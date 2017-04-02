@@ -1,0 +1,155 @@
+
+/* ************************ */
+/*  general / sharable css  */
+/* ************************ */
+
+.showing {
+  display: block;
+}
+.hiding {
+  display: none;
+}
+
+.cursor-hand {
+  cursor: pointer;
+}
+
+.main-frame-container {
+  padding-top: 60px;
+}
+
+.main-frame-panel {
+  max-width: 1024;
+  min-width:200px;
+  margin: auto;
+}
+
+/* **************** */
+/*  header related  */
+/* **************** */
+
+.header-menu {
+  font-size: 15px;
+  padding-top: 6px; padding-bottom: 6px; padding-left: 8px; padding-right: 8px;
+  border-radius: 4px;
+}
+.header-menu:hover {
+  background: #ddd;
+}
+
+.header-sign-in-btn {
+  font-size: 17px;
+  padding-top: 8px; padding-bottom: 8px; padding-left: 10px; padding-right: 10px;
+  border-radius: 6px;
+  border: 2px solid #999;
+}
+.header-sign-in-btn:hover {
+  border-color: #ccc;
+  color: #333;
+}
+
+.header-compact-menu-container {
+  width: calc(100%);
+  height: 1500px;
+  z-index: 100;
+  background-color: #fdfdfd;
+  position: absolute;
+  top: 0px;
+}
+.header-compact-menu-item {
+  font-size: 20px;
+  padding-top: 12px; padding-bottom: 12px;
+  padding-left: 16px; padding-right: 16px;
+}
+.header-compact-menu-sign-in-btn {
+  font-size: 20px;
+  padding-top: 6px; padding-bottom: 6px;
+  padding-left: 16px; padding-right: 16px;
+  border-radius: 6px;
+  border: 2px solid #999;
+}
+
+
+/* **************** */
+/*  trailer related */
+/* **************** */
+
+.trailer-container-top-line {
+  border-top: 1px solid #ddd;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.trailer-container {
+  max-width: 800px;
+  margin: auto;
+  padding-top: 30px;
+}
+
+.trailer-menu-font {
+  font-size: 14px; font-weight: bold;
+}
+.trailer-label-font {
+  font-size: 12px;
+}
+.trailer-menu-item {
+  padding-bottom: 8px;
+}
+
+/* **************** */
+/*  landing related */
+
+.landing-container {
+  background: url('/static/img/landing/landing-main-2.jpg');
+  /*
+  width: calc(100%);
+  height: 600px;
+  */
+  height: 400px;
+  background-size: cover;
+}
+.landing-container-overlay {
+  background-color: rgba(50,50,50,0.5);
+  /* the height MUST match with the landing-container's height */
+  height: 400px;
+}
+.landing-core-image-centering {
+  text-align: center;
+  padding-top: 150px;
+  padding-bottom: 100px;
+  padding: auto;
+}
+.landing-core-image-btn {
+  font-size: 32px;
+  border-radius: 40px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.landing-headline {
+  /* font-family: 'PT Sans', sans-serif; */
+  /* font-family: 'Roboto Slab', serif; */
+  font-family: 'Baloo Thambi', cursive;
+  font-size: 40px;
+}
+
+/* */
+/*  playground related  */
+/* */
+.playground-headline {
+  padding-left: 16px; padding-right: 16px;
+  margin-top: 12px; margin-bottom: 12px;
+  color: #563d7c;
+}
+.playground-menu-container {
+  border-radius: 4px;
+  border: 1px solid #aaa;
+  /*margin-left: 8px; margin-right: 8px;*/
+  min-height: 400px;
+  max-height: calc(100%);
+}
+.playground-menu-container-left {
+  margin-right: 4px;
+}
+.playground-menu-container-right {
+  margin-left: 4px;
+}

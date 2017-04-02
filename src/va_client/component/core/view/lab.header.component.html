@@ -1,0 +1,22 @@
+<!-- navbar-fixed-top if you need it to be at the top (all the time) -->
+<nav class="navbar navbar-default "
+  style="margin-bottom: 8px;" >
+  <span class="navbar-brand">
+    <i class="fa fa-bullhorn" aria-hidden="true" title='replace with designed icon'></i>
+    project.VA
+  </span>
+  <!-- full menu -->
+  <span id='menu-full' class="pull-right" [ngClass]='getCssClassForMenuFull()'>
+    <span class="navbar-brand">
+      <span class="header-menu cursor-hand" (click)='headerMenuClick("product")' >Product</span>
+      <span class="header-menu cursor-hand" (click)='headerMenuClick("pricing")' >Pricing</span>
+      <span class="header-menu cursor-hand" (click)='headerMenuClick("support")' >Support</span>
+
+      &nbsp;&nbsp;
+      <span class='header-sign-in-btn cursor-hand' (click)='signIn($event)' >Sign in</span>
+    </span>
+  </span>
+  
+  <!-- for side menus start to define the div and overlays within the nav tag -->
+
+</nav>

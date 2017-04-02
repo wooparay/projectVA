@@ -10,8 +10,9 @@
     },
     // map tells the System loader where to look for things
     map: {
-      // our app is within the app folder
-      'app': 'app',
+      // [step] add back the "folder" that holds your app contents / src.
+      // projectVA client side (ng2 4.0.0)
+      'va_client': 'va_client',
 
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
@@ -29,7 +30,8 @@
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
-      app: {
+      // [step] you need to add back the "app" specific setup information here
+      va_client: {
         defaultExtension: 'js',
         meta: {
           './*.js': {
