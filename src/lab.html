@@ -9,15 +9,35 @@
 
     <link rel='stylesheet' href='static/css/core.css'>
 
-    <link rel="stylesheet" href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+    <!-- ################################ -->
+    <!-- ori settings using bootstrap 3.7 -->
+    <!-- ################################ -->
+
+    <!--link rel="stylesheet" href='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'-->
+
+    <!-- ################################ -->
+    <!-- using MDB (metal design bootstrap) -->
+    <!-- ################################ -->
     <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' >
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/css/mdb.css">
+
+    <!-- MDB required jscript lib -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/js/bootstrap.js"></script>
+    <!-- MDB core JavaScript -->
+<!-- some problem in getting document.body -->    
+    <!--script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.1/js/mdb.js"></script-->
+
 
     <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
-
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
-
     <script src="systemjs.config.js"></script>
     <script>
       System.import('main.js').catch(function(err){ console.error(err); });

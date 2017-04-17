@@ -31,6 +31,7 @@ var PlaygroundSideMenuComponent = (function () {
     PlaygroundSideMenuComponent.prototype.pluginRequested = function (label) {
         console.log(label);
         console.log(this._ref.changeRoutlet);
+        // based on the label value, change the router-outlet to show the correct component view
     };
     return PlaygroundSideMenuComponent;
 }());
