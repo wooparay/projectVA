@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var core_2 = require("@angular/core");
+var playground_component_1 = require("./../core/playground.component");
 var PlaygroundSideMenuComponent = (function () {
     /* ---------------------------- */
     /*  ctor and lifecycle methods  */
@@ -35,7 +36,7 @@ var PlaygroundSideMenuComponent = (function () {
 }());
 __decorate([
     core_2.Input(),
-    __metadata("design:type", Object)
+    __metadata("design:type", playground_component_1.PlaygroundComponent)
 ], PlaygroundSideMenuComponent.prototype, "_ref", void 0);
 PlaygroundSideMenuComponent = __decorate([
     core_1.Component({

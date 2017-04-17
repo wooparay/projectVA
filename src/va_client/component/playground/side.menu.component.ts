@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 
+import { PlaygroundComponent } from './../core/playground.component';
+
 @Component({
   selector: 'playground-side-menu',
   templateUrl: './view/side.menu.component.html',
@@ -28,7 +30,7 @@ export class PlaygroundSideMenuComponent  {
   /*  private / utility methods */
   /* -------------------------- */
 
-  private pluginRequested(label) {
+  private pluginRequested(label:string) {
     console.log(label);
     console.log(this._ref.changeRoutlet);
   }

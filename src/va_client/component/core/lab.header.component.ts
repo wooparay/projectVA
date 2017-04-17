@@ -12,11 +12,11 @@ export class LabHeaderComponent  {
     return css;
   }
 
-  private headerMenuClick(label) {
+  private headerMenuClick(label:string) {
     console.log(label);
   }
 
-  private signIn(event) {
+  private signIn(event:any) {
     console.log(event);
   }
 
