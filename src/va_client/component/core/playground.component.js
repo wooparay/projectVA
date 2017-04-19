@@ -19,7 +19,9 @@ var PlaygroundComponent = (function () {
     /*  interface methods for playground.side.menu component  */
     /* ------------------------------------------------------ */
     PlaygroundComponent.prototype.changeRoutlet = function (routeName) {
-        console.log(routeName);
+        //console.log(routeName);
+        //console.log(this._router.navigate);
+        this._router.navigate(['/playground/photo-picker', this]);
     };
     return PlaygroundComponent;
 }());

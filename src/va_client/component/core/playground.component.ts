@@ -16,7 +16,9 @@ export class PlaygroundComponent  {
   /*  interface methods for playground.side.menu component  */
   /* ------------------------------------------------------ */
   public changeRoutlet(routeName:string) {
-    console.log(routeName);
+    //console.log(routeName);
+    //console.log(this._router.navigate);
+    this._router.navigate(['/playground/photo-picker', this]);
   }
 
 

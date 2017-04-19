@@ -13,6 +13,7 @@ var lab_component_1 = require("./component/core/lab.component");
 var lab_header_component_1 = require("./component/core/lab.header.component");
 var playground_component_1 = require("./component/core/playground.component");
 var side_menu_component_1 = require("./component/playground/side.menu.component");
+var photo_picker_component_1 = require("./component/component/photo.picker.component");
 var MainAppModule = (function () {
     function MainAppModule() {
     }
@@ -30,6 +31,10 @@ MainAppModule = __decorate([
                         {
                             path: '',
                             component: hello_component_1.HelloComponent
+                        },
+                        {
+                            path: 'photo-picker',
+                            component: photo_picker_component_1.PhotoPickerComponent
                         }
                     ] /* end of "child" routes */
                 }
@@ -39,7 +44,8 @@ MainAppModule = __decorate([
         declarations: [
             hello_component_1.HelloComponent,
             lab_component_1.LabComponent, lab_header_component_1.LabHeaderComponent,
-            playground_component_1.PlaygroundComponent, side_menu_component_1.PlaygroundSideMenuComponent
+            playground_component_1.PlaygroundComponent, side_menu_component_1.PlaygroundSideMenuComponent,
+            photo_picker_component_1.PhotoPickerComponent
         ],
         bootstrap: [lab_component_1.LabComponent]
     })

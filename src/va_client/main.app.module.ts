@@ -9,6 +9,9 @@ import { LabHeaderComponent }  from './component/core/lab.header.component';
 import { PlaygroundComponent }  from './component/core/playground.component';
 import { PlaygroundSideMenuComponent } from './component/playground/side.menu.component';
 
+import { PhotoPickerComponent } from './component/component/photo.picker.component';
+
+
 @NgModule({
   imports:      [
     BrowserModule,
@@ -20,6 +23,10 @@ import { PlaygroundSideMenuComponent } from './component/playground/side.menu.co
           {
             path: '', /* default path */
             component: HelloComponent
+          },
+          {
+            path: 'photo-picker',
+            component: PhotoPickerComponent
           }
         ] /* end of "child" routes */
       }
@@ -29,7 +36,8 @@ import { PlaygroundSideMenuComponent } from './component/playground/side.menu.co
   declarations: [
     HelloComponent,
     LabComponent, LabHeaderComponent,
-    PlaygroundComponent, PlaygroundSideMenuComponent
+    PlaygroundComponent, PlaygroundSideMenuComponent,
+    PhotoPickerComponent
   ],
   bootstrap:    [ LabComponent ]
 })
