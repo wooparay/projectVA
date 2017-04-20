@@ -3,6 +3,10 @@
 /*  general / sharable css  */
 /* ************************ */
 
+.lightblue {
+  color: lightblue;
+}
+
 .showing {
   display: block;
 }
@@ -152,4 +156,40 @@
 }
 .playground-menu-container-right {
   margin-left: 4px;
+}
+
+/* */
+/*  photo-picker  */
+/* */
+.photo-picker-button::after {
+  padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px;
+}
+.photo-picker-menubar-break {
+  padding-top: 2px;
+  border-bottom: 1px solid rgba(170,170,170,0.5);
+}
+.photo-picker-preview-container {
+  padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px;
+  overflow-y: scroll;
+}
+.photo-picker-preview-container-inner {
+  overflow-y: hidden;
+}
+.photo-picker-preview-widget-container {
+  display: inline-block; width: 100px; height: 100px; margin-bottom: 2px;
+}
+.photo-picker-preview-widget-container-inner {
+  border: 4px dashed #55ACEE; border-radius: 4px; width: 100px; height: 100px;
+}
+.photo-picker-preview-widget-image-container {
+  border: 2px solid #55ACEE; border-radius: 4px; width: 100px; height: 100px;
+}
+.photo-picker-preview-widget-image-container img {
+  width: 96px; height: 96px;
+}
+.photo-picker-preview-widget-image-close-container {
+  position: relative; margin-top: -100px; left: 0; z-index: 100;
+}
+.photo-picker-preview-widget-image-close-container a {
+  border-radius: 40px; padding-left: 4px; padding-right: 4px; padding-top: 1px; padding-bottom: 1px;
 }
