@@ -1,0 +1,40 @@
+<!-- add show to get it shown -->
+<div class="modal fade file-upload-background-overlay"
+  id='dlgFileUpload' tabindex="-1"
+  role="dialog" aria-labelledby='dlgFileUploadLabel'
+  style="display: none;">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="border-radius: 4px;">
+      <!-- title / header -->
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id='dlgFileUploadLabel'>
+          title here...
+        </h4>
+        <button type="button" class="close pull-right"
+          data-dismiss='modal' aria-label='Close' (click)='cancel($event)'>
+          <span aria-hidden='true'>x</span>
+        </button>
+      </div>
+      <!-- content -->
+      <div class="modal-body">
+<span id='lblHeader'>this is header</span>
+      </div>
+      <!-- footer -->
+      <div class="modal-footer">
+        <button class="btn btn-secondary waves-effect waves-light"
+          data-dismiss='modal' (click)='select($event)'>
+          Select
+        </button>
+        <button class="btn btn-primary waves-effect waves-light"
+          (click)='cancel($event)'>
+          Cancel
+        </button>
+      </div>
+    </div>  <!-- content -->
+  </div>  <!-- dialog -->
+
+  <!-- file input -->
+  <input id="filUpload" type="file" style="visibility:hidden" (change)='fileUpdated($event)' />
+
+</div>

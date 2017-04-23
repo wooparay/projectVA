@@ -14,6 +14,8 @@ var lab_header_component_1 = require("./component/core/lab.header.component");
 var playground_component_1 = require("./component/core/playground.component");
 var side_menu_component_1 = require("./component/playground/side.menu.component");
 var photo_picker_component_1 = require("./component/component/photo.picker.component");
+var photo_picker_preview_widget_1 = require("./component/component/photo.picker.preview.widget");
+var file_upload_component_1 = require("./component/component/file.upload.component");
 var MainAppModule = (function () {
     function MainAppModule() {
     }
@@ -45,7 +47,8 @@ MainAppModule = __decorate([
             hello_component_1.HelloComponent,
             lab_component_1.LabComponent, lab_header_component_1.LabHeaderComponent,
             playground_component_1.PlaygroundComponent, side_menu_component_1.PlaygroundSideMenuComponent,
-            photo_picker_component_1.PhotoPickerComponent
+            photo_picker_component_1.PhotoPickerComponent, photo_picker_preview_widget_1.PhotoPickerPreviewWidget,
+            file_upload_component_1.FileUploadComponent
         ],
         bootstrap: [lab_component_1.LabComponent]
     })

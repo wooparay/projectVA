@@ -18,7 +18,9 @@ export class PlaygroundComponent  {
   public changeRoutlet(routeName:string) {
     //console.log(routeName);
     //console.log(this._router.navigate);
-    this._router.navigate(['/playground/photo-picker', this]);
+    //this._router.navigate(['/playground/photo-picker', this]);
+
+    this._router.navigate(['/playground/'+routeName, this]);
   }
 
 

@@ -21,7 +21,8 @@ var PlaygroundComponent = (function () {
     PlaygroundComponent.prototype.changeRoutlet = function (routeName) {
         //console.log(routeName);
         //console.log(this._router.navigate);
-        this._router.navigate(['/playground/photo-picker', this]);
+        //this._router.navigate(['/playground/photo-picker', this]);
+        this._router.navigate(['/playground/' + routeName, this]);
     };
     return PlaygroundComponent;
 }());

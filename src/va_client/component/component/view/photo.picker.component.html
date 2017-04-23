@@ -29,21 +29,16 @@
 
       <!-- photo display widget(s) -->
 <!-- * set height based on the widget area given -->
-      <div class="photo-picker-preview-container" style="height: 150px;">
+      <div id='photo-picker-preview-container' class="photo-picker-preview-container" style="height: 150px;">
         <div class="photo-picker-preview-container-inner">
           <!-- widget -->
-          <div class="photo-picker-preview-widget-container">
-            <div class="photo-picker-preview-widget-container-inner">
-              <div class="flex-center cursor-hand">
-                <i class="fa fa-lg fa-image lightblue" title="add photo"></i>
-              </div>
-            </div>
-          </div>
+          <photo-picker-preview-widget [_ref]='this'></photo-picker-preview-widget>
+          <photo-picker-preview-widget [_ref]='this'></photo-picker-preview-widget>
           <!-- widget (image) -->
           <div class="photo-picker-preview-widget-container">
             <div class="photo-picker-preview-widget-image-container">
               <div class="cursor-hand">
-                <img src='http://www.behindthevoiceactors.com/_img/chars/terry-bogard-capcom-vs-snk-millenium-fight-31.6.jpg' />
+                <img src='../../static/img/photoPicker/airBalloon.jpeg' />
                 <!-- the "x" button -->
                 <span class="pull-right photo-picker-preview-widget-image-close-container">
                   <a class='btn btn-small red'>x</a>
@@ -52,11 +47,11 @@
             </div>
           </div>
 
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='http://www.behindthevoiceactors.com/_img/chars/terry-bogard-capcom-vs-snk-millenium-fight-31.6.jpg' /><!-- the "x" button --><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='http://www.behindthevoiceactors.com/_img/chars/terry-bogard-capcom-vs-snk-millenium-fight-31.6.jpg' /><!-- the "x" button --><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='http://www.behindthevoiceactors.com/_img/chars/terry-bogard-capcom-vs-snk-millenium-fight-31.6.jpg' /><!-- the "x" button --><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='http://www.behindthevoiceactors.com/_img/chars/terry-bogard-capcom-vs-snk-millenium-fight-31.6.jpg' /><!-- the "x" button --><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='http://www.behindthevoiceactors.com/_img/chars/terry-bogard-capcom-vs-snk-millenium-fight-31.6.jpg' /><!-- the "x" button --><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
+          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='../../static/img/photoPicker/airBalloon.jpeg' /><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
+          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='../../static/img/photoPicker/airBalloon.jpeg' /><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
+          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='../../static/img/photoPicker/airBalloon.jpeg' /><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
+          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='../../static/img/photoPicker/airBalloon.jpeg' /><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
+          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='../../static/img/photoPicker/airBalloon.jpeg' /><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
 
           <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-container-inner"><div class="flex-center cursor-hand"><i class="fa fa-lg fa-image lightblue" title="add photo"></i></div></div></div>
           <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-container-inner"><div class="flex-center cursor-hand"><i class="fa fa-lg fa-image lightblue" title="add photo"></i></div></div></div>
@@ -74,3 +69,8 @@
   </div>  <!-- container-fluid -->
 
 </div>  <!-- outer most div -->
+
+<!-- *********************** -->
+<!--  Common upload dialogue -->
+<!-- *********************** -->
+<file-upload></file-upload>

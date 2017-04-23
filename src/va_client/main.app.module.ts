@@ -10,7 +10,8 @@ import { PlaygroundComponent }  from './component/core/playground.component';
 import { PlaygroundSideMenuComponent } from './component/playground/side.menu.component';
 
 import { PhotoPickerComponent } from './component/component/photo.picker.component';
-
+import { PhotoPickerPreviewWidget } from './component/component/photo.picker.preview.widget';
+import { FileUploadComponent } from './component/component/file.upload.component';
 
 @NgModule({
   imports:      [
@@ -37,7 +38,8 @@ import { PhotoPickerComponent } from './component/component/photo.picker.compone
     HelloComponent,
     LabComponent, LabHeaderComponent,
     PlaygroundComponent, PlaygroundSideMenuComponent,
-    PhotoPickerComponent
+    PhotoPickerComponent, PhotoPickerPreviewWidget,
+    FileUploadComponent
   ],
   bootstrap:    [ LabComponent ]
 })
