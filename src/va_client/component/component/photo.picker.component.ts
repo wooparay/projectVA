@@ -3,6 +3,7 @@ import { ElementRef } from '@angular/core';
 import { Renderer2 } from '@angular/core';
 
 import { CoreModel } from './../core/coreModel';
+import { CoreModelProvider } from './../core/core.model.provider';
 import { PhotoPickerPreviewWidget } from './photo.picker.preview.widget';
 // ** optional (unless you need to access this component's methods)
 import { FileUploadComponent } from './file.upload.component';
@@ -10,15 +11,17 @@ import { FileUploadComponent } from './file.upload.component';
 @Component({
   selector: 'photo-picker',
   templateUrl: './view/photo.picker.component.html',
-  providers: [ CoreModel ]
+  /* ** CONCEPT => provider creates CoreModel, hence you are
+   *    injecting CoreModel not CoreModelProvider
+   * **
+   */
+  providers: [ CoreModelProvider ]
 })
 export class PhotoPickerComponent  {
 
   constructor(private _coreModel:CoreModel,
     private _renderer:Renderer2,
     private _element:ElementRef) {
-
-    console.log(_coreModel.getCreationTimestamp());
   }
 
   /* ################################################################## */
@@ -38,6 +41,18 @@ export class PhotoPickerComponent  {
     // ** example on how ElementRef could manipulate the DOM
     /*console.log(this._element.nativeElement);
     console.log(this._element.nativeElement.querySelector('file-upload span').innerHTML='yo man');*/
+
+
+    /*
+    // could not recognize FileUploadComponent.XXX within the {} (scope problem)
+    let _options:any = {};
+    _options[FileUploadComponent.DLG_TITLE] = "Select an image file";
+    _options[FileUploadComponent.DLG_BTN_ONE_LABEL] = "ok";
+    _options[FileUploadComponent.DLG_BTN_TWO_LABEL] = "no, thx";
+
+    // typically a good idea to check if any errors occured in setting the data
+    let _ret:any = this._coreModel.setDataByKey(FileUploadComponent.CMODEL_KEY, _options, false);
+    */
 
     FileUploadComponent.showDlgFileUpload(
       this._element.nativeElement.querySelector('#dlgFileUpload'),

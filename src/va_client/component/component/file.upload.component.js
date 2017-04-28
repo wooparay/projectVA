@@ -12,17 +12,86 @@ var core_1 = require("@angular/core");
 var core_2 = require("@angular/core");
 var core_3 = require("@angular/core");
 var coreModel_1 = require("./../core/coreModel");
-var FileUploadComponent = (function () {
+var core_model_provider_1 = require("./../core/core.model.provider");
+var FileUploadComponent = FileUploadComponent_1 = (function () {
     /**
      *  constructor
      */
-    function FileUploadComponent(_element, _renderer) {
+    function FileUploadComponent(_element, _renderer, _coreModel) {
         this._element = _element;
         this._renderer = _renderer;
+        this._coreModel = _coreModel;
         this._isTainted = false;
         this._dlgFileUpload = null;
         this._filUpload = null;
+        this._form = null;
+        this._isFormDragNDropSet = false;
+        // value bound properties
+        this._lblTitle = 'Select';
+        this._lblBtnOne = 'Select';
+        this._lblBtnTwo = 'Cancel';
     }
+    /**
+     *  lifecycle hook
+     *  (Respond after Angular checks the content projected into the component.)
+     *  https://angular.io/docs/ts/latest/guide/lifecycle-hooks.html
+     */
+    FileUploadComponent.prototype.ngAfterContentChecked = function () {
+        // check CoreModel contents and apply changes to the label(s) when necessary
+        var _options = this._coreModel.getDataByKey(FileUploadComponent_1.CMODEL_KEY);
+        if (_options) {
+            if (_options.hasOwnProperty(FileUploadComponent_1.DLG_TITLE)) {
+                this._lblTitle = _options[FileUploadComponent_1.DLG_TITLE];
+            }
+            if (_options.hasOwnProperty(FileUploadComponent_1.DLG_BTN_ONE_LABEL)) {
+                this._lblBtnOne = _options[FileUploadComponent_1.DLG_BTN_ONE_LABEL];
+            }
+            if (_options.hasOwnProperty(FileUploadComponent_1.DLG_BTN_TWO_LABEL)) {
+                this._lblBtnTwo = _options[FileUploadComponent_1.DLG_BTN_TWO_LABEL];
+            }
+        } // end -- if (_options)
+        // handle the Form's drag n drop feature
+        this._setFormDragNDrop();
+    };
+    FileUploadComponent.prototype._setFormDragNDrop = function () {
+        if (this._isFormDragNDropSet == false) {
+            var _frm = this._getForm();
+            var _fxStopEvent = function () {
+                var _e = arguments[0];
+                _e.preventDefault();
+                _e.stopPropagation();
+                console.log('# inside event');
+            };
+            var _fxDropEvent = function () {
+                var _e = arguments[0];
+                _e.preventDefault();
+                _e.stopPropagation();
+                if (!_e.hasOwnProperty('dataTransfer')) {
+                    if (_e.hasOwnProperty('originalEvent')) {
+                        _e = _e['originalEvent'];
+                    }
+                }
+                if (_e) {
+                    console.log(_e['dataTransfer'].files);
+                }
+                console.log('# inside drop event');
+            };
+            this._renderer.setProperty(_frm, "ondrag", _fxStopEvent);
+            this._renderer.setProperty(_frm, "ondragstart", _fxStopEvent);
+            this._renderer.setProperty(_frm, "ondragend", _fxStopEvent);
+            this._renderer.setProperty(_frm, "ondragover", _fxStopEvent);
+            this._renderer.setProperty(_frm, "ondragenter", _fxStopEvent);
+            this._renderer.setProperty(_frm, "ondragleave", _fxStopEvent);
+            this._renderer.setProperty(_frm, "ondrop", _fxDropEvent);
+            this._isFormDragNDropSet = true;
+        }
+    };
+    FileUploadComponent.prototype._getForm = function () {
+        if (this._form == null) {
+            this._form = this._element.nativeElement.querySelector('form');
+        }
+        return this._form;
+    };
     /**
      *  return the (native) element value of #dlgFileUpload
      */
@@ -68,13 +137,20 @@ var FileUploadComponent = (function () {
     };
     return FileUploadComponent;
 }());
-FileUploadComponent = __decorate([
+FileUploadComponent.CMODEL_KEY = "FileUploadComponent";
+FileUploadComponent.DLG_TITLE = "DLG_TITLE";
+FileUploadComponent.DLG_BTN_ONE_LABEL = "DLG_BTN_ONE_LABEL";
+FileUploadComponent.DLG_BTN_TWO_LABEL = "DLG_BTN_TWO_LABEL";
+FileUploadComponent = FileUploadComponent_1 = __decorate([
     core_1.Component({
         selector: 'file-upload',
         templateUrl: './view/file.upload.component.html',
-        providers: [coreModel_1.CoreModel]
+        providers: [core_model_provider_1.CoreModelProvider]
     }),
-    __metadata("design:paramtypes", [core_2.ElementRef, core_3.Renderer2])
+    __metadata("design:paramtypes", [core_2.ElementRef,
+        core_3.Renderer2,
+        coreModel_1.CoreModel])
 ], FileUploadComponent);
 exports.FileUploadComponent = FileUploadComponent;
+var FileUploadComponent_1;
 //# sourceMappingURL=file.upload.component.js.map

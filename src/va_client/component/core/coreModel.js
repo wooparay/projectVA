@@ -13,18 +13,66 @@ var core_1 = require("@angular/core");
  *  sort of like a singleton for storing information across
  *  component(s)
  */
-var CoreModel = (function () {
+var CoreModel = CoreModel_1 = (function () {
     function CoreModel() {
+        // the actual place where dynamic data (logically grouped) could be stored
+        this._fieldset = {};
         this._creationTimestamp = new Date();
     }
+    // *
+    CoreModel.getInstance = function () {
+        if (CoreModel_1._instance == null) {
+            CoreModel_1._instance = new CoreModel_1();
+        }
+        return CoreModel_1._instance;
+    };
     CoreModel.prototype.getCreationTimestamp = function () {
         return this._creationTimestamp;
     };
+    /**
+     *  set / add data based on the key value; can set _canOverwrite to true
+     *  if needed to overwrite existing data
+     */
+    CoreModel.prototype.setDataByKey = function (_key, _data, _canOverwrite) {
+        // check if _key exists
+        var _keyExists = this._fieldset.hasOwnProperty(_key);
+        var _ret = {};
+        _ret[CoreModel_1.KEY_STATUS] = CoreModel_1.STATUS_OK;
+        if (!_keyExists) {
+            this._fieldset[_key] = _data;
+        }
+        else if (_canOverwrite == true) {
+            this._fieldset[_key] = _data;
+            _ret[CoreModel_1.KEY_OVERWRITE] = CoreModel_1.OVERWRITE_YES;
+        }
+        else {
+            _ret[CoreModel_1.KEY_STATUS] = CoreModel_1.STATUS_FAIL;
+            _ret[CoreModel_1.STATUS_FAIL_REASON] = CoreModel_1.REASON_DUPLICATE_KEY;
+        }
+        return _ret;
+    };
+    CoreModel.prototype.getDataByKey = function (_key) {
+        return this._fieldset[_key];
+    };
+    CoreModel.prototype.getFieldSetKeys = function () {
+        return Object.keys(this._fieldset);
+    };
     return CoreModel;
 }());
-CoreModel = __decorate([
+CoreModel.KEY_STATUS = "STATUS";
+CoreModel.KEY_OVERWRITE = "OVERWRITE";
+CoreModel.STATUS_OK = "OK";
+CoreModel.STATUS_FAIL = "FAIL";
+CoreModel.STATUS_FAIL_REASON = "FAIL_REASON";
+CoreModel.OVERWRITE_YES = "YES";
+CoreModel.OVERWRITE_NO = "NO";
+CoreModel.REASON_DUPLICATE_KEY = "key already existed, either set _canOverwrite to 'true' or use another Key value";
+// *
+CoreModel._instance = null;
+CoreModel = CoreModel_1 = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [])
 ], CoreModel);
 exports.CoreModel = CoreModel;
+var CoreModel_1;
 //# sourceMappingURL=coreModel.js.map

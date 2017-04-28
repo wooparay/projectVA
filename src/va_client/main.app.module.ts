@@ -13,6 +13,9 @@ import { PhotoPickerComponent } from './component/component/photo.picker.compone
 import { PhotoPickerPreviewWidget } from './component/component/photo.picker.preview.widget';
 import { FileUploadComponent } from './component/component/file.upload.component';
 
+import { CoreModelProvider } from './component/core/core.model.provider';
+
+
 @NgModule({
   imports:      [
     BrowserModule,
@@ -40,6 +43,10 @@ import { FileUploadComponent } from './component/component/file.upload.component
     PlaygroundComponent, PlaygroundSideMenuComponent,
     PhotoPickerComponent, PhotoPickerPreviewWidget,
     FileUploadComponent
+  ],
+  // [step] if you want to have REAL singleton, you need to create your own Provider...
+  providers: [
+    CoreModelProvider
   ],
   bootstrap:    [ LabComponent ]
 })
