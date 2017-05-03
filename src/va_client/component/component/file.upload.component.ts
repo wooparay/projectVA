@@ -1,16 +1,22 @@
 import { Component } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { Renderer2 } from '@angular/core';
+import { Input } from '@angular/core';
 
 import { CoreModel } from './../core/coreModel';
 import { CoreModelProvider } from './../core/core.model.provider';
 
+import { PhotoPickerComponent } from './photo.picker.component';
+import { FileReaderService, FileReaderServiceProvider } from './../core/file.reader';
+
 @Component({
   selector: 'file-upload',
   templateUrl: './view/file.upload.component.html',
-  providers: [ CoreModelProvider ]
+  providers: [ CoreModelProvider, FileReaderServiceProvider ]
 })
 export class FileUploadComponent {
+
+  @Input() _parent:PhotoPickerComponent;
 
   public static CMODEL_KEY:string = "FileUploadComponent";
 
@@ -35,7 +41,8 @@ export class FileUploadComponent {
    */
   constructor(private _element:ElementRef,
     private _renderer:Renderer2,
-    private _coreModel:CoreModel) {
+    private _coreModel:CoreModel,
+    private _fileReaderService:FileReaderService) {
   }
 
   /**
@@ -59,10 +66,10 @@ export class FileUploadComponent {
     } // end -- if (_options)
 
     // handle the Form's drag n drop feature
-    this._setFormDragNDrop();
+    this._setFormDragNDrop(this);
   }
 
-  private _setFormDragNDrop() {
+  private _setFormDragNDrop(_ref:FileUploadComponent) {
     if (this._isFormDragNDropSet == false) {
       let _frm:any = this._getForm();
       let _fxStopEvent = function() {
@@ -81,11 +88,16 @@ export class FileUploadComponent {
             _e = _e['originalEvent'];
           }
         }
-        if (_e) {
-          console.log(_e['dataTransfer'].files);  
-        }
+        if (_e && _e['dataTransfer'].files) {
+          let _file:any = _e['dataTransfer'].files[0];
 
-        console.log('# inside drop event');
+          if (_file.type.match(/image.*/)) {
+            _ref._fileReaderService.readAsDataURL(_file, _ref._parent);
+
+          } else {
+            alert('not an image type.. sorry');
+          } // end -- if (image/*) type
+        }
       };
 
       this._renderer.setProperty(_frm, "ondrag", _fxStopEvent);

@@ -1,3 +1,8 @@
+/*import {
+  View,
+  CORE_DIRECTIVES,
+  FORM_DIRECTIVES
+} from '@angular/core';*/
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -20,6 +25,7 @@ var PhotoPickerComponent = (function () {
         this._coreModel = _coreModel;
         this._renderer = _renderer;
         this._element = _element;
+        this._photoDataList = [];
     }
     /* ################################################################## */
     /*  methods for handling singleton level resources like common dialog */
@@ -46,6 +52,10 @@ var PhotoPickerComponent = (function () {
         let _ret:any = this._coreModel.setDataByKey(FileUploadComponent.CMODEL_KEY, _options, false);
         */
         file_upload_component_1.FileUploadComponent.showDlgFileUpload(this._element.nativeElement.querySelector('#dlgFileUpload'), this._renderer);
+    };
+    PhotoPickerComponent.prototype.addDataToPhotoDataList = function (_data) {
+        this._photoDataList.push(_data);
+        console.log('** size of the photoDataList > ' + this._photoDataList.length);
     };
     return PhotoPickerComponent;
 }());

@@ -32,6 +32,11 @@
       <div id='photo-picker-preview-container' class="photo-picker-preview-container" style="height: 150px;">
         <div class="photo-picker-preview-container-inner">
           <!-- widget -->
+<!-- testing -->
+<div *ngFor='let item of _photoDataList; let _i = index; '>
+  {{item}}
+</div>
+<!-- testing (end) -->
           <photo-picker-preview-widget [_ref]='this'></photo-picker-preview-widget>
           <photo-picker-preview-widget [_ref]='this'></photo-picker-preview-widget>
           <!-- widget (image) -->
@@ -73,4 +78,4 @@
 <!-- *********************** -->
 <!--  Common upload dialogue -->
 <!-- *********************** -->
-<file-upload></file-upload>
+<file-upload [_parent]='this'></file-upload>

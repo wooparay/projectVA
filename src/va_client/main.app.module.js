@@ -17,6 +17,7 @@ var photo_picker_component_1 = require("./component/component/photo.picker.compo
 var photo_picker_preview_widget_1 = require("./component/component/photo.picker.preview.widget");
 var file_upload_component_1 = require("./component/component/file.upload.component");
 var core_model_provider_1 = require("./component/core/core.model.provider");
+var file_reader_1 = require("./component/core/file.reader");
 var MainAppModule = (function () {
     function MainAppModule() {
     }
@@ -53,7 +54,8 @@ MainAppModule = __decorate([
         ],
         // [step] if you want to have REAL singleton, you need to create your own Provider...
         providers: [
-            core_model_provider_1.CoreModelProvider
+            core_model_provider_1.CoreModelProvider,
+            file_reader_1.FileReaderServiceProvider
         ],
         bootstrap: [lab_component_1.LabComponent]
     })

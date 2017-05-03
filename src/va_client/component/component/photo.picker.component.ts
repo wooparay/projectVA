@@ -1,3 +1,11 @@
+/*import {
+  View,
+  CORE_DIRECTIVES,
+  FORM_DIRECTIVES
+} from '@angular/core';*/
+
+import {NgFor} from '@angular/common';
+
 import { Component } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { Renderer2 } from '@angular/core';
@@ -18,6 +26,8 @@ import { FileUploadComponent } from './file.upload.component';
   providers: [ CoreModelProvider ]
 })
 export class PhotoPickerComponent  {
+
+  private _photoDataList:string[] = [];
 
   constructor(private _coreModel:CoreModel,
     private _renderer:Renderer2,
@@ -57,6 +67,11 @@ export class PhotoPickerComponent  {
     FileUploadComponent.showDlgFileUpload(
       this._element.nativeElement.querySelector('#dlgFileUpload'),
       this._renderer);
+  }
+
+  public addDataToPhotoDataList(_data:string) {
+    this._photoDataList.push(_data);
+    console.log('** size of the photoDataList > '+this._photoDataList.length);
   }
 
 }

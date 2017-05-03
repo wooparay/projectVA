@@ -11,16 +11,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var core_2 = require("@angular/core");
 var core_3 = require("@angular/core");
+var core_4 = require("@angular/core");
 var coreModel_1 = require("./../core/coreModel");
 var core_model_provider_1 = require("./../core/core.model.provider");
+var photo_picker_component_1 = require("./photo.picker.component");
+var file_reader_1 = require("./../core/file.reader");
 var FileUploadComponent = FileUploadComponent_1 = (function () {
     /**
      *  constructor
      */
-    function FileUploadComponent(_element, _renderer, _coreModel) {
+    function FileUploadComponent(_element, _renderer, _coreModel, _fileReaderService) {
         this._element = _element;
         this._renderer = _renderer;
         this._coreModel = _coreModel;
+        this._fileReaderService = _fileReaderService;
         this._isTainted = false;
         this._dlgFileUpload = null;
         this._filUpload = null;
@@ -51,9 +55,9 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
             }
         } // end -- if (_options)
         // handle the Form's drag n drop feature
-        this._setFormDragNDrop();
+        this._setFormDragNDrop(this);
     };
-    FileUploadComponent.prototype._setFormDragNDrop = function () {
+    FileUploadComponent.prototype._setFormDragNDrop = function (_ref) {
         if (this._isFormDragNDropSet == false) {
             var _frm = this._getForm();
             var _fxStopEvent = function () {
@@ -71,10 +75,15 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
                         _e = _e['originalEvent'];
                     }
                 }
-                if (_e) {
-                    console.log(_e['dataTransfer'].files);
+                if (_e && _e['dataTransfer'].files) {
+                    var _file = _e['dataTransfer'].files[0];
+                    if (_file.type.match(/image.*/)) {
+                        _ref._fileReaderService.readAsDataURL(_file, _ref._parent);
+                    }
+                    else {
+                        alert('not an image type.. sorry');
+                    } // end -- if (image/*) type
                 }
-                console.log('# inside drop event');
             };
             this._renderer.setProperty(_frm, "ondrag", _fxStopEvent);
             this._renderer.setProperty(_frm, "ondragstart", _fxStopEvent);
@@ -141,15 +150,20 @@ FileUploadComponent.CMODEL_KEY = "FileUploadComponent";
 FileUploadComponent.DLG_TITLE = "DLG_TITLE";
 FileUploadComponent.DLG_BTN_ONE_LABEL = "DLG_BTN_ONE_LABEL";
 FileUploadComponent.DLG_BTN_TWO_LABEL = "DLG_BTN_TWO_LABEL";
+__decorate([
+    core_4.Input(),
+    __metadata("design:type", photo_picker_component_1.PhotoPickerComponent)
+], FileUploadComponent.prototype, "_parent", void 0);
 FileUploadComponent = FileUploadComponent_1 = __decorate([
     core_1.Component({
         selector: 'file-upload',
         templateUrl: './view/file.upload.component.html',
-        providers: [core_model_provider_1.CoreModelProvider]
+        providers: [core_model_provider_1.CoreModelProvider, file_reader_1.FileReaderServiceProvider]
     }),
     __metadata("design:paramtypes", [core_2.ElementRef,
         core_3.Renderer2,
-        coreModel_1.CoreModel])
+        coreModel_1.CoreModel,
+        file_reader_1.FileReaderService])
 ], FileUploadComponent);
 exports.FileUploadComponent = FileUploadComponent;
 var FileUploadComponent_1;
