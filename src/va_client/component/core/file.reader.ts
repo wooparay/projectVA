@@ -33,13 +33,16 @@ export class FileReaderService {
   constructor() {}
 
   // methods here...
-  public readAsDataURL(_file:any, _parentRef:PhotoPickerComponent) {
+  public readAsDataURL(_file:any, _parentRef:PhotoPickerComponent, _callback:any) {
     if (this._isFileReaderSupported() == true) {
       if (this._fileReader == null) {
         this._fileReader = new FileReader();
         this._fileReader.onload = function(e:Event) {
           if (_parentRef) {
             _parentRef.addDataToPhotoDataList(e.currentTarget['result']);
+          }
+          if (_callback && typeof(_callback)=='function') {
+            _callback();
           }
         };
       }

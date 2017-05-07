@@ -20,7 +20,14 @@ export class FileUploadComponent {
 
   public static CMODEL_KEY:string = "FileUploadComponent";
 
+  /*
+   *  difference between DLG_TITLE and DLG_INFO_TITLE is that by default,
+   *  will use DLG_TITLE, however if "SHOW_INFO_FLAG" is set to true,
+   *  will pick DLG_INFO_TITLE if set
+   */
   public static DLG_TITLE:string = "DLG_TITLE";
+  public static DLG_INFO_TITLE:string = "DLG_INFO_TITLE";
+  public static SHOW_INFO_FLAG:string = "SHOW_INFO_FLAG";
   public static DLG_BTN_ONE_LABEL:string = "DLG_BTN_ONE_LABEL";
   public static DLG_BTN_TWO_LABEL:string = "DLG_BTN_TWO_LABEL";
 
@@ -54,9 +61,24 @@ export class FileUploadComponent {
     // check CoreModel contents and apply changes to the label(s) when necessary
     let _options:any = this._coreModel.getDataByKey(FileUploadComponent.CMODEL_KEY);
     if (_options) {
-      if (_options.hasOwnProperty(FileUploadComponent.DLG_TITLE)) {
-        this._lblTitle = _options[FileUploadComponent.DLG_TITLE];
+      // show which Title...
+      if (_options.hasOwnProperty(FileUploadComponent.SHOW_INFO_FLAG)) {
+        let _flag:boolean = _options[FileUploadComponent.SHOW_INFO_FLAG];
+        if (_flag == true) {
+          if (_options.hasOwnProperty(FileUploadComponent.DLG_INFO_TITLE)) {
+            this._lblTitle = _options[FileUploadComponent.DLG_INFO_TITLE];
+          } else if (_options.hasOwnProperty(FileUploadComponent.DLG_TITLE)) {
+            this._lblTitle = _options[FileUploadComponent.DLG_TITLE];
+          }
+        } else {
+          if (_options.hasOwnProperty(FileUploadComponent.DLG_TITLE)) {
+            this._lblTitle = _options[FileUploadComponent.DLG_TITLE];
+          } else {
+            this._lblTitle = 'Select';
+          }
+        }
       }
+      // any special labels for the button(s)
       if (_options.hasOwnProperty(FileUploadComponent.DLG_BTN_ONE_LABEL)) {
         this._lblBtnOne = _options[FileUploadComponent.DLG_BTN_ONE_LABEL];
       }
@@ -92,10 +114,17 @@ export class FileUploadComponent {
           let _file:any = _e['dataTransfer'].files[0];
 
           if (_file.type.match(/image.*/)) {
-            _ref._fileReaderService.readAsDataURL(_file, _ref._parent);
+            // added _callback => close the dialogue
+            _ref._fileReaderService.readAsDataURL(_file, _ref._parent, function() { _ref.cancel(null); });
 
           } else {
-            alert('not an image type.. sorry');
+            let _options:any = _ref._coreModel.getDataByKey(FileUploadComponent.CMODEL_KEY);
+            if (!_options) {
+              _options = {};
+            }
+            _options[FileUploadComponent.SHOW_INFO_FLAG]=true;
+            _options[FileUploadComponent.DLG_INFO_TITLE] = 'Select: the selected file is not an image type!';
+            _ref._coreModel.setDataByKey(FileUploadComponent.CMODEL_KEY, _options, true);
           } // end -- if (image/*) type
         }
       };
@@ -158,13 +187,44 @@ alert('tainted');
       this._renderer.removeClass(this._getDlgFileUpload(), 'show');
       this._renderer.setStyle(this._getDlgFileUpload(), 'display', "none");
     }
+    // reset the SHOW_INFO_FLAG flag to false
+    this._resetShowInfoFlag();
   }
   private select(_event:MouseEvent) {
     // trigger the "file" input to click
     this._getFilUpload().click();
   }
   private fileUpdated(_event:Event) {
-    console.log(_event);
+    let _file:any = _event.target['files'][0];
+    let _ref:FileUploadComponent = this;
+    if (_file.type.match(/image.*/)) {
+      // added _callback => close the dialogue
+      this._fileReaderService.readAsDataURL(_file, this._parent,
+        function() {
+          _ref.cancel(null);
+        });
+
+    } else {
+      let _options:any = this._coreModel.getDataByKey(FileUploadComponent.CMODEL_KEY);
+      if (!_options) {
+        _options = {};
+      }
+      _options[FileUploadComponent.SHOW_INFO_FLAG]=true;
+      _options[FileUploadComponent.DLG_INFO_TITLE] = 'Select: the selected file is not an image type!';
+      this._coreModel.setDataByKey(FileUploadComponent.CMODEL_KEY, _options, true);
+      // not sure if it works
+      _event.target['form'].reset();
+    }
+  }
+
+  private _resetShowInfoFlag() {
+    let _options:any = this._coreModel.getDataByKey(FileUploadComponent.CMODEL_KEY);
+    if (!_options) {
+      _options = {};
+    }
+    _options[FileUploadComponent.SHOW_INFO_FLAG]=false;
+    _options[FileUploadComponent.DLG_INFO_TITLE] = '';
+    this._coreModel.setDataByKey(FileUploadComponent.CMODEL_KEY, _options, true);
   }
 
 }

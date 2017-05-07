@@ -44,9 +44,27 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
         // check CoreModel contents and apply changes to the label(s) when necessary
         var _options = this._coreModel.getDataByKey(FileUploadComponent_1.CMODEL_KEY);
         if (_options) {
-            if (_options.hasOwnProperty(FileUploadComponent_1.DLG_TITLE)) {
-                this._lblTitle = _options[FileUploadComponent_1.DLG_TITLE];
+            // show which Title...
+            if (_options.hasOwnProperty(FileUploadComponent_1.SHOW_INFO_FLAG)) {
+                var _flag = _options[FileUploadComponent_1.SHOW_INFO_FLAG];
+                if (_flag == true) {
+                    if (_options.hasOwnProperty(FileUploadComponent_1.DLG_INFO_TITLE)) {
+                        this._lblTitle = _options[FileUploadComponent_1.DLG_INFO_TITLE];
+                    }
+                    else if (_options.hasOwnProperty(FileUploadComponent_1.DLG_TITLE)) {
+                        this._lblTitle = _options[FileUploadComponent_1.DLG_TITLE];
+                    }
+                }
+                else {
+                    if (_options.hasOwnProperty(FileUploadComponent_1.DLG_TITLE)) {
+                        this._lblTitle = _options[FileUploadComponent_1.DLG_TITLE];
+                    }
+                    else {
+                        this._lblTitle = 'Select';
+                    }
+                }
             }
+            // any special labels for the button(s)
             if (_options.hasOwnProperty(FileUploadComponent_1.DLG_BTN_ONE_LABEL)) {
                 this._lblBtnOne = _options[FileUploadComponent_1.DLG_BTN_ONE_LABEL];
             }
@@ -78,10 +96,17 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
                 if (_e && _e['dataTransfer'].files) {
                     var _file = _e['dataTransfer'].files[0];
                     if (_file.type.match(/image.*/)) {
-                        _ref._fileReaderService.readAsDataURL(_file, _ref._parent);
+                        // added _callback => close the dialogue
+                        _ref._fileReaderService.readAsDataURL(_file, _ref._parent, function () { _ref.cancel(null); });
                     }
                     else {
-                        alert('not an image type.. sorry');
+                        var _options = _ref._coreModel.getDataByKey(FileUploadComponent_1.CMODEL_KEY);
+                        if (!_options) {
+                            _options = {};
+                        }
+                        _options[FileUploadComponent_1.SHOW_INFO_FLAG] = true;
+                        _options[FileUploadComponent_1.DLG_INFO_TITLE] = 'Select: the selected file is not an image type!';
+                        _ref._coreModel.setDataByKey(FileUploadComponent_1.CMODEL_KEY, _options, true);
                     } // end -- if (image/*) type
                 }
             };
@@ -136,18 +161,54 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
             this._renderer.removeClass(this._getDlgFileUpload(), 'show');
             this._renderer.setStyle(this._getDlgFileUpload(), 'display', "none");
         }
+        // reset the SHOW_INFO_FLAG flag to false
+        this._resetShowInfoFlag();
     };
     FileUploadComponent.prototype.select = function (_event) {
         // trigger the "file" input to click
         this._getFilUpload().click();
     };
     FileUploadComponent.prototype.fileUpdated = function (_event) {
-        console.log(_event);
+        var _file = _event.target['files'][0];
+        var _ref = this;
+        if (_file.type.match(/image.*/)) {
+            // added _callback => close the dialogue
+            this._fileReaderService.readAsDataURL(_file, this._parent, function () {
+                _ref.cancel(null);
+            });
+        }
+        else {
+            var _options = this._coreModel.getDataByKey(FileUploadComponent_1.CMODEL_KEY);
+            if (!_options) {
+                _options = {};
+            }
+            _options[FileUploadComponent_1.SHOW_INFO_FLAG] = true;
+            _options[FileUploadComponent_1.DLG_INFO_TITLE] = 'Select: the selected file is not an image type!';
+            this._coreModel.setDataByKey(FileUploadComponent_1.CMODEL_KEY, _options, true);
+            // not sure if it works
+            _event.target['form'].reset();
+        }
+    };
+    FileUploadComponent.prototype._resetShowInfoFlag = function () {
+        var _options = this._coreModel.getDataByKey(FileUploadComponent_1.CMODEL_KEY);
+        if (!_options) {
+            _options = {};
+        }
+        _options[FileUploadComponent_1.SHOW_INFO_FLAG] = false;
+        _options[FileUploadComponent_1.DLG_INFO_TITLE] = '';
+        this._coreModel.setDataByKey(FileUploadComponent_1.CMODEL_KEY, _options, true);
     };
     return FileUploadComponent;
 }());
 FileUploadComponent.CMODEL_KEY = "FileUploadComponent";
+/*
+ *  difference between DLG_TITLE and DLG_INFO_TITLE is that by default,
+ *  will use DLG_TITLE, however if "SHOW_INFO_FLAG" is set to true,
+ *  will pick DLG_INFO_TITLE if set
+ */
 FileUploadComponent.DLG_TITLE = "DLG_TITLE";
+FileUploadComponent.DLG_INFO_TITLE = "DLG_INFO_TITLE";
+FileUploadComponent.SHOW_INFO_FLAG = "SHOW_INFO_FLAG";
 FileUploadComponent.DLG_BTN_ONE_LABEL = "DLG_BTN_ONE_LABEL";
 FileUploadComponent.DLG_BTN_TWO_LABEL = "DLG_BTN_TWO_LABEL";
 __decorate([

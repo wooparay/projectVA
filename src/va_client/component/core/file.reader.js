@@ -33,13 +33,16 @@ var FileReaderService = FileReaderService_1 = (function () {
         return false;
     };
     // methods here...
-    FileReaderService.prototype.readAsDataURL = function (_file, _parentRef) {
+    FileReaderService.prototype.readAsDataURL = function (_file, _parentRef, _callback) {
         if (this._isFileReaderSupported() == true) {
             if (this._fileReader == null) {
                 this._fileReader = new FileReader();
                 this._fileReader.onload = function (e) {
                     if (_parentRef) {
                         _parentRef.addDataToPhotoDataList(e.currentTarget['result']);
+                    }
+                    if (_callback && typeof (_callback) == 'function') {
+                        _callback();
                     }
                 };
             }
