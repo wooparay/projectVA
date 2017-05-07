@@ -2,6 +2,9 @@
 <!--here we are... photo-picker ({{_coreModel.getCreationTimestamp()}})-->
 
 <!-- might need to use flex measurements later e.g. container -->
+<!-- TODO -->
+<!-- ** set the "Width" of the widget (picker) ** -->
+<!-- TODO -->
 <div style="width: 400px; border: 1px solid;">
   <div class="container-fluid" style="padding:0px;">
     <div class="col" style="padding: 0px;">
@@ -28,43 +31,16 @@
       </div> <!-- menubar -->
 
       <!-- photo display widget(s) -->
-<!-- * set height based on the widget area given -->
+      <!-- TODO -->
+      <!-- * set height based on the widget area given -->
+      <!-- TODO -->
       <div id='photo-picker-preview-container' class="photo-picker-preview-container" style="height: 150px;">
         <div class="photo-picker-preview-container-inner">
           <!-- widget -->
-<!-- testing -->
-<div *ngFor='let item of _photoDataList; let _i = index; '>
-  {{item}}
-</div>
-<!-- testing (end) -->
           <photo-picker-preview-widget [_ref]='this'></photo-picker-preview-widget>
-          <photo-picker-preview-widget [_ref]='this'></photo-picker-preview-widget>
-          <!-- widget (image) -->
-          <div class="photo-picker-preview-widget-container">
-            <div class="photo-picker-preview-widget-image-container">
-              <div class="cursor-hand">
-                <img src='../../static/img/photoPicker/airBalloon.jpeg' />
-                <!-- the "x" button -->
-                <span class="pull-right photo-picker-preview-widget-image-close-container">
-                  <a class='btn btn-small red'>x</a>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='../../static/img/photoPicker/airBalloon.jpeg' /><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='../../static/img/photoPicker/airBalloon.jpeg' /><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='../../static/img/photoPicker/airBalloon.jpeg' /><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='../../static/img/photoPicker/airBalloon.jpeg' /><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-image-container"><div class="cursor-hand"><img src='../../static/img/photoPicker/airBalloon.jpeg' /><span class="pull-right photo-picker-preview-widget-image-close-container"><a class='btn btn-small red'>x</a></span></div></div></div>
-
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-container-inner"><div class="flex-center cursor-hand"><i class="fa fa-lg fa-image lightblue" title="add photo"></i></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-container-inner"><div class="flex-center cursor-hand"><i class="fa fa-lg fa-image lightblue" title="add photo"></i></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-container-inner"><div class="flex-center cursor-hand"><i class="fa fa-lg fa-image lightblue" title="add photo"></i></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-container-inner"><div class="flex-center cursor-hand"><i class="fa fa-lg fa-image lightblue" title="add photo"></i></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-container-inner"><div class="flex-center cursor-hand"><i class="fa fa-lg fa-image lightblue" title="add photo"></i></div></div></div>
-          <div class="photo-picker-preview-widget-container"><div class="photo-picker-preview-widget-container-inner"><div class="flex-center cursor-hand"><i class="fa fa-lg fa-image lightblue" title="add photo"></i></div></div></div>
-
+          <!-- iterate through the photoDataList item(s) -->
+          <photo-picker-view-widget *ngFor='let item of _photoDataList; let _i = index; '
+            [_parent]='this' [_photoDataIndex]='_i'></photo-picker-view-widget>
         </div>
 
       </div>  <!-- div for preview image widgets -->

@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 
 import { CoreModel } from './../core/coreModel';
+import { CoreModelProvider } from './../core/core.model.provider';
 import { PhotoPickerComponent } from './photo.picker.component';
 
 @Component({
   selector: 'photo-picker-preview-widget',
   templateUrl: './view/photo.picker.preview.widget.html',
-  providers: [ CoreModel ]
+  providers: [ CoreModelProvider ]
 })
 export class PhotoPickerPreviewWidget  {
   // reference to the parent component

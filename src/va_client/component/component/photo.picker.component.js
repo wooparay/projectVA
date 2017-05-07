@@ -1,8 +1,3 @@
-/*import {
-  View,
-  CORE_DIRECTIVES,
-  FORM_DIRECTIVES
-} from '@angular/core';*/
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -18,15 +13,26 @@ var core_2 = require("@angular/core");
 var core_3 = require("@angular/core");
 var coreModel_1 = require("./../core/coreModel");
 var core_model_provider_1 = require("./../core/core.model.provider");
-// ** optional (unless you need to access this component's methods)
 var file_upload_component_1 = require("./file.upload.component");
 var PhotoPickerComponent = (function () {
     function PhotoPickerComponent(_coreModel, _renderer, _element) {
         this._coreModel = _coreModel;
         this._renderer = _renderer;
         this._element = _element;
+        // List of URI_data for the photos involved
         this._photoDataList = [];
     }
+    /**
+     *  method to return the uri data based on the given index
+     */
+    PhotoPickerComponent.prototype.getURIDataFromPhotoDataList = function (_index) {
+        if (_index < this._photoDataList.length) {
+            return this._photoDataList[_index];
+        }
+        else {
+            return null;
+        }
+    };
     /* ################################################################## */
     /*  methods for handling singleton level resources like common dialog */
     /* ################################################################## */
@@ -78,4 +84,9 @@ exports.PhotoPickerComponent = PhotoPickerComponent;
  *  Renderer2 tutorial =>
  *    https://netbasal.com/angular-2-explore-the-renderer-service-e43ef673b26c
  */
+/*import {
+  View,
+  CORE_DIRECTIVES,
+  FORM_DIRECTIVES
+} from '@angular/core';*/
 //# sourceMappingURL=photo.picker.component.js.map

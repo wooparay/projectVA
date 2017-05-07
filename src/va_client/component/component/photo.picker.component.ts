@@ -1,9 +1,3 @@
-/*import {
-  View,
-  CORE_DIRECTIVES,
-  FORM_DIRECTIVES
-} from '@angular/core';*/
-
 import {NgFor} from '@angular/common';
 
 import { Component } from '@angular/core';
@@ -13,7 +7,8 @@ import { Renderer2 } from '@angular/core';
 import { CoreModel } from './../core/coreModel';
 import { CoreModelProvider } from './../core/core.model.provider';
 import { PhotoPickerPreviewWidget } from './photo.picker.preview.widget';
-// ** optional (unless you need to access this component's methods)
+import { PhotoPickerViewWidget } from './photo.picker.view.widget';
+
 import { FileUploadComponent } from './file.upload.component';
 
 @Component({
@@ -27,11 +22,23 @@ import { FileUploadComponent } from './file.upload.component';
 })
 export class PhotoPickerComponent  {
 
+  // List of URI_data for the photos involved
   private _photoDataList:string[] = [];
 
   constructor(private _coreModel:CoreModel,
     private _renderer:Renderer2,
     private _element:ElementRef) {
+  }
+
+  /**
+   *  method to return the uri data based on the given index
+   */
+  public getURIDataFromPhotoDataList(_index:number):string {
+    if (_index < this._photoDataList.length) {
+      return this._photoDataList[_index];
+    } else {
+      return null;
+    }
   }
 
   /* ################################################################## */
@@ -80,3 +87,9 @@ export class PhotoPickerComponent  {
  *  Renderer2 tutorial =>
  *    https://netbasal.com/angular-2-explore-the-renderer-service-e43ef673b26c
  */
+
+ /*import {
+   View,
+   CORE_DIRECTIVES,
+   FORM_DIRECTIVES
+ } from '@angular/core';*/

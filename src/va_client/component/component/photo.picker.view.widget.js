@@ -13,27 +13,37 @@ var core_2 = require("@angular/core");
 var coreModel_1 = require("./../core/coreModel");
 var core_model_provider_1 = require("./../core/core.model.provider");
 var photo_picker_component_1 = require("./photo.picker.component");
-var PhotoPickerPreviewWidget = (function () {
-    function PhotoPickerPreviewWidget(_coreModel) {
+var PhotoPickerViewWidget = (function () {
+    function PhotoPickerViewWidget(_coreModel) {
         this._coreModel = _coreModel;
-        console.log(_coreModel.getCreationTimestamp());
     }
-    PhotoPickerPreviewWidget.prototype.displayUploadDlg = function () {
-        this._ref.displayUploadDlg(this);
+    /**
+     *  lifecycle hook
+     *  (Respond after Angular checks the content projected into the component.)
+     *  https://angular.io/docs/ts/latest/guide/lifecycle-hooks.html
+     */
+    PhotoPickerViewWidget.prototype.ngAfterContentChecked = function () {
+        if (!this._photoURIData) {
+            this._photoURIData = this._parent.getURIDataFromPhotoDataList(this._photoDataIndex);
+        }
     };
-    return PhotoPickerPreviewWidget;
+    return PhotoPickerViewWidget;
 }());
 __decorate([
     core_2.Input(),
     __metadata("design:type", photo_picker_component_1.PhotoPickerComponent)
-], PhotoPickerPreviewWidget.prototype, "_ref", void 0);
-PhotoPickerPreviewWidget = __decorate([
+], PhotoPickerViewWidget.prototype, "_parent", void 0);
+__decorate([
+    core_2.Input(),
+    __metadata("design:type", Number)
+], PhotoPickerViewWidget.prototype, "_photoDataIndex", void 0);
+PhotoPickerViewWidget = __decorate([
     core_1.Component({
-        selector: 'photo-picker-preview-widget',
-        templateUrl: './view/photo.picker.preview.widget.html',
+        selector: 'photo-picker-view-widget',
+        templateUrl: './view/photo.picker.view.widget.html',
         providers: [core_model_provider_1.CoreModelProvider]
     }),
     __metadata("design:paramtypes", [coreModel_1.CoreModel])
-], PhotoPickerPreviewWidget);
-exports.PhotoPickerPreviewWidget = PhotoPickerPreviewWidget;
-//# sourceMappingURL=photo.picker.preview.widget.js.map
+], PhotoPickerViewWidget);
+exports.PhotoPickerViewWidget = PhotoPickerViewWidget;
+//# sourceMappingURL=photo.picker.view.widget.js.map
