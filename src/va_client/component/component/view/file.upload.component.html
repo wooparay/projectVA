@@ -10,7 +10,9 @@
         <!-- title / header -->
         <div class="modal-header">
           <h4 class="modal-title w-100" id='dlgFileUploadLabel'>
-            {{_lblTitle}}
+            <!-- depends if it is a valid or not message, have diff color -->
+            <span *ngIf='_canShowInfo' style="color: red;">{{_lblTitle}}</span>
+            <span *ngIf='!_canShowInfo' >{{_lblTitle}}</span>
           </h4>
           <button type="button" class="close pull-right"
             data-dismiss='modal' aria-label='Close' (click)='cancel($event)'>

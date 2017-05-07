@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { Renderer2 } from '@angular/core';
 import { Input } from '@angular/core';
+import { NgIf } from '@angular/common';
 
 import { CoreModel } from './../core/coreModel';
 import { CoreModelProvider } from './../core/core.model.provider';
 
-import { PhotoPickerComponent } from './photo.picker.component';
+//import { PhotoPickerComponent } from './photo.picker.component';
 import { FileReaderService, FileReaderServiceProvider } from './../core/file.reader';
 
 @Component({
@@ -16,7 +17,7 @@ import { FileReaderService, FileReaderServiceProvider } from './../core/file.rea
 })
 export class FileUploadComponent {
 
-  @Input() _parent:PhotoPickerComponent;
+  @Input() _parent:any;
 
   public static CMODEL_KEY:string = "FileUploadComponent";
 
@@ -42,6 +43,8 @@ export class FileUploadComponent {
   private _lblTitle:string = 'Select';
   private _lblBtnOne:string = 'Select';
   private _lblBtnTwo:string = 'Cancel';
+
+  private _canShowInfo:boolean = false;
 
   /**
    *  constructor
@@ -70,12 +73,14 @@ export class FileUploadComponent {
           } else if (_options.hasOwnProperty(FileUploadComponent.DLG_TITLE)) {
             this._lblTitle = _options[FileUploadComponent.DLG_TITLE];
           }
+          this._canShowInfo = true;
         } else {
           if (_options.hasOwnProperty(FileUploadComponent.DLG_TITLE)) {
             this._lblTitle = _options[FileUploadComponent.DLG_TITLE];
           } else {
             this._lblTitle = 'Select';
           }
+          this._canShowInfo = false;
         }
       }
       // any special labels for the button(s)
@@ -197,24 +202,27 @@ alert('tainted');
   private fileUpdated(_event:Event) {
     let _file:any = _event.target['files'][0];
     let _ref:FileUploadComponent = this;
-    if (_file.type.match(/image.*/)) {
-      // added _callback => close the dialogue
-      this._fileReaderService.readAsDataURL(_file, this._parent,
-        function() {
-          _ref.cancel(null);
-        });
 
-    } else {
-      let _options:any = this._coreModel.getDataByKey(FileUploadComponent.CMODEL_KEY);
-      if (!_options) {
-        _options = {};
+    if (_file) {
+      if (_file.type.match(/image.*/)) {
+        // added _callback => close the dialogue
+        this._fileReaderService.readAsDataURL(_file, this._parent,
+          function() {
+            _ref.cancel(null);
+          });
+
+      } else {
+        let _options:any = this._coreModel.getDataByKey(FileUploadComponent.CMODEL_KEY);
+        if (!_options) {
+          _options = {};
+        }
+        _options[FileUploadComponent.SHOW_INFO_FLAG]=true;
+        _options[FileUploadComponent.DLG_INFO_TITLE] = 'Select: the selected file is not an image type!';
+        this._coreModel.setDataByKey(FileUploadComponent.CMODEL_KEY, _options, true);
+        // not sure if it works
+        _event.target['form'].reset();
       }
-      _options[FileUploadComponent.SHOW_INFO_FLAG]=true;
-      _options[FileUploadComponent.DLG_INFO_TITLE] = 'Select: the selected file is not an image type!';
-      this._coreModel.setDataByKey(FileUploadComponent.CMODEL_KEY, _options, true);
-      // not sure if it works
-      _event.target['form'].reset();
-    }
+    } // end -- if (_file) could be null if "cancelled"
   }
 
   private _resetShowInfoFlag() {
@@ -228,3 +236,11 @@ alert('tainted');
   }
 
 }
+
+/* ****************
+ *  dependency(s)
+ *
+ *  _parent => embedding parent (could be anything => now is hard-code as PhotoPickerComponent)
+ *  _renderer2 => Renderer2 (for html DOM manipulation)
+ *  _coreModel => CoreModel (act as a sharable storage for values across objects)
+ * ****************/

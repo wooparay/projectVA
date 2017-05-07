@@ -14,7 +14,7 @@ var core_3 = require("@angular/core");
 var core_4 = require("@angular/core");
 var coreModel_1 = require("./../core/coreModel");
 var core_model_provider_1 = require("./../core/core.model.provider");
-var photo_picker_component_1 = require("./photo.picker.component");
+//import { PhotoPickerComponent } from './photo.picker.component';
 var file_reader_1 = require("./../core/file.reader");
 var FileUploadComponent = FileUploadComponent_1 = (function () {
     /**
@@ -34,6 +34,7 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
         this._lblTitle = 'Select';
         this._lblBtnOne = 'Select';
         this._lblBtnTwo = 'Cancel';
+        this._canShowInfo = false;
     }
     /**
      *  lifecycle hook
@@ -54,6 +55,7 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
                     else if (_options.hasOwnProperty(FileUploadComponent_1.DLG_TITLE)) {
                         this._lblTitle = _options[FileUploadComponent_1.DLG_TITLE];
                     }
+                    this._canShowInfo = true;
                 }
                 else {
                     if (_options.hasOwnProperty(FileUploadComponent_1.DLG_TITLE)) {
@@ -62,6 +64,7 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
                     else {
                         this._lblTitle = 'Select';
                     }
+                    this._canShowInfo = false;
                 }
             }
             // any special labels for the button(s)
@@ -171,23 +174,25 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
     FileUploadComponent.prototype.fileUpdated = function (_event) {
         var _file = _event.target['files'][0];
         var _ref = this;
-        if (_file.type.match(/image.*/)) {
-            // added _callback => close the dialogue
-            this._fileReaderService.readAsDataURL(_file, this._parent, function () {
-                _ref.cancel(null);
-            });
-        }
-        else {
-            var _options = this._coreModel.getDataByKey(FileUploadComponent_1.CMODEL_KEY);
-            if (!_options) {
-                _options = {};
+        if (_file) {
+            if (_file.type.match(/image.*/)) {
+                // added _callback => close the dialogue
+                this._fileReaderService.readAsDataURL(_file, this._parent, function () {
+                    _ref.cancel(null);
+                });
             }
-            _options[FileUploadComponent_1.SHOW_INFO_FLAG] = true;
-            _options[FileUploadComponent_1.DLG_INFO_TITLE] = 'Select: the selected file is not an image type!';
-            this._coreModel.setDataByKey(FileUploadComponent_1.CMODEL_KEY, _options, true);
-            // not sure if it works
-            _event.target['form'].reset();
-        }
+            else {
+                var _options = this._coreModel.getDataByKey(FileUploadComponent_1.CMODEL_KEY);
+                if (!_options) {
+                    _options = {};
+                }
+                _options[FileUploadComponent_1.SHOW_INFO_FLAG] = true;
+                _options[FileUploadComponent_1.DLG_INFO_TITLE] = 'Select: the selected file is not an image type!';
+                this._coreModel.setDataByKey(FileUploadComponent_1.CMODEL_KEY, _options, true);
+                // not sure if it works
+                _event.target['form'].reset();
+            }
+        } // end -- if (_file) could be null if "cancelled"
     };
     FileUploadComponent.prototype._resetShowInfoFlag = function () {
         var _options = this._coreModel.getDataByKey(FileUploadComponent_1.CMODEL_KEY);
@@ -213,7 +218,7 @@ FileUploadComponent.DLG_BTN_ONE_LABEL = "DLG_BTN_ONE_LABEL";
 FileUploadComponent.DLG_BTN_TWO_LABEL = "DLG_BTN_TWO_LABEL";
 __decorate([
     core_4.Input(),
-    __metadata("design:type", photo_picker_component_1.PhotoPickerComponent)
+    __metadata("design:type", Object)
 ], FileUploadComponent.prototype, "_parent", void 0);
 FileUploadComponent = FileUploadComponent_1 = __decorate([
     core_1.Component({
@@ -228,4 +233,11 @@ FileUploadComponent = FileUploadComponent_1 = __decorate([
 ], FileUploadComponent);
 exports.FileUploadComponent = FileUploadComponent;
 var FileUploadComponent_1;
+/* ****************
+ *  dependency(s)
+ *
+ *  _parent => embedding parent (could be anything => now is hard-code as PhotoPickerComponent)
+ *  _renderer2 => Renderer2 (for html DOM manipulation)
+ *  _coreModel => CoreModel (act as a sharable storage for values across objects)
+ * ****************/
 //# sourceMappingURL=file.upload.component.js.map

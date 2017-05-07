@@ -38,8 +38,8 @@ var FileReaderService = FileReaderService_1 = (function () {
             if (this._fileReader == null) {
                 this._fileReader = new FileReader();
                 this._fileReader.onload = function (e) {
-                    if (_parentRef) {
-                        _parentRef.addDataToPhotoDataList(e.currentTarget['result']);
+                    if (_parentRef && _parentRef['addDataToPhotoDataList']) {
+                        _parentRef['addDataToPhotoDataList'](e.currentTarget['result']);
                     }
                     if (_callback && typeof (_callback) == 'function') {
                         _callback();
