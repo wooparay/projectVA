@@ -31,5 +31,9 @@ export class PhotoPickerViewWidget  {
     }
   }
 
+  private showPhotBigPreviewDlg(_e:Event) {
+    console.log(this._photoURIData);
+  }
+
 
 }

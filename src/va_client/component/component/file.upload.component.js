@@ -1,4 +1,9 @@
 "use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -16,25 +21,27 @@ var coreModel_1 = require("./../core/coreModel");
 var core_model_provider_1 = require("./../core/core.model.provider");
 //import { PhotoPickerComponent } from './photo.picker.component';
 var file_reader_1 = require("./../core/file.reader");
-var FileUploadComponent = FileUploadComponent_1 = (function () {
+var generic_dlg_component_1 = require("./generic.dlg.component");
+var FileUploadComponent = FileUploadComponent_1 = (function (_super) {
+    __extends(FileUploadComponent, _super);
     /**
      *  constructor
      */
     function FileUploadComponent(_element, _renderer, _coreModel, _fileReaderService) {
-        this._element = _element;
-        this._renderer = _renderer;
-        this._coreModel = _coreModel;
-        this._fileReaderService = _fileReaderService;
-        this._isTainted = false;
-        this._dlgFileUpload = null;
-        this._filUpload = null;
-        this._form = null;
-        this._isFormDragNDropSet = false;
+        var _this = _super.call(this) || this;
+        _this._element = _element;
+        _this._renderer = _renderer;
+        _this._coreModel = _coreModel;
+        _this._fileReaderService = _fileReaderService;
+        _this._isTainted = false;
+        _this._filUpload = null;
+        _this._isFormDragNDropSet = false;
         // value bound properties
-        this._lblTitle = 'Select';
-        this._lblBtnOne = 'Select';
-        this._lblBtnTwo = 'Cancel';
-        this._canShowInfo = false;
+        _this._lblTitle = 'Select';
+        _this._canShowInfo = false;
+        _this.buttonOneLabel = 'Select';
+        _this.buttonTwoLabel = 'Cancel';
+        return _this;
     }
     /**
      *  lifecycle hook
@@ -69,10 +76,10 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
             }
             // any special labels for the button(s)
             if (_options.hasOwnProperty(FileUploadComponent_1.DLG_BTN_ONE_LABEL)) {
-                this._lblBtnOne = _options[FileUploadComponent_1.DLG_BTN_ONE_LABEL];
+                this.buttonOneLabel = _options[FileUploadComponent_1.DLG_BTN_ONE_LABEL];
             }
             if (_options.hasOwnProperty(FileUploadComponent_1.DLG_BTN_TWO_LABEL)) {
-                this._lblBtnTwo = _options[FileUploadComponent_1.DLG_BTN_TWO_LABEL];
+                this.buttonTwoLabel = _options[FileUploadComponent_1.DLG_BTN_TWO_LABEL];
             }
         } // end -- if (_options)
         // handle the Form's drag n drop feature
@@ -80,7 +87,7 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
     };
     FileUploadComponent.prototype._setFormDragNDrop = function (_ref) {
         if (this._isFormDragNDropSet == false) {
-            var _frm = this._getForm();
+            var _frm = this.getForm(_ref._element);
             var _fxStopEvent = function () {
                 var _e = arguments[0];
                 _e.preventDefault();
@@ -100,7 +107,7 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
                     var _file = _e['dataTransfer'].files[0];
                     if (_file.type.match(/image.*/)) {
                         // added _callback => close the dialogue
-                        _ref._fileReaderService.readAsDataURL(_file, _ref._parent, function () { _ref.cancel(null); });
+                        _ref._fileReaderService.readAsDataURL(_file, _ref._parent, function () { _ref.buttonTwoClick(null); });
                     }
                     else {
                         var _options = _ref._coreModel.getDataByKey(FileUploadComponent_1.CMODEL_KEY);
@@ -123,51 +130,33 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
             this._isFormDragNDropSet = true;
         }
     };
-    FileUploadComponent.prototype._getForm = function () {
-        if (this._form == null) {
-            this._form = this._element.nativeElement.querySelector('form');
-        }
-        return this._form;
-    };
-    /**
-     *  return the (native) element value of #dlgFileUpload
-     */
-    FileUploadComponent.prototype._getDlgFileUpload = function () {
-        if (this._dlgFileUpload == null) {
-            this._dlgFileUpload = this._element.nativeElement.querySelector('#dlgFileUpload');
-        }
-        return this._dlgFileUpload;
-    };
     FileUploadComponent.prototype._getFilUpload = function () {
         if (this._filUpload == null) {
             this._filUpload = this._element.nativeElement.querySelector('#filUpload');
         }
         return this._filUpload;
     };
-    /**
-     *  STATIC method to show the dlgFileUpload
-     */
-    FileUploadComponent.showDlgFileUpload = function (_e, _renderer) {
-        _renderer.addClass(_e, 'show');
-        _renderer.setStyle(_e, 'display', 'block');
-    };
     /* -------------- */
     /* -------------- */
     /*  event handler */
     /* -------------- */
     /* -------------- */
-    FileUploadComponent.prototype.cancel = function (_event) {
+    /* -------------------------------- */
+    /*  abstract method implementations */
+    /* -------------------------------- */
+    //private cancel(_event:MouseEvent) {
+    FileUploadComponent.prototype.buttonTwoClick = function (_event) {
         if (this._isTainted) {
             alert('tainted');
         }
         else {
-            this._renderer.removeClass(this._getDlgFileUpload(), 'show');
-            this._renderer.setStyle(this._getDlgFileUpload(), 'display', "none");
+            FileUploadComponent_1.hideDlg(this.getDlg(this._element, 'dlgFileUpload'), this._renderer);
         }
         // reset the SHOW_INFO_FLAG flag to false
         this._resetShowInfoFlag();
     };
-    FileUploadComponent.prototype.select = function (_event) {
+    //private select(_event:MouseEvent) {
+    FileUploadComponent.prototype.buttonOneClick = function (_event) {
         // trigger the "file" input to click
         this._getFilUpload().click();
     };
@@ -178,7 +167,7 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
             if (_file.type.match(/image.*/)) {
                 // added _callback => close the dialogue
                 this._fileReaderService.readAsDataURL(_file, this._parent, function () {
-                    _ref.cancel(null);
+                    _ref.buttonTwoClick(null);
                 });
             }
             else {
@@ -204,7 +193,7 @@ var FileUploadComponent = FileUploadComponent_1 = (function () {
         this._coreModel.setDataByKey(FileUploadComponent_1.CMODEL_KEY, _options, true);
     };
     return FileUploadComponent;
-}());
+}(generic_dlg_component_1.GenericDlgComponent));
 FileUploadComponent.CMODEL_KEY = "FileUploadComponent";
 /*
  *  difference between DLG_TITLE and DLG_INFO_TITLE is that by default,

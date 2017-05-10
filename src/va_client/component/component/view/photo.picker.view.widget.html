@@ -4,7 +4,7 @@
   <div class="photo-picker-preview-widget-image-container">
     <div class="cursor-hand">
       <!--img src='../../static/img/photoPicker/airBalloon.jpeg' /-->
-      <img src='{{_photoURIData}}' />
+      <img src='{{_photoURIData}}' (click)='showPhotBigPreviewDlg($event)' />
 
       <!-- the "x" button -->
       <span class="pull-right photo-picker-preview-widget-image-close-container">

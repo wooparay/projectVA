@@ -67,8 +67,10 @@ var PhotoPickerComponent = (function () {
         // typically a good idea to check if any errors occured in setting the data
         let _ret:any = this._coreModel.setDataByKey(FileUploadComponent.CMODEL_KEY, _options, false);
         */
-        file_upload_component_1.FileUploadComponent.showDlgFileUpload(this._element.nativeElement.querySelector('#dlgFileUpload'), this._renderer);
+        //FileUploadComponent.showDlgFileUpload(
+        file_upload_component_1.FileUploadComponent.showDlg(this._element.nativeElement.querySelector('#dlgFileUpload'), this._renderer);
     };
+    /* TODO showPhotoBigPreviewDlg */
     PhotoPickerComponent.prototype.addDataToPhotoDataList = function (_data) {
         this._photoDataList.push(_data);
         console.log('** size of the photoDataList > ' + this._photoDataList.length);

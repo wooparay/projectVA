@@ -86,10 +86,14 @@ console.log('*** to be destroyed => PhotoPickerComponent, remove the key on Core
     let _ret:any = this._coreModel.setDataByKey(FileUploadComponent.CMODEL_KEY, _options, false);
     */
 
-    FileUploadComponent.showDlgFileUpload(
+    //FileUploadComponent.showDlgFileUpload(
+    FileUploadComponent.showDlg(
       this._element.nativeElement.querySelector('#dlgFileUpload'),
       this._renderer);
   }
+
+/* TODO showPhotoBigPreviewDlg */
+
 
   public addDataToPhotoDataList(_data:string) {
     this._photoDataList.push(_data);

@@ -10,12 +10,14 @@ import { CoreModelProvider } from './../core/core.model.provider';
 //import { PhotoPickerComponent } from './photo.picker.component';
 import { FileReaderService, FileReaderServiceProvider } from './../core/file.reader';
 
+import { GenericDlgComponent } from './generic.dlg.component';
+
 @Component({
   selector: 'file-upload',
   templateUrl: './view/file.upload.component.html',
   providers: [ CoreModelProvider, FileReaderServiceProvider ]
 })
-export class FileUploadComponent {
+export class FileUploadComponent extends GenericDlgComponent {
 
   @Input() _parent:any;
 
@@ -33,16 +35,12 @@ export class FileUploadComponent {
   public static DLG_BTN_TWO_LABEL:string = "DLG_BTN_TWO_LABEL";
 
   private _isTainted:boolean = false;
-  private _dlgFileUpload:any = null;
   private _filUpload:any = null;
-  private _form:any = null;
 
   private _isFormDragNDropSet:boolean = false;
 
   // value bound properties
   private _lblTitle:string = 'Select';
-  private _lblBtnOne:string = 'Select';
-  private _lblBtnTwo:string = 'Cancel';
 
   private _canShowInfo:boolean = false;
 
@@ -53,6 +51,10 @@ export class FileUploadComponent {
     private _renderer:Renderer2,
     private _coreModel:CoreModel,
     private _fileReaderService:FileReaderService) {
+    super();
+
+    this.buttonOneLabel = 'Select';
+    this.buttonTwoLabel = 'Cancel';
   }
 
   /**
@@ -85,10 +87,10 @@ export class FileUploadComponent {
       }
       // any special labels for the button(s)
       if (_options.hasOwnProperty(FileUploadComponent.DLG_BTN_ONE_LABEL)) {
-        this._lblBtnOne = _options[FileUploadComponent.DLG_BTN_ONE_LABEL];
+        this.buttonOneLabel = _options[FileUploadComponent.DLG_BTN_ONE_LABEL];
       }
       if (_options.hasOwnProperty(FileUploadComponent.DLG_BTN_TWO_LABEL)) {
-        this._lblBtnTwo = _options[FileUploadComponent.DLG_BTN_TWO_LABEL];
+        this.buttonTwoLabel = _options[FileUploadComponent.DLG_BTN_TWO_LABEL];
       }
     } // end -- if (_options)
 
@@ -98,7 +100,7 @@ export class FileUploadComponent {
 
   private _setFormDragNDrop(_ref:FileUploadComponent) {
     if (this._isFormDragNDropSet == false) {
-      let _frm:any = this._getForm();
+      let _frm:any = this.getForm(_ref._element);
       let _fxStopEvent = function() {
         let _e:Event = arguments[0];
         _e.preventDefault();
@@ -120,7 +122,7 @@ export class FileUploadComponent {
 
           if (_file.type.match(/image.*/)) {
             // added _callback => close the dialogue
-            _ref._fileReaderService.readAsDataURL(_file, _ref._parent, function() { _ref.cancel(null); });
+            _ref._fileReaderService.readAsDataURL(_file, _ref._parent, function() { _ref.buttonTwoClick(null); });
 
           } else {
             let _options:any = _ref._coreModel.getDataByKey(FileUploadComponent.CMODEL_KEY);
@@ -146,23 +148,6 @@ export class FileUploadComponent {
     }
   }
 
-  private _getForm() {
-    if (this._form==null) {
-      this._form = this._element.nativeElement.querySelector('form');
-    }
-    return this._form;
-  }
-
-
-  /**
-   *  return the (native) element value of #dlgFileUpload
-   */
-  private _getDlgFileUpload() {
-    if (this._dlgFileUpload == null) {
-      this._dlgFileUpload = this._element.nativeElement.querySelector('#dlgFileUpload');
-    }
-    return this._dlgFileUpload;
-  }
   private _getFilUpload() {
     if (this._filUpload == null) {
       this._filUpload = this._element.nativeElement.querySelector('#filUpload');
@@ -170,32 +155,28 @@ export class FileUploadComponent {
     return this._filUpload;
   }
 
-  /**
-   *  STATIC method to show the dlgFileUpload
-   */
-  public static showDlgFileUpload(_e:any, _renderer:Renderer2) {
-    _renderer.addClass(_e, 'show');
-    _renderer.setStyle(_e, 'display', 'block');
-  }
-
-
   /* -------------- */
   /* -------------- */
   /*  event handler */
   /* -------------- */
   /* -------------- */
 
-  private cancel(_event:MouseEvent) {
+  /* -------------------------------- */
+  /*  abstract method implementations */
+  /* -------------------------------- */
+
+//private cancel(_event:MouseEvent) {
+  public buttonTwoClick(_event:Event) {
     if (this._isTainted) {
-alert('tainted');
+      alert('tainted');
     } else {
-      this._renderer.removeClass(this._getDlgFileUpload(), 'show');
-      this._renderer.setStyle(this._getDlgFileUpload(), 'display', "none");
+      FileUploadComponent.hideDlg(this.getDlg(this._element, 'dlgFileUpload'), this._renderer);
     }
     // reset the SHOW_INFO_FLAG flag to false
     this._resetShowInfoFlag();
   }
-  private select(_event:MouseEvent) {
+//private select(_event:MouseEvent) {
+  public buttonOneClick(_event:Event) {
     // trigger the "file" input to click
     this._getFilUpload().click();
   }
@@ -208,7 +189,7 @@ alert('tainted');
         // added _callback => close the dialogue
         this._fileReaderService.readAsDataURL(_file, this._parent,
           function() {
-            _ref.cancel(null);
+            _ref.buttonTwoClick(null);
           });
 
       } else {

@@ -15,7 +15,7 @@
             <span *ngIf='!_canShowInfo' >{{_lblTitle}}</span>
           </h4>
           <button type="button" class="close pull-right"
-            data-dismiss='modal' aria-label='Close' (click)='cancel($event)'>
+            data-dismiss='modal' aria-label='Close' (click)='buttonTwoClick($event)'>
             <span aria-hidden='true'>x</span>
           </button>
         </div>
@@ -32,12 +32,12 @@
         <!-- footer -->
         <div class="modal-footer">
           <button class="btn btn-secondary waves-effect waves-light"
-            data-dismiss='modal' (click)='select($event)'>
-            {{_lblBtnOne}}
+            data-dismiss='modal' (click)='buttonOneClick($event)'>
+            {{buttonOneLabel}}
           </button>
           <button class="btn btn-primary waves-effect waves-light"
-            (click)='cancel($event)'>
-            {{_lblBtnTwo}}
+            (click)='buttonTwoClick($event)'>
+            {{buttonTwoLabel}}
           </button>
         </div>
       </div>  <!-- content -->
