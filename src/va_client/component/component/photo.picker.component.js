@@ -22,6 +22,16 @@ var PhotoPickerComponent = (function () {
         // List of URI_data for the photos involved
         this._photoDataList = [];
     }
+    PhotoPickerComponent.prototype.ngOnDestroy = function () {
+        this.cleanupDataBasedOnKey(file_upload_component_1.FileUploadComponent.CMODEL_KEY);
+        console.log('*** to be destroyed => PhotoPickerComponent, remove the key on CoreModel');
+    };
+    /* -------------------------- */
+    /*  interface implementations */
+    /* -------------------------- */
+    PhotoPickerComponent.prototype.cleanupDataBasedOnKey = function (_key) {
+        this._coreModel.removeDataByKey(_key);
+    };
     /**
      *  method to return the uri data based on the given index
      */

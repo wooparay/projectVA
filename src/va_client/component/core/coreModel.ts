@@ -62,12 +62,24 @@ export class CoreModel {
     return _ret;
   }
 
+  /**
+   *  get the value / data based on the key
+   */
   public getDataByKey(_key:string) {
     return this._fieldset[_key];
   }
-
+  /**
+   *  get all the keys available (each key holds associated values)
+   */
   public getFieldSetKeys() {
     return Object.keys(this._fieldset);
+  }
+  
+  /**
+   *  remove the value under the given key
+   */
+  public removeDataByKey(_key:string) {
+    delete this._fieldset[_key];
   }
 
 }

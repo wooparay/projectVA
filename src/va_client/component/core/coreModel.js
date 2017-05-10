@@ -51,11 +51,23 @@ var CoreModel = CoreModel_1 = (function () {
         }
         return _ret;
     };
+    /**
+     *  get the value / data based on the key
+     */
     CoreModel.prototype.getDataByKey = function (_key) {
         return this._fieldset[_key];
     };
+    /**
+     *  get all the keys available (each key holds associated values)
+     */
     CoreModel.prototype.getFieldSetKeys = function () {
         return Object.keys(this._fieldset);
+    };
+    /**
+     *  remove the value under the given key
+     */
+    CoreModel.prototype.removeDataByKey = function (_key) {
+        delete this._fieldset[_key];
     };
     return CoreModel;
 }());

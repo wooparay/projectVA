@@ -11,6 +11,8 @@ import { PhotoPickerViewWidget } from './photo.picker.view.widget';
 
 import { FileUploadComponent } from './file.upload.component';
 
+import { ICoreModelLifeCycle } from './../interface/i.core.model.lifecycle';
+
 @Component({
   selector: 'photo-picker',
   templateUrl: './view/photo.picker.component.html',
@@ -20,7 +22,7 @@ import { FileUploadComponent } from './file.upload.component';
    */
   providers: [ CoreModelProvider ]
 })
-export class PhotoPickerComponent  {
+export class PhotoPickerComponent implements ICoreModelLifeCycle {
 
   // List of URI_data for the photos involved
   private _photoDataList:string[] = [];
@@ -29,6 +31,19 @@ export class PhotoPickerComponent  {
     private _renderer:Renderer2,
     private _element:ElementRef) {
   }
+  ngOnDestroy() {
+    this.cleanupDataBasedOnKey(FileUploadComponent.CMODEL_KEY);
+console.log('*** to be destroyed => PhotoPickerComponent, remove the key on CoreModel');
+  }
+
+  /* -------------------------- */
+  /*  interface implementations */
+  /* -------------------------- */
+
+  public cleanupDataBasedOnKey(_key:string):any {
+    this._coreModel.removeDataByKey(_key);
+  }
+
 
   /**
    *  method to return the uri data based on the given index
