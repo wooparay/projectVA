@@ -28,7 +28,7 @@ var PhotoPickerViewWidget = (function () {
         }
     };
     PhotoPickerViewWidget.prototype.showPhotBigPreviewDlg = function (_e) {
-        console.log(this._photoURIData);
+        this._parent.displayPhotoBigPreviewDlg(this, this._photoURIData);
     };
     return PhotoPickerViewWidget;
 }());

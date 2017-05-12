@@ -10,6 +10,7 @@ import { PhotoPickerPreviewWidget } from './photo.picker.preview.widget';
 import { PhotoPickerViewWidget } from './photo.picker.view.widget';
 
 import { FileUploadComponent } from './file.upload.component';
+import { PhotoBigPreviewComponent } from './photo.big.preview.dialogue';
 
 import { ICoreModelLifeCycle } from './../interface/i.core.model.lifecycle';
 
@@ -92,7 +93,15 @@ console.log('*** to be destroyed => PhotoPickerComponent, remove the key on Core
       this._renderer);
   }
 
-/* TODO showPhotoBigPreviewDlg */
+/* TODO showPhotoBigPreviewDlg => PhotoBigPreviewComponent */
+
+  public displayPhotoBigPreviewDlg(_ref:any, _dataUri:string) {
+    PhotoBigPreviewComponent.showPhotoBigPreviewDlg(
+      this._element.nativeElement.querySelector('#dlgPhotoBigPreview'),
+      this._element.nativeElement.querySelector('#imgContent'),
+      this._renderer,
+      _dataUri);
+  }
 
 
   public addDataToPhotoDataList(_data:string) {

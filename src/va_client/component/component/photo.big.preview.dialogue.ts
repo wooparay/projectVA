@@ -6,6 +6,7 @@ import { NgIf } from '@angular/common';
 
 import { GenericDlgComponent } from './generic.dlg.component';
 
+//import { PhotoPickerComponent } from './photo.picker.component';
 //import { CoreModel } from './../core/coreModel';
 //import { CoreModelProvider } from './../core/core.model.provider';
 
@@ -18,14 +19,16 @@ import { GenericDlgComponent } from './generic.dlg.component';
 })
 export class PhotoBigPreviewComponent extends GenericDlgComponent {
 
-  @Input() _dataUri:string;
+  @Input() _parent:any;
 
-  constructor() {
+  constructor(private _element:ElementRef,
+    private _renderer:Renderer2) {
+
     super();
     this.titleLabel = 'preview';
+    this.buttonOneLabel = "Ok";
+    this.buttonTwoLabel = "Cancel";
   }
-
-  //ngAfterContentChecked() {}
 
   /* -------------------------------- */
   /*  abstract method implementations */
@@ -35,7 +38,25 @@ export class PhotoBigPreviewComponent extends GenericDlgComponent {
     console.log(this.buttonOneLabel+' clicked');
   }
   protected buttonTwoClick(_e:Event):void {
-    console.log(this.buttonTwoLabel+' clicked');
+    PhotoBigPreviewComponent.hideDlg(
+      this._element.nativeElement.querySelector('#dlgPhotoBigPreview'),
+      this._renderer);
   }
+
+  /**
+   *  STATIC method to show the dialog
+   */
+  public static showPhotoBigPreviewDlg(
+    _e:any, _imgE:any, _renderer:Renderer2, _dataUri:string) {
+
+// TODO -> handle the HTML width too => modal-dialog max-width: 500px;
+console.log(_dataUri);
+console.log(_imgE);
+
+    _renderer.addClass(_e, 'show');
+    _renderer.setStyle(_e, 'display', 'block');
+  }
+
+
 
 }

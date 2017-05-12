@@ -14,6 +14,7 @@ var core_3 = require("@angular/core");
 var coreModel_1 = require("./../core/coreModel");
 var core_model_provider_1 = require("./../core/core.model.provider");
 var file_upload_component_1 = require("./file.upload.component");
+var photo_big_preview_dialogue_1 = require("./photo.big.preview.dialogue");
 var PhotoPickerComponent = (function () {
     function PhotoPickerComponent(_coreModel, _renderer, _element) {
         this._coreModel = _coreModel;
@@ -70,7 +71,10 @@ var PhotoPickerComponent = (function () {
         //FileUploadComponent.showDlgFileUpload(
         file_upload_component_1.FileUploadComponent.showDlg(this._element.nativeElement.querySelector('#dlgFileUpload'), this._renderer);
     };
-    /* TODO showPhotoBigPreviewDlg */
+    /* TODO showPhotoBigPreviewDlg => PhotoBigPreviewComponent */
+    PhotoPickerComponent.prototype.displayPhotoBigPreviewDlg = function (_ref, _dataUri) {
+        photo_big_preview_dialogue_1.PhotoBigPreviewComponent.showPhotoBigPreviewDlg(this._element.nativeElement.querySelector('#dlgPhotoBigPreview'), this._element.nativeElement.querySelector('#imgContent'), this._renderer, _dataUri);
+    };
     PhotoPickerComponent.prototype.addDataToPhotoDataList = function (_data) {
         this._photoDataList.push(_data);
         console.log('** size of the photoDataList > ' + this._photoDataList.length);

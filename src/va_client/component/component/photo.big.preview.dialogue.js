@@ -15,18 +15,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var core_2 = require("@angular/core");
+var core_3 = require("@angular/core");
+var core_4 = require("@angular/core");
 var generic_dlg_component_1 = require("./generic.dlg.component");
+//import { PhotoPickerComponent } from './photo.picker.component';
 //import { CoreModel } from './../core/coreModel';
 //import { CoreModelProvider } from './../core/core.model.provider';
 //import { FileReaderService, FileReaderServiceProvider } from './../core/file.reader';
-var PhotoBigPreviewComponent = (function (_super) {
+var PhotoBigPreviewComponent = PhotoBigPreviewComponent_1 = (function (_super) {
     __extends(PhotoBigPreviewComponent, _super);
-    function PhotoBigPreviewComponent() {
+    function PhotoBigPreviewComponent(_element, _renderer) {
         var _this = _super.call(this) || this;
+        _this._element = _element;
+        _this._renderer = _renderer;
         _this.titleLabel = 'preview';
+        _this.buttonOneLabel = "Ok";
+        _this.buttonTwoLabel = "Cancel";
         return _this;
     }
-    //ngAfterContentChecked() {}
     /* -------------------------------- */
     /*  abstract method implementations */
     /* -------------------------------- */
@@ -34,20 +40,32 @@ var PhotoBigPreviewComponent = (function (_super) {
         console.log(this.buttonOneLabel + ' clicked');
     };
     PhotoBigPreviewComponent.prototype.buttonTwoClick = function (_e) {
-        console.log(this.buttonTwoLabel + ' clicked');
+        PhotoBigPreviewComponent_1.hideDlg(this._element.nativeElement.querySelector('#dlgPhotoBigPreview'), this._renderer);
+    };
+    /**
+     *  STATIC method to show the dialog
+     */
+    PhotoBigPreviewComponent.showPhotoBigPreviewDlg = function (_e, _imgE, _renderer, _dataUri) {
+        // TODO -> handle the HTML width too => modal-dialog max-width: 500px;
+        console.log(_dataUri);
+        console.log(_imgE);
+        _renderer.addClass(_e, 'show');
+        _renderer.setStyle(_e, 'display', 'block');
     };
     return PhotoBigPreviewComponent;
 }(generic_dlg_component_1.GenericDlgComponent));
 __decorate([
-    core_2.Input(),
-    __metadata("design:type", String)
-], PhotoBigPreviewComponent.prototype, "_dataUri", void 0);
-PhotoBigPreviewComponent = __decorate([
+    core_4.Input(),
+    __metadata("design:type", Object)
+], PhotoBigPreviewComponent.prototype, "_parent", void 0);
+PhotoBigPreviewComponent = PhotoBigPreviewComponent_1 = __decorate([
     core_1.Component({
         selector: 'photo-big-preview-dlg',
         templateUrl: './view/photo.big.preview.component.html'
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [core_2.ElementRef,
+        core_3.Renderer2])
 ], PhotoBigPreviewComponent);
 exports.PhotoBigPreviewComponent = PhotoBigPreviewComponent;
+var PhotoBigPreviewComponent_1;
 //# sourceMappingURL=photo.big.preview.dialogue.js.map
