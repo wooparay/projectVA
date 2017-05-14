@@ -3,44 +3,18 @@
 <div class="modal fade file-upload-background-overlay"
   id='dlgPhotoBigPreview' tabindex="-1"
   role="dialog" aria-labelledby='dlgPhotoBigPreviewLabel'
-  style="display: none;">
+  style="display: none; padding: 4px;">
 
-  <form method="post" action="javascript:void(0);" >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content animated flipY" style="border-radius: 4px;">
-        <!-- title / header -->
-        <div class="modal-header">
-          <h4 class="modal-title w-100" id='dlgPhotoBigPreviewLabel'>
-            <!--
-            <span *ngIf='_canShowInfo' style="color: red;">{{_lblTitle}}</span>
-            <span *ngIf='!_canShowInfo' >{{_lblTitle}}</span> -->
-            {{titleLabel}}
-          </h4>
-          <button type="button" class="close pull-right"
-            data-dismiss='modal' aria-label='Close' (click)='buttonTwoClick($event)'>
-            <span aria-hidden='true'>x</span>
-          </button>
-        </div>
-        <!-- content -->
-        <div class="modal-body">
-          <div style="width: calc(100%); ">
-<!-- TODO _dataUri (attribute) -->
-            <img id='imgContent' src='./../../static/img/photoPicker/airBalloon.jpeg'>
-          </div>
-        </div>
-        <!-- footer -->
-        <div class="modal-footer">
-          <button class="btn btn-secondary waves-effect waves-light"
-            data-dismiss='modal' (click)='buttonOneClick($event)'>
-            {{buttonOneLabel}}
-          </button>
-          <button class="btn btn-primary waves-effect waves-light"
-            (click)='buttonTwoClick($event)'>
-            {{buttonTwoLabel}}
-          </button>
-        </div>
-      </div>  <!-- content -->
-    </div>  <!-- dialog -->
-
+  <form method="post" style='height: calc(100%);' action="javascript:void(0);" >
+    <span style="color: white; padding-left: 20px;">Preview</span>
+    <button type="button" class="close pull-right"
+      data-dismiss='modal' aria-label='Close' (click)='buttonTwoClick($event)'>
+      <span aria-hidden='true' style="color: white;">x</span>
+    </button>
+    <div style="height: 600px; text-align: center; padding-top: 12px; padding-bottom: 12px; padding-left: 40px; padding-right: 40px;">
+      <img id='imgContent'
+        style='text-align: center; min-width: calc(10%); max-width: calc(100%); min-height: calc(10%); max-height: calc(100%);'
+        src='./../../static/img/photoPicker/airBalloon.jpeg'>
+    </div>
   </form>
 </div>

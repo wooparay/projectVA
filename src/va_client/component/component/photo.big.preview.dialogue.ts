@@ -50,8 +50,7 @@ export class PhotoBigPreviewComponent extends GenericDlgComponent {
     _e:any, _imgE:any, _renderer:Renderer2, _dataUri:string) {
 
 // TODO -> handle the HTML width too => modal-dialog max-width: 500px;
-console.log(_dataUri);
-console.log(_imgE);
+    _renderer.setAttribute(_imgE, "src", _dataUri, "");
 
     _renderer.addClass(_e, 'show');
     _renderer.setStyle(_e, 'display', 'block');

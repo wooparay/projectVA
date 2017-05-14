@@ -47,8 +47,7 @@ var PhotoBigPreviewComponent = PhotoBigPreviewComponent_1 = (function (_super) {
      */
     PhotoBigPreviewComponent.showPhotoBigPreviewDlg = function (_e, _imgE, _renderer, _dataUri) {
         // TODO -> handle the HTML width too => modal-dialog max-width: 500px;
-        console.log(_dataUri);
-        console.log(_imgE);
+        _renderer.setAttribute(_imgE, "src", _dataUri, "");
         _renderer.addClass(_e, 'show');
         _renderer.setStyle(_e, 'display', 'block');
     };
