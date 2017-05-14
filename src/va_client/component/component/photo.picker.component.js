@@ -71,13 +71,12 @@ var PhotoPickerComponent = (function () {
         //FileUploadComponent.showDlgFileUpload(
         file_upload_component_1.FileUploadComponent.showDlg(this._element.nativeElement.querySelector('#dlgFileUpload'), this._renderer);
     };
-    /* TODO showPhotoBigPreviewDlg => PhotoBigPreviewComponent */
     PhotoPickerComponent.prototype.displayPhotoBigPreviewDlg = function (_ref, _dataUri) {
         photo_big_preview_dialogue_1.PhotoBigPreviewComponent.showPhotoBigPreviewDlg(this._element.nativeElement.querySelector('#dlgPhotoBigPreview'), this._element.nativeElement.querySelector('#imgContent'), this._renderer, _dataUri);
     };
     PhotoPickerComponent.prototype.addDataToPhotoDataList = function (_data) {
         this._photoDataList.push(_data);
-        console.log('** size of the photoDataList > ' + this._photoDataList.length);
+        //console.log('** size of the photoDataList > '+this._photoDataList.length);
     };
     return PhotoPickerComponent;
 }());

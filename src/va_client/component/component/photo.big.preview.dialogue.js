@@ -28,16 +28,16 @@ var PhotoBigPreviewComponent = PhotoBigPreviewComponent_1 = (function (_super) {
         var _this = _super.call(this) || this;
         _this._element = _element;
         _this._renderer = _renderer;
-        _this.titleLabel = 'preview';
-        _this.buttonOneLabel = "Ok";
-        _this.buttonTwoLabel = "Cancel";
+        _this.titleLabel = 'preview~';
         return _this;
+        //this.buttonOneLabel = "Ok";
+        //this.buttonTwoLabel = "Cancel";
     }
     /* -------------------------------- */
     /*  abstract method implementations */
     /* -------------------------------- */
     PhotoBigPreviewComponent.prototype.buttonOneClick = function (_e) {
-        console.log(this.buttonOneLabel + ' clicked');
+        // nothing to do in this case
     };
     PhotoBigPreviewComponent.prototype.buttonTwoClick = function (_e) {
         PhotoBigPreviewComponent_1.hideDlg(this._element.nativeElement.querySelector('#dlgPhotoBigPreview'), this._renderer);
@@ -46,7 +46,7 @@ var PhotoBigPreviewComponent = PhotoBigPreviewComponent_1 = (function (_super) {
      *  STATIC method to show the dialog
      */
     PhotoBigPreviewComponent.showPhotoBigPreviewDlg = function (_e, _imgE, _renderer, _dataUri) {
-        // TODO -> handle the HTML width too => modal-dialog max-width: 500px;
+        // handle the HTML width too => modal-dialog max-width: 500px;
         _renderer.setAttribute(_imgE, "src", _dataUri, "");
         _renderer.addClass(_e, 'show');
         _renderer.setStyle(_e, 'display', 'block');

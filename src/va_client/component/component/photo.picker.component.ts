@@ -93,8 +93,6 @@ console.log('*** to be destroyed => PhotoPickerComponent, remove the key on Core
       this._renderer);
   }
 
-/* TODO showPhotoBigPreviewDlg => PhotoBigPreviewComponent */
-
   public displayPhotoBigPreviewDlg(_ref:any, _dataUri:string) {
     PhotoBigPreviewComponent.showPhotoBigPreviewDlg(
       this._element.nativeElement.querySelector('#dlgPhotoBigPreview'),
@@ -106,7 +104,7 @@ console.log('*** to be destroyed => PhotoPickerComponent, remove the key on Core
 
   public addDataToPhotoDataList(_data:string) {
     this._photoDataList.push(_data);
-    console.log('** size of the photoDataList > '+this._photoDataList.length);
+    //console.log('** size of the photoDataList > '+this._photoDataList.length);
   }
 
 }

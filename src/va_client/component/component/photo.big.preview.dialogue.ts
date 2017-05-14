@@ -25,9 +25,9 @@ export class PhotoBigPreviewComponent extends GenericDlgComponent {
     private _renderer:Renderer2) {
 
     super();
-    this.titleLabel = 'preview';
-    this.buttonOneLabel = "Ok";
-    this.buttonTwoLabel = "Cancel";
+    this.titleLabel = 'preview~';
+    //this.buttonOneLabel = "Ok";
+    //this.buttonTwoLabel = "Cancel";
   }
 
   /* -------------------------------- */
@@ -35,7 +35,7 @@ export class PhotoBigPreviewComponent extends GenericDlgComponent {
   /* -------------------------------- */
 
   protected buttonOneClick(_e:Event):void {
-    console.log(this.buttonOneLabel+' clicked');
+    // nothing to do in this case
   }
   protected buttonTwoClick(_e:Event):void {
     PhotoBigPreviewComponent.hideDlg(
@@ -49,7 +49,7 @@ export class PhotoBigPreviewComponent extends GenericDlgComponent {
   public static showPhotoBigPreviewDlg(
     _e:any, _imgE:any, _renderer:Renderer2, _dataUri:string) {
 
-// TODO -> handle the HTML width too => modal-dialog max-width: 500px;
+    // handle the HTML width too => modal-dialog max-width: 500px;
     _renderer.setAttribute(_imgE, "src", _dataUri, "");
 
     _renderer.addClass(_e, 'show');
