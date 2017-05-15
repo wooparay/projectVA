@@ -1,0 +1,38 @@
+
+[folder structure]
+- Docs (documents related to the project)
+- Scripts (scripts for the project, e.g. how to start the server)
+- node_modules (the npm required libraries to run the project)
+- *src (source code for the project)
+
+- LICENSE (the licence for this project)
+- README.md (readme for github)
+- bs-config.json (browser-sync config file)
+- package.json (npm / nodejs project config file)
+- tslint.json (typescript code readability tool ???)
+
+########################################################
+
+[src folder structure]
+- favicon.ico (icon for the site/ webpage)
+- index.html (this page is sort of a starting point to run projectVA, it has 2 buttons bringing you to either the lab mode or the main production mode)
+- **main.html (the main production mode, TBD)
+- **lab.html (the lab mode, where components are loaded separately, handy for development and testing)
+- main.ts (the bootstrap module)
+- static (a folder containing statis resources)
+  - config (config files related to the components)
+  - css (css)
+  - img (images)
+- systemjs-angular-loader.js (???)
+- systemjs.config.extras.js (???)
+- systemjs.config.js (configuration for the project, e.g. the source code folder root)
+- tsconfig.json (typescript language config
+- **va_client (the source / component for the project)
+
+########################################################
+
+[va_client folder structure)
+
+
+
+########################################################
