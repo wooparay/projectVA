@@ -7,6 +7,7 @@ import { CoreModelProvider } from './../core/core.model.provider';
 import { PhotoPickerPreviewWidget } from './photo.picker.preview.widget';
 import { PhotoPickerViewWidget } from './photo.picker.view.widget';
 
+import { MessageDlgComponent } from './message.dlg.component';
 import { FileUploadComponent } from './file.upload.component';
 import { PhotoBigPreviewComponent } from './photo.big.preview.dialogue';
 
@@ -116,10 +117,45 @@ console.log('*** to be destroyed => PhotoPickerComponent, remove the key on Core
       _dataUri);
   }
 
+  public displayMessageDlg(_ref:any,
+    _msg:string, _title:string, _warning:boolean,
+    _needButtonTwo:boolean) {
+    let _opt:any={};
+
+    _opt[MessageDlgComponent.DLG_MESSAGE] = _msg;
+    _opt[MessageDlgComponent.DLG_NEED_BUTTON_TWO] = _needButtonTwo;
+    _opt[MessageDlgComponent.DLG_WARNING] = _warning;
+    _opt[MessageDlgComponent.DLG_TITLE] = _title;
+    this._coreModel.setDataByKey(MessageDlgComponent.CMODEL_KEY, _opt, true);
+
+    MessageDlgComponent.showDlg(
+      this._element.nativeElement.querySelector('#dlgMessage'),
+      this._renderer);
+  }
+
 
   public addDataToPhotoDataList(_data:string) {
     this._photoDataList.push(_data);
     //console.log('** size of the photoDataList > '+this._photoDataList.length);
+  }
+
+  /* -------------------- */
+  /*  button event area   */
+  /* -------------------- */
+
+  private _openSet(_event:Event) {
+    console.log('inside openSet');
+  }
+  private _saveSet(_event:Event) {
+    console.log('inside saveSet');
+  }
+  private _delSet(_event:Event) {
+    console.log('inside delSet');
+  }
+  private _showHelp(_event:Event) {
+    this.displayMessageDlg(null, 'testing on the so-called common message dlg',
+      "info - help",
+      false, false);
   }
 
 }

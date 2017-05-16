@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var coreModel_1 = require("./../core/coreModel");
 var core_model_provider_1 = require("./../core/core.model.provider");
+var message_dlg_component_1 = require("./message.dlg.component");
 var file_upload_component_1 = require("./file.upload.component");
 var photo_big_preview_dialogue_1 = require("./photo.big.preview.dialogue");
 //import { AIOConfigService, AIOConfigServiceProvider } from './../core/aio.config';
@@ -87,9 +88,33 @@ var PhotoPickerComponent = (function () {
     PhotoPickerComponent.prototype.displayPhotoBigPreviewDlg = function (_ref, _dataUri) {
         photo_big_preview_dialogue_1.PhotoBigPreviewComponent.showPhotoBigPreviewDlg(this._element.nativeElement.querySelector('#dlgPhotoBigPreview'), this._element.nativeElement.querySelector('#imgContent'), this._renderer, _dataUri);
     };
+    PhotoPickerComponent.prototype.displayMessageDlg = function (_ref, _msg, _title, _warning, _needButtonTwo) {
+        var _opt = {};
+        _opt[message_dlg_component_1.MessageDlgComponent.DLG_MESSAGE] = _msg;
+        _opt[message_dlg_component_1.MessageDlgComponent.DLG_NEED_BUTTON_TWO] = _needButtonTwo;
+        _opt[message_dlg_component_1.MessageDlgComponent.DLG_WARNING] = _warning;
+        _opt[message_dlg_component_1.MessageDlgComponent.DLG_TITLE] = _title;
+        this._coreModel.setDataByKey(message_dlg_component_1.MessageDlgComponent.CMODEL_KEY, _opt, true);
+        message_dlg_component_1.MessageDlgComponent.showDlg(this._element.nativeElement.querySelector('#dlgMessage'), this._renderer);
+    };
     PhotoPickerComponent.prototype.addDataToPhotoDataList = function (_data) {
         this._photoDataList.push(_data);
         //console.log('** size of the photoDataList > '+this._photoDataList.length);
+    };
+    /* -------------------- */
+    /*  button event area   */
+    /* -------------------- */
+    PhotoPickerComponent.prototype._openSet = function (_event) {
+        console.log('inside openSet');
+    };
+    PhotoPickerComponent.prototype._saveSet = function (_event) {
+        console.log('inside saveSet');
+    };
+    PhotoPickerComponent.prototype._delSet = function (_event) {
+        console.log('inside delSet');
+    };
+    PhotoPickerComponent.prototype._showHelp = function (_event) {
+        this.displayMessageDlg(null, 'testing on the so-called common message dlg', "info - help", false, false);
     };
     return PhotoPickerComponent;
 }());

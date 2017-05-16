@@ -54,6 +54,12 @@ var GenericDlgComponent = (function () {
         return this._dlg;
     };
     /**
+     *  return the html component by the given id
+     */
+    GenericDlgComponent.prototype.getHtmlComponent = function (_element, _id) {
+        return _element.nativeElement.querySelector('#' + _id);
+    };
+    /**
      *  STATIC method to show the dialog
      */
     GenericDlgComponent.showDlg = function (_e, _renderer) {

@@ -5,7 +5,8 @@
         "_id": "8bf6a376-39cd-11e7-a919-92ebcb67fe33",
         "backend-endpoint": {
 
-        }
+        },
+        "use-common-message-dialog": false
       }
     }
   ]

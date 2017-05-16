@@ -1,0 +1,82 @@
+import { Component, ElementRef, Renderer2, Input } from '@angular/core';
+
+import { NgIf } from '@angular/common';
+
+import { CoreModel } from './../core/coreModel';
+import { CoreModelProvider } from './../core/core.model.provider';
+
+//import { PhotoPickerComponent } from './photo.picker.component';
+//import { FileReaderService, FileReaderServiceProvider } from './../core/file.reader';
+
+import { GenericDlgComponent } from './generic.dlg.component';
+
+@Component({
+  selector: 'message-dlg',
+  templateUrl: './view/message.dlg.component.html',
+  providers: [ CoreModelProvider ]
+})
+export class MessageDlgComponent extends GenericDlgComponent {
+
+  public static CMODEL_KEY:string = "MessageDlgComponent";
+  public static DLG_TITLE:string = "DLG_TITLE";
+  public static DLG_MESSAGE:string = "DLG_MESSAGE";
+  public static DLG_WARNING:string = "DLG_WARNING";
+  public static DLG_NEED_BUTTON_TWO:string = "DLG_NEED_BUTTON_TWO";
+
+  // parent component (could be anything, hence didn't state the "type")
+  @Input() _parent:any;
+
+  private _message:string='*** some message ***';
+  private _showWarning:boolean=false;
+  private _showButtonTwo:boolean=true;
+
+  /**
+   *  contructor
+   */
+  constructor(private _element:ElementRef,
+    private _renderer:Renderer2,
+    private _coreModel:CoreModel) {
+    super();
+
+    this.buttonOneLabel='ok';
+    this.buttonTwoLabel='cancel';
+  }
+  ngAfterContentChecked() {
+    let _opt:any = this._coreModel.getDataByKey(MessageDlgComponent.CMODEL_KEY);
+    if (_opt) {
+      this._message=_opt[MessageDlgComponent.DLG_MESSAGE];
+      this.titleLabel=_opt[MessageDlgComponent.DLG_TITLE];
+
+      let _warning:boolean=_opt[MessageDlgComponent.DLG_WARNING];
+      if (_warning && _warning==true) {
+        this._showWarning=true;
+      } else this._showWarning=false;
+
+      let _needBtn2:boolean=_opt[MessageDlgComponent.DLG_NEED_BUTTON_TWO];
+      if (_needBtn2 && _needBtn2==true) {
+        this._showButtonTwo=true;
+      } else this._showButtonTwo=false;
+
+    } // end -- if (_opt is valid)
+  }
+
+  /* ------------------ */
+  /*  implementations   */
+  /* ------------------ */
+  protected buttonOneClick(_e:Event):void {
+    alert('button one clicked');
+  }
+  protected buttonTwoClick(_e:Event):void {
+    // cleanup to save memory
+    this.titleLabel='';
+    this._message='';
+    this._showWarning=false;
+    this._showButtonTwo=true;
+
+    MessageDlgComponent.hideDlg(this.getDlg(this._element, 'dlgMessage'), this._renderer);
+  }
+
+
+
+
+}

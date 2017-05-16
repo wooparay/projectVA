@@ -15,6 +15,7 @@ import { PhotoPickerPreviewWidget } from './component/component/photo.picker.pre
 import { PhotoPickerViewWidget } from './component/component/photo.picker.view.widget';
 import { FileUploadComponent } from './component/component/file.upload.component';
 import { PhotoBigPreviewComponent } from './component/component/photo.big.preview.dialogue';
+import { MessageDlgComponent } from './component/component/message.dlg.component';
 
 import { CoreModelProvider } from './component/core/core.model.provider';
 import { FileReaderServiceProvider, FileReaderService } from './component/core/file.reader';
@@ -47,7 +48,7 @@ import { FileReaderServiceProvider, FileReaderService } from './component/core/f
     LabComponent, LabHeaderComponent,
     PlaygroundComponent, PlaygroundSideMenuComponent,
     PhotoPickerComponent, PhotoPickerPreviewWidget, PhotoPickerViewWidget,
-    FileUploadComponent, PhotoBigPreviewComponent
+    FileUploadComponent, PhotoBigPreviewComponent, MessageDlgComponent
   ],
   // [step] if you want to have REAL singleton, you need to create your own Provider...
   providers: [
