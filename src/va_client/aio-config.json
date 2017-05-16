@@ -1,0 +1,18 @@
+{
+  "general": {
+    "alternative-config-location": [
+      "../../static/config/photo.picker.component.config.json"
+    ],
+    "app": {
+      "version": "1.0.0",
+      "title": "ProjectVA - making html based VIDEO and MTV at your fingertips"
+    }
+  },
+  "modules": [
+    {
+      "core": {
+        "_id": "36415692-39cd-11e7-a919-92ebcb67fe33"
+      }
+    }
+  ]
+}

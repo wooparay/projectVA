@@ -9,23 +9,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var core_2 = require("@angular/core");
-var core_3 = require("@angular/core");
 var coreModel_1 = require("./../core/coreModel");
 var core_model_provider_1 = require("./../core/core.model.provider");
 var file_upload_component_1 = require("./file.upload.component");
 var photo_big_preview_dialogue_1 = require("./photo.big.preview.dialogue");
+//import { AIOConfigService, AIOConfigServiceProvider } from './../core/aio.config';
+var aio_config_1 = require("./../core/aio.config");
 var PhotoPickerComponent = (function () {
-    function PhotoPickerComponent(_coreModel, _renderer, _element) {
+    function PhotoPickerComponent(_coreModel, _aioConfig, _renderer, _element) {
         this._coreModel = _coreModel;
+        this._aioConfig = _aioConfig;
         this._renderer = _renderer;
         this._element = _element;
         // List of URI_data for the photos involved
         this._photoDataList = [];
+        // the Configuration data related to photo.picker.component (e.g. backend endpoints)
+        this._configs = null;
     }
     PhotoPickerComponent.prototype.ngOnDestroy = function () {
         this.cleanupDataBasedOnKey(file_upload_component_1.FileUploadComponent.CMODEL_KEY);
         console.log('*** to be destroyed => PhotoPickerComponent, remove the key on CoreModel');
+    };
+    /**
+     *  method to return the Configuration related to
+     *  "photo.picker.component"
+     */
+    PhotoPickerComponent.prototype._getConfigs = function () {
+        if (!this._configs) {
+            this._configs = this._aioConfig.getConfigsByKey("photo.picker.component");
+        }
+        return this._configs;
     };
     /* -------------------------- */
     /*  interface implementations */
@@ -88,11 +101,12 @@ PhotoPickerComponent = __decorate([
          *    injecting CoreModel not CoreModelProvider
          * **
          */
-        providers: [core_model_provider_1.CoreModelProvider]
+        providers: [core_model_provider_1.CoreModelProvider, aio_config_1.AIOConfigService]
     }),
     __metadata("design:paramtypes", [coreModel_1.CoreModel,
-        core_3.Renderer2,
-        core_2.ElementRef])
+        aio_config_1.AIOConfigService,
+        core_1.Renderer2,
+        core_1.ElementRef])
 ], PhotoPickerComponent);
 exports.PhotoPickerComponent = PhotoPickerComponent;
 /*

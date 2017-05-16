@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule }   from '@angular/router';
+import { HttpModule } from '@angular/http';
 
 import { HelloComponent }  from './component/playground/hello.component';
 import { LabComponent }  from './component/core/lab.component';
@@ -22,6 +23,7 @@ import { FileReaderServiceProvider, FileReaderService } from './component/core/f
 @NgModule({
   imports:      [
     BrowserModule,
+    HttpModule,
     RouterModule.forRoot([
       {
         path: 'playground',

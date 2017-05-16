@@ -1,8 +1,6 @@
-import {NgFor} from '@angular/common';
+import { NgFor } from '@angular/common';
 
-import { Component } from '@angular/core';
-import { ElementRef } from '@angular/core';
-import { Renderer2 } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 
 import { CoreModel } from './../core/coreModel';
 import { CoreModelProvider } from './../core/core.model.provider';
@@ -14,6 +12,9 @@ import { PhotoBigPreviewComponent } from './photo.big.preview.dialogue';
 
 import { ICoreModelLifeCycle } from './../interface/i.core.model.lifecycle';
 
+//import { AIOConfigService, AIOConfigServiceProvider } from './../core/aio.config';
+import { AIOConfigService } from './../core/aio.config';
+
 @Component({
   selector: 'photo-picker',
   templateUrl: './view/photo.picker.component.html',
@@ -21,20 +22,34 @@ import { ICoreModelLifeCycle } from './../interface/i.core.model.lifecycle';
    *    injecting CoreModel not CoreModelProvider
    * **
    */
-  providers: [ CoreModelProvider ]
+  providers: [ CoreModelProvider, AIOConfigService ]
 })
 export class PhotoPickerComponent implements ICoreModelLifeCycle {
 
   // List of URI_data for the photos involved
   private _photoDataList:string[] = [];
+  // the Configuration data related to photo.picker.component (e.g. backend endpoints)
+  private _configs:any = null;
 
   constructor(private _coreModel:CoreModel,
+    private _aioConfig:AIOConfigService,
     private _renderer:Renderer2,
     private _element:ElementRef) {
   }
   ngOnDestroy() {
     this.cleanupDataBasedOnKey(FileUploadComponent.CMODEL_KEY);
 console.log('*** to be destroyed => PhotoPickerComponent, remove the key on CoreModel');
+  }
+
+  /**
+   *  method to return the Configuration related to
+   *  "photo.picker.component"
+   */
+  private _getConfigs() {
+    if (!this._configs) {
+      this._configs = this._aioConfig.getConfigsByKey("photo.picker.component");
+    }
+    return this._configs;
   }
 
   /* -------------------------- */
