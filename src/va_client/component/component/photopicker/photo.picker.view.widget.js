@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var core_2 = require("@angular/core");
-var coreModel_1 = require("./../core/coreModel");
-var core_model_provider_1 = require("./../core/core.model.provider");
+var coreModel_1 = require("./../../core/coreModel");
+var core_model_provider_1 = require("./../../core/core.model.provider");
 var photo_picker_component_1 = require("./photo.picker.component");
 var PhotoPickerViewWidget = (function () {
     function PhotoPickerViewWidget(_coreModel) {

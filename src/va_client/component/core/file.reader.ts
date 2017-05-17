@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { PhotoPickerComponent } from './../component/photo.picker.component';
+//import { PhotoPickerComponent } from './../component/photopicker/photo.picker.component';
 
 /**
  *  FileReaderService

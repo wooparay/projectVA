@@ -17,10 +17,10 @@ var core_1 = require("@angular/core");
 var core_2 = require("@angular/core");
 var core_3 = require("@angular/core");
 var core_4 = require("@angular/core");
-var coreModel_1 = require("./../core/coreModel");
-var core_model_provider_1 = require("./../core/core.model.provider");
+var coreModel_1 = require("./../../core/coreModel");
+var core_model_provider_1 = require("./../../core/core.model.provider");
 //import { PhotoPickerComponent } from './photo.picker.component';
-var file_reader_1 = require("./../core/file.reader");
+var file_reader_1 = require("./../../core/file.reader");
 var generic_dlg_component_1 = require("./generic.dlg.component");
 var FileUploadComponent = FileUploadComponent_1 = (function (_super) {
     __extends(FileUploadComponent, _super);

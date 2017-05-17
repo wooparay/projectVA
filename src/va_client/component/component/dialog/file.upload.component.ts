@@ -4,11 +4,11 @@ import { Renderer2 } from '@angular/core';
 import { Input } from '@angular/core';
 import { NgIf } from '@angular/common';
 
-import { CoreModel } from './../core/coreModel';
-import { CoreModelProvider } from './../core/core.model.provider';
+import { CoreModel } from './../../core/coreModel';
+import { CoreModelProvider } from './../../core/core.model.provider';
 
 //import { PhotoPickerComponent } from './photo.picker.component';
-import { FileReaderService, FileReaderServiceProvider } from './../core/file.reader';
+import { FileReaderService, FileReaderServiceProvider } from './../../core/file.reader';
 
 import { GenericDlgComponent } from './generic.dlg.component';
 

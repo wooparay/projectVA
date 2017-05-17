@@ -10,12 +10,12 @@ import { LabHeaderComponent }  from './component/core/lab.header.component';
 import { PlaygroundComponent }  from './component/core/playground.component';
 import { PlaygroundSideMenuComponent } from './component/playground/side.menu.component';
 
-import { PhotoPickerComponent } from './component/component/photo.picker.component';
-import { PhotoPickerPreviewWidget } from './component/component/photo.picker.preview.widget';
-import { PhotoPickerViewWidget } from './component/component/photo.picker.view.widget';
-import { FileUploadComponent } from './component/component/file.upload.component';
-import { PhotoBigPreviewComponent } from './component/component/photo.big.preview.dialogue';
-import { MessageDlgComponent } from './component/component/message.dlg.component';
+import { PhotoPickerComponent } from './component/component/photopicker/photo.picker.component';
+import { PhotoPickerPreviewWidget } from './component/component/photopicker/photo.picker.preview.widget';
+import { PhotoPickerViewWidget } from './component/component/photopicker/photo.picker.view.widget';
+import { FileUploadComponent } from './component/component/dialog/file.upload.component';
+import { PhotoBigPreviewComponent } from './component/component/photopicker/photo.big.preview.dialogue';
+import { MessageDlgComponent } from './component/component/dialog/message.dlg.component';
 
 import { CoreModelProvider } from './component/core/core.model.provider';
 import { FileReaderServiceProvider, FileReaderService } from './component/core/file.reader';

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 
-import { CoreModel } from './../core/coreModel';
-import { CoreModelProvider } from './../core/core.model.provider';
+import { CoreModel } from './../../core/coreModel';
+import { CoreModelProvider } from './../../core/core.model.provider';
 import { PhotoPickerComponent } from './photo.picker.component';
 
 @Component({

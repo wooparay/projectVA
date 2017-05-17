@@ -2,19 +2,19 @@ import { NgFor } from '@angular/common';
 
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 
-import { CoreModel } from './../core/coreModel';
-import { CoreModelProvider } from './../core/core.model.provider';
+import { CoreModel } from './../../core/coreModel';
+import { CoreModelProvider } from './../../core/core.model.provider';
 import { PhotoPickerPreviewWidget } from './photo.picker.preview.widget';
 import { PhotoPickerViewWidget } from './photo.picker.view.widget';
 
-import { MessageDlgComponent } from './message.dlg.component';
-import { FileUploadComponent } from './file.upload.component';
+import { MessageDlgComponent } from './../dialog/message.dlg.component';
+import { FileUploadComponent } from './../dialog/file.upload.component';
 import { PhotoBigPreviewComponent } from './photo.big.preview.dialogue';
 
-import { ICoreModelLifeCycle } from './../interface/i.core.model.lifecycle';
+import { ICoreModelLifeCycle } from './../../interface/i.core.model.lifecycle';
 
 //import { AIOConfigService, AIOConfigServiceProvider } from './../core/aio.config';
-import { AIOConfigService } from './../core/aio.config';
+import { AIOConfigService } from './../../core/aio.config';
 
 @Component({
   selector: 'photo-picker',

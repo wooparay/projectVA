@@ -14,14 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var core_2 = require("@angular/core");
-var core_3 = require("@angular/core");
-var core_4 = require("@angular/core");
-var generic_dlg_component_1 = require("./generic.dlg.component");
-//import { PhotoPickerComponent } from './photo.picker.component';
-//import { CoreModel } from './../core/coreModel';
-//import { CoreModelProvider } from './../core/core.model.provider';
-//import { FileReaderService, FileReaderServiceProvider } from './../core/file.reader';
+var generic_dlg_component_1 = require("./../dialog/generic.dlg.component");
 var PhotoBigPreviewComponent = PhotoBigPreviewComponent_1 = (function (_super) {
     __extends(PhotoBigPreviewComponent, _super);
     function PhotoBigPreviewComponent(_element, _renderer) {
@@ -30,8 +23,6 @@ var PhotoBigPreviewComponent = PhotoBigPreviewComponent_1 = (function (_super) {
         _this._renderer = _renderer;
         _this.titleLabel = 'preview~';
         return _this;
-        //this.buttonOneLabel = "Ok";
-        //this.buttonTwoLabel = "Cancel";
     }
     /* -------------------------------- */
     /*  abstract method implementations */
@@ -40,7 +31,24 @@ var PhotoBigPreviewComponent = PhotoBigPreviewComponent_1 = (function (_super) {
         // nothing to do in this case
     };
     PhotoBigPreviewComponent.prototype.buttonTwoClick = function (_e) {
+        // reset flags etc
+        this._resetFlags();
         PhotoBigPreviewComponent_1.hideDlg(this._element.nativeElement.querySelector('#dlgPhotoBigPreview'), this._renderer);
+    };
+    PhotoBigPreviewComponent.prototype._getImgElement = function () {
+        if (!this._imgElement) {
+            this._imgElement = this._element.nativeElement.querySelector('#imgContent');
+        }
+        return this._imgElement;
+    };
+    /**
+     *  clean up on the flag(s) and data for this dialogue
+     */
+    PhotoBigPreviewComponent.prototype._resetFlags = function () {
+        var _iE = this._getImgElement();
+        if (_iE) {
+            this._renderer.setAttribute(_iE, "src", "", null);
+        }
     };
     /**
      *  STATIC method to show the dialog
@@ -54,7 +62,7 @@ var PhotoBigPreviewComponent = PhotoBigPreviewComponent_1 = (function (_super) {
     return PhotoBigPreviewComponent;
 }(generic_dlg_component_1.GenericDlgComponent));
 __decorate([
-    core_4.Input(),
+    core_1.Input(),
     __metadata("design:type", Object)
 ], PhotoBigPreviewComponent.prototype, "_parent", void 0);
 PhotoBigPreviewComponent = PhotoBigPreviewComponent_1 = __decorate([
@@ -62,8 +70,8 @@ PhotoBigPreviewComponent = PhotoBigPreviewComponent_1 = __decorate([
         selector: 'photo-big-preview-dlg',
         templateUrl: './view/photo.big.preview.component.html'
     }),
-    __metadata("design:paramtypes", [core_2.ElementRef,
-        core_3.Renderer2])
+    __metadata("design:paramtypes", [core_1.ElementRef,
+        core_1.Renderer2])
 ], PhotoBigPreviewComponent);
 exports.PhotoBigPreviewComponent = PhotoBigPreviewComponent;
 var PhotoBigPreviewComponent_1;

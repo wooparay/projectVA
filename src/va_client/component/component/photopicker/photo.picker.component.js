@@ -9,13 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var coreModel_1 = require("./../core/coreModel");
-var core_model_provider_1 = require("./../core/core.model.provider");
-var message_dlg_component_1 = require("./message.dlg.component");
-var file_upload_component_1 = require("./file.upload.component");
+var coreModel_1 = require("./../../core/coreModel");
+var core_model_provider_1 = require("./../../core/core.model.provider");
+var message_dlg_component_1 = require("./../dialog/message.dlg.component");
+var file_upload_component_1 = require("./../dialog/file.upload.component");
 var photo_big_preview_dialogue_1 = require("./photo.big.preview.dialogue");
 //import { AIOConfigService, AIOConfigServiceProvider } from './../core/aio.config';
-var aio_config_1 = require("./../core/aio.config");
+var aio_config_1 = require("./../../core/aio.config");
 var PhotoPickerComponent = (function () {
     function PhotoPickerComponent(_coreModel, _aioConfig, _renderer, _element) {
         this._coreModel = _coreModel;
