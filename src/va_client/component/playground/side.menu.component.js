@@ -33,6 +33,10 @@ var PlaygroundSideMenuComponent = (function () {
         if (label == 'photo-picker') {
             this._ref.changeRoutlet(label);
         }
+        else {
+            // normally should just pass through
+            this._ref.changeRoutlet(label);
+        }
     };
     return PlaygroundSideMenuComponent;
 }());

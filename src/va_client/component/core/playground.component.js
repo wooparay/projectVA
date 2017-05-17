@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var PlaygroundComponent = (function () {
+    //name = 'yoshika';
     function PlaygroundComponent(_router) {
         this._router = _router;
-        this.name = 'yoshika';
     }
     /* ------------------------------------------------------ */
     /*  interface methods for playground.side.menu component  */

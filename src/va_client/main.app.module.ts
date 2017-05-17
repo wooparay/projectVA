@@ -20,6 +20,7 @@ import { MessageDlgComponent } from './component/component/dialog/message.dlg.co
 import { CoreModelProvider } from './component/core/core.model.provider';
 import { FileReaderServiceProvider, FileReaderService } from './component/core/file.reader';
 
+import { DialogTestingComponent } from './component/component/testing/dialog.testing.component';
 
 @NgModule({
   imports:      [
@@ -37,6 +38,10 @@ import { FileReaderServiceProvider, FileReaderService } from './component/core/f
           {
             path: 'photo-picker',
             component: PhotoPickerComponent
+          },
+          {
+            path: 'dialogs',
+            component: DialogTestingComponent
           }
         ] /* end of "child" routes */
       }
@@ -48,7 +53,8 @@ import { FileReaderServiceProvider, FileReaderService } from './component/core/f
     LabComponent, LabHeaderComponent,
     PlaygroundComponent, PlaygroundSideMenuComponent,
     PhotoPickerComponent, PhotoPickerPreviewWidget, PhotoPickerViewWidget,
-    FileUploadComponent, PhotoBigPreviewComponent, MessageDlgComponent
+    FileUploadComponent, PhotoBigPreviewComponent, MessageDlgComponent,
+    DialogTestingComponent
   ],
   // [step] if you want to have REAL singleton, you need to create your own Provider...
   providers: [

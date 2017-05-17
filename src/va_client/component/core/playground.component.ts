@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './view/playground.component.html',
 })
 export class PlaygroundComponent  {
-  name = 'yoshika';
+  //name = 'yoshika';
 
   constructor (private _router:Router) {
 

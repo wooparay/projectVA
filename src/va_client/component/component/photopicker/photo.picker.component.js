@@ -22,14 +22,16 @@ var PhotoPickerComponent = (function () {
         this._aioConfig = _aioConfig;
         this._renderer = _renderer;
         this._element = _element;
+        //public _timestamp:number = new Date().getTime();
         // List of URI_data for the photos involved
         this._photoDataList = [];
         // the Configuration data related to photo.picker.component (e.g. backend endpoints)
         this._configs = null;
     }
     PhotoPickerComponent.prototype.ngOnDestroy = function () {
+        this._photoDataList = [];
         this.cleanupDataBasedOnKey(file_upload_component_1.FileUploadComponent.CMODEL_KEY);
-        console.log('*** to be destroyed => PhotoPickerComponent, remove the key on CoreModel');
+        //console.log('*** to be destroyed => PhotoPickerComponent, remove the key on CoreModel');
     };
     /**
      *  method to return the Configuration related to

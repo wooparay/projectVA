@@ -22,6 +22,7 @@ var photo_big_preview_dialogue_1 = require("./component/component/photopicker/ph
 var message_dlg_component_1 = require("./component/component/dialog/message.dlg.component");
 var core_model_provider_1 = require("./component/core/core.model.provider");
 var file_reader_1 = require("./component/core/file.reader");
+var dialog_testing_component_1 = require("./component/component/testing/dialog.testing.component");
 var MainAppModule = (function () {
     function MainAppModule() {
     }
@@ -44,6 +45,10 @@ MainAppModule = __decorate([
                         {
                             path: 'photo-picker',
                             component: photo_picker_component_1.PhotoPickerComponent
+                        },
+                        {
+                            path: 'dialogs',
+                            component: dialog_testing_component_1.DialogTestingComponent
                         }
                     ] /* end of "child" routes */
                 }
@@ -55,7 +60,8 @@ MainAppModule = __decorate([
             lab_component_1.LabComponent, lab_header_component_1.LabHeaderComponent,
             playground_component_1.PlaygroundComponent, side_menu_component_1.PlaygroundSideMenuComponent,
             photo_picker_component_1.PhotoPickerComponent, photo_picker_preview_widget_1.PhotoPickerPreviewWidget, photo_picker_view_widget_1.PhotoPickerViewWidget,
-            file_upload_component_1.FileUploadComponent, photo_big_preview_dialogue_1.PhotoBigPreviewComponent, message_dlg_component_1.MessageDlgComponent
+            file_upload_component_1.FileUploadComponent, photo_big_preview_dialogue_1.PhotoBigPreviewComponent, message_dlg_component_1.MessageDlgComponent,
+            dialog_testing_component_1.DialogTestingComponent
         ],
         // [step] if you want to have REAL singleton, you need to create your own Provider...
         providers: [

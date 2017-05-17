@@ -34,6 +34,9 @@ export class PlaygroundSideMenuComponent  {
     // based on the label value, change the router-outlet to show the correct component view
     if (label == 'photo-picker') {
       this._ref.changeRoutlet(label);
+    } else {
+      // normally should just pass through
+      this._ref.changeRoutlet(label);
     }
   }
 

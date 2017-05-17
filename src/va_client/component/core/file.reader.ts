@@ -37,15 +37,16 @@ export class FileReaderService {
     if (this._isFileReaderSupported() == true) {
       if (this._fileReader == null) {
         this._fileReader = new FileReader();
-        this._fileReader.onload = function(e:Event) {
-          if (_parentRef && _parentRef['addDataToPhotoDataList']) {
-            _parentRef['addDataToPhotoDataList'](e.currentTarget['result']);
-          }
-          if (_callback && typeof(_callback)=='function') {
-            _callback();
-          }
-        };
       }
+      // no matter what... renew this onload everytime
+      this._fileReader.onload = function(e:Event) {
+        if (_parentRef && _parentRef['addDataToPhotoDataList']) {
+          _parentRef['addDataToPhotoDataList'](e.currentTarget['result']);
+        }
+        if (_callback && typeof(_callback)=='function') {
+          _callback();
+        }
+      };
       this._fileReader.readAsDataURL(_file);
     } // end -- if (fileReader supported)
   }

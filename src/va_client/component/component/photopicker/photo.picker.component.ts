@@ -27,6 +27,8 @@ import { AIOConfigService } from './../../core/aio.config';
 })
 export class PhotoPickerComponent implements ICoreModelLifeCycle {
 
+  //public _timestamp:number = new Date().getTime();
+  
   // List of URI_data for the photos involved
   private _photoDataList:string[] = [];
   // the Configuration data related to photo.picker.component (e.g. backend endpoints)
@@ -38,8 +40,9 @@ export class PhotoPickerComponent implements ICoreModelLifeCycle {
     private _element:ElementRef) {
   }
   ngOnDestroy() {
+    this._photoDataList=[];
     this.cleanupDataBasedOnKey(FileUploadComponent.CMODEL_KEY);
-console.log('*** to be destroyed => PhotoPickerComponent, remove the key on CoreModel');
+    //console.log('*** to be destroyed => PhotoPickerComponent, remove the key on CoreModel');
   }
 
   /**
@@ -136,7 +139,7 @@ console.log('*** to be destroyed => PhotoPickerComponent, remove the key on Core
 
   public addDataToPhotoDataList(_data:string) {
     this._photoDataList.push(_data);
-    //console.log('** size of the photoDataList > '+this._photoDataList.length);
+//console.log('** size of the photoDataList > '+this._photoDataList.length);
   }
 
   /* -------------------- */
