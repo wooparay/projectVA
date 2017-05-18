@@ -32,8 +32,7 @@ var MessageDlgComponent = MessageDlgComponent_1 = (function (_super) {
         _this._message = '*** some message ***';
         _this._showWarning = false;
         _this._showButtonTwo = true;
-        _this.buttonOneLabel = 'ok';
-        _this.buttonTwoLabel = 'cancel';
+        _this._isHelpDlg = false;
         return _this;
     }
     MessageDlgComponent.prototype.ngAfterContentChecked = function () {
@@ -53,13 +52,29 @@ var MessageDlgComponent = MessageDlgComponent_1 = (function (_super) {
             }
             else
                 this._showButtonTwo = false;
+            var _type = _opt[MessageDlgComponent_1.DLG_TYPE];
+            if (_type && _type == MessageDlgComponent_1.DLG_TYPE_HELP) {
+                this._isHelpDlg = true;
+            }
+            else
+                this._isHelpDlg = false;
+            var _btnLbl = _opt[MessageDlgComponent_1.DLG_BUTTON_ONE_LABEL];
+            if (_btnLbl)
+                this.buttonOneLabel = _btnLbl;
+            else
+                this.buttonOneLabel = 'ok';
+            _btnLbl = _opt[MessageDlgComponent_1.DLG_BUTTON_TWO_LABEL];
+            if (_btnLbl)
+                this.buttonTwoLabel = _btnLbl;
+            else
+                this.buttonTwoLabel = 'cancel';
         } // end -- if (_opt is valid)
     };
     /* ------------------ */
     /*  implementations   */
     /* ------------------ */
     MessageDlgComponent.prototype.buttonOneClick = function (_e) {
-        alert('button one clicked');
+        this.buttonTwoClick(null);
     };
     MessageDlgComponent.prototype.buttonTwoClick = function (_e) {
         // cleanup to save memory
@@ -75,7 +90,13 @@ MessageDlgComponent.CMODEL_KEY = "MessageDlgComponent";
 MessageDlgComponent.DLG_TITLE = "DLG_TITLE";
 MessageDlgComponent.DLG_MESSAGE = "DLG_MESSAGE";
 MessageDlgComponent.DLG_WARNING = "DLG_WARNING";
+MessageDlgComponent.DLG_TYPE = "DLG_TYPE";
 MessageDlgComponent.DLG_NEED_BUTTON_TWO = "DLG_NEED_BUTTON_TWO";
+MessageDlgComponent.DLG_BUTTON_ONE_LABEL = "DLG_BUTTON_ONE_LABEL";
+MessageDlgComponent.DLG_BUTTON_TWO_LABEL = "DLG_BUTTON_TWO_LABEL";
+// constants for DLG_TYPE
+MessageDlgComponent.DLG_TYPE_MESSAGE = "message";
+MessageDlgComponent.DLG_TYPE_HELP = "help";
 __decorate([
     core_1.Input(),
     __metadata("design:type", Object)

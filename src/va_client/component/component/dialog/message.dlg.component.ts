@@ -21,7 +21,14 @@ export class MessageDlgComponent extends GenericDlgComponent {
   public static DLG_TITLE:string = "DLG_TITLE";
   public static DLG_MESSAGE:string = "DLG_MESSAGE";
   public static DLG_WARNING:string = "DLG_WARNING";
+  public static DLG_TYPE:string = "DLG_TYPE";
   public static DLG_NEED_BUTTON_TWO:string = "DLG_NEED_BUTTON_TWO";
+  public static DLG_BUTTON_ONE_LABEL:string="DLG_BUTTON_ONE_LABEL";
+  public static DLG_BUTTON_TWO_LABEL:string="DLG_BUTTON_TWO_LABEL";
+
+  // constants for DLG_TYPE
+  public static DLG_TYPE_MESSAGE:string = "message";
+  public static DLG_TYPE_HELP:string = "help";
 
   // parent component (could be anything, hence didn't state the "type")
   @Input() _parent:any;
@@ -29,6 +36,7 @@ export class MessageDlgComponent extends GenericDlgComponent {
   private _message:string='*** some message ***';
   private _showWarning:boolean=false;
   private _showButtonTwo:boolean=true;
+  private _isHelpDlg:boolean=false;
 
   /**
    *  contructor
@@ -37,9 +45,6 @@ export class MessageDlgComponent extends GenericDlgComponent {
     private _renderer:Renderer2,
     private _coreModel:CoreModel) {
     super();
-
-    this.buttonOneLabel='ok';
-    this.buttonTwoLabel='cancel';
   }
   ngAfterContentChecked() {
     let _opt:any = this._coreModel.getDataByKey(MessageDlgComponent.CMODEL_KEY);
@@ -57,6 +62,18 @@ export class MessageDlgComponent extends GenericDlgComponent {
         this._showButtonTwo=true;
       } else this._showButtonTwo=false;
 
+      let _type:string=_opt[MessageDlgComponent.DLG_TYPE];
+      if (_type && _type==MessageDlgComponent.DLG_TYPE_HELP) {
+        this._isHelpDlg=true;
+      } else this._isHelpDlg=false;
+
+      let _btnLbl:string=_opt[MessageDlgComponent.DLG_BUTTON_ONE_LABEL];
+      if (_btnLbl) this.buttonOneLabel=_btnLbl; else this.buttonOneLabel='ok';
+
+      _btnLbl=_opt[MessageDlgComponent.DLG_BUTTON_TWO_LABEL];
+      if (_btnLbl) this.buttonTwoLabel=_btnLbl; else this.buttonTwoLabel='cancel';
+
+
     } // end -- if (_opt is valid)
   }
 
@@ -64,7 +81,7 @@ export class MessageDlgComponent extends GenericDlgComponent {
   /*  implementations   */
   /* ------------------ */
   protected buttonOneClick(_e:Event):void {
-    alert('button one clicked');
+    this.buttonTwoClick(null);
   }
   protected buttonTwoClick(_e:Event):void {
     // cleanup to save memory

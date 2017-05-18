@@ -9,6 +9,7 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var router_1 = require("@angular/router");
 var http_1 = require("@angular/http");
+var forms_1 = require("@angular/forms");
 var hello_component_1 = require("./component/playground/hello.component");
 var lab_component_1 = require("./component/core/lab.component");
 var lab_header_component_1 = require("./component/core/lab.header.component");
@@ -33,6 +34,7 @@ MainAppModule = __decorate([
         imports: [
             platform_browser_1.BrowserModule,
             http_1.HttpModule,
+            forms_1.FormsModule,
             router_1.RouterModule.forRoot([
                 {
                     path: 'playground',

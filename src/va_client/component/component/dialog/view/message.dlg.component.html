@@ -4,7 +4,6 @@
   role="dialog" aria-labelledby='dlgMessageLabel'
   style="display: none;">
   <form method="post" action="javascript:void(0);">
-<!-- TODO modal-dialog = controlled width -->
     <div class="modal-dialog" role="document">
       <div class="modal-content animated flipInX" style="border-radius: 4px;">
         <!-- title / header -->
@@ -19,21 +18,33 @@
             <span aria-hidden='true'>x</span>
           </button>
         </div>
-        <!-- content -->
+<!-- content -->
         <div class="modal-body">
-          <div class="file-upload-dlg-content-container">
-            <div class="mx-auto" style="text-align: center; margin-top: 100px;">
+          <div *ngIf='_isHelpDlg==false' class="message-dlg-container">
+            <div class="mx-auto" style="text-align: center; ">
               <span>{{_message}}</span>
             </div>
           </div>
+
+          <div *ngIf='_isHelpDlg==true' class="message-dlg-container">
+            <div class="mx-auto" style="text-align: center; ">
+              <!--
+              ##########################################
+                innerHTML for sanitory html content
+              ##########################################
+              -->
+              <span [innerHTML]='_message' ></span>
+            </div>
+          </div>
+
         </div>
-        <!-- footer -->
+<!-- footer -->
         <div class="modal-footer">
           <button class="btn btn-secondary waves-effect waves-light"
             data-dismiss='modal' (click)='buttonOneClick($event)'>
             {{buttonOneLabel}}
           </button>
-          <button *ngIf='_needButtonTwo' class="btn btn-primary waves-effect waves-light"
+          <button *ngIf='_showButtonTwo' class="btn btn-primary waves-effect waves-light"
             (click)='buttonTwoClick($event)'>
             {{buttonTwoLabel}}
           </button>

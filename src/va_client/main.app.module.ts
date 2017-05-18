@@ -2,6 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule }   from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { HelloComponent }  from './component/playground/hello.component';
 import { LabComponent }  from './component/core/lab.component';
@@ -26,6 +27,7 @@ import { DialogTestingComponent } from './component/component/testing/dialog.tes
   imports:      [
     BrowserModule,
     HttpModule,
+    FormsModule,
     RouterModule.forRoot([
       {
         path: 'playground',
