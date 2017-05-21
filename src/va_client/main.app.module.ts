@@ -38,7 +38,8 @@ import { CoreModelProvider } from './component/core/core.model.provider';
 import { FileReaderServiceProvider, FileReaderService } from './component/core/file.reader';
 
 import { DialogTestingComponent } from './component/component/testing/dlg/dialog.testing.component';
-import { AccordionZeroComponent } from './component/component/testing/dlg/accordion.zero'
+import { AccordionZeroComponent } from './component/component/testing/dlg/accordion.zero';
+import { AccordionOneComponent } from './component/component/testing/dlg/accordion.one';
 
 @NgModule({
   imports:      [
@@ -73,7 +74,7 @@ import { AccordionZeroComponent } from './component/component/testing/dlg/accord
     PlaygroundComponent, PlaygroundSideMenuComponent,
     PhotoPickerComponent, PhotoPickerPreviewWidget, PhotoPickerViewWidget,
     FileUploadComponent, PhotoBigPreviewComponent, MessageDlgComponent,
-    DialogTestingComponent, AccordionZeroComponent
+    DialogTestingComponent, AccordionZeroComponent, AccordionOneComponent
   ],
   // [step] if you want to have REAL singleton, you need to create your own Provider...
   providers: [

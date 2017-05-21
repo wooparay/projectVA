@@ -41,6 +41,7 @@ var core_model_provider_1 = require("./component/core/core.model.provider");
 var file_reader_1 = require("./component/core/file.reader");
 var dialog_testing_component_1 = require("./component/component/testing/dlg/dialog.testing.component");
 var accordion_zero_1 = require("./component/component/testing/dlg/accordion.zero");
+var accordion_one_1 = require("./component/component/testing/dlg/accordion.one");
 var MainAppModule = (function () {
     function MainAppModule() {
     }
@@ -80,7 +81,7 @@ MainAppModule = __decorate([
             playground_component_1.PlaygroundComponent, side_menu_component_1.PlaygroundSideMenuComponent,
             photo_picker_component_1.PhotoPickerComponent, photo_picker_preview_widget_1.PhotoPickerPreviewWidget, photo_picker_view_widget_1.PhotoPickerViewWidget,
             file_upload_component_1.FileUploadComponent, photo_big_preview_dialogue_1.PhotoBigPreviewComponent, message_dlg_component_1.MessageDlgComponent,
-            dialog_testing_component_1.DialogTestingComponent, accordion_zero_1.AccordionZeroComponent
+            dialog_testing_component_1.DialogTestingComponent, accordion_zero_1.AccordionZeroComponent, accordion_one_1.AccordionOneComponent
         ],
         // [step] if you want to have REAL singleton, you need to create your own Provider...
         providers: [

@@ -22,7 +22,7 @@
         <div class="modal-body">
           <div *ngIf='_isHelpDlg==false' class="message-dlg-container">
             <div class="mx-auto" style="text-align: center; ">
-              <span>{{_message}}</span>
+              <span [innerHTML]='_message' ></span>
             </div>
           </div>
 

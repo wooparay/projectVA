@@ -1,0 +1,58 @@
+<div class="animated flipInX hiding" id="divTweek_1">
+  <div class="card card-block">
+    <h5><span class="dialog-testing-title">Specs</span></h5>
+    <dl class="row">
+      <dd class="col-sm-4 text-truncate margin-bottom-zero">&nbsp;actual component name</dd>
+      <dd class="col-sm-8 margin-bottom-zero"><span class='dialog-testing-spec-value'>MessageDlgComponent</span></dd>
+
+      <dd class="col-sm-4 text-truncate margin-bottom-zero">&nbsp;class filename</dd>
+      <dd class="col-sm-8 margin-bottom-zero"> <span class='dialog-testing-spec-value'>message.dlg.component.ts</span> </dd>
+
+      <dd class="col-sm-4 text-truncate margin-bottom-zero">&nbsp;dialog type</dd>
+      <dd class="col-sm-8 margin-bottom-zero"> <span class='dialog-testing-spec-value'>message dialog</span> </dd>
+    </dl>
+    <!-- tweek options -->
+    <p></p>
+    <h5><span class="dialog-testing-title">Tweek options</span></h5>
+    <div class="md-form form-sm">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-4 col-md-4" style="padding: 0px;">
+            <span class="">main help message</span>
+          </div>
+          <div class="col-sm-8 col-md-8" style="padding: 0px;">
+            <textarea id='__1_message' [(ngModel)]="_frm['message']" class="form-control"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 col-md-4" style="padding: 0px;"><span class="">dialog title</span></div>
+          <div class="col-sm-8 col-md-8" style="padding: 0px;">
+            <input type="text" id="__1_title" [(ngModel)]="_frm['title']"  class="form-control dialog-testing-tweek-input">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 col-md-4" style="padding: 0px;"><span class="">is it a warning?</span></div>
+          <div class="col-sm-8 col-md-8" style="padding: 0px;">
+            <div style="margin-top: 8px;"></div>
+            <input type='radio' [(ngModel)]="_frm['warning']" name='__1_warning' value='yes'>&nbsp;yes&nbsp;
+            <input type='radio' [(ngModel)]="_frm['warning']" name='__1_warning' value='no'>&nbsp;no
+            <div style="margin-bottom: 15px;"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4 col-md-4" style="padding: 0px;"><span class="">button 1 label</span></div>
+          <div class="col-sm-8 col-md-8" style="padding: 0px;">
+            <input type="text" id="__1_btn1_lbl" [(ngModel)]="_frm['btn1_lbl']"  class="form-control dialog-testing-tweek-input">
+          </div>
+        </div>
+
+      </div>  <!-- container-fluid -->
+    </div>
+
+    <button class="btn btn-primary" (click)='showDlg($event)' >show dialog</button>
+  </div>
+</div>
+
+<!-- dlg instances -->
+<message-dlg [_parent]='this'></message-dlg>
