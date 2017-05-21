@@ -24,7 +24,8 @@ export class AccordionZeroComponent {
     this._frm={
       'message': '', 'title': '',
       'warning': 'no', 'btn2': 'no',
-      'btn2_lbl': '', 'btn1_lbl': ''
+      'btn2_lbl': '', 'btn1_lbl': '',
+      'btn1_cb': 'no'
     };
   }
 
@@ -38,6 +39,12 @@ export class AccordionZeroComponent {
     _opt[MessageDlgComponent.DLG_NEED_BUTTON_TWO]=(this._frm['btn2']=='yes'?true:false);
     _opt[MessageDlgComponent.DLG_BUTTON_ONE_LABEL]=this._frm['btn1_lbl'];
     _opt[MessageDlgComponent.DLG_BUTTON_TWO_LABEL]=this._frm['btn2_lbl'];
+    // test on adding function callback to button1?
+    if (this._frm['btn1_cb']=='yes') {
+      _opt[MessageDlgComponent.DLG_BUTTON_ONE_CALLBACK]=function() {
+        alert('testing on button one click');
+      };
+    } else _opt[MessageDlgComponent.DLG_BUTTON_ONE_CALLBACK]=null;
 
     this._coreModel.setDataByKey(MessageDlgComponent.CMODEL_KEY, _opt, true);
     MessageDlgComponent.showDlg(

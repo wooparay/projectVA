@@ -33,6 +33,8 @@ var MessageDlgComponent = MessageDlgComponent_1 = (function (_super) {
         _this._showWarning = false;
         _this._showButtonTwo = true;
         _this._isHelpDlg = false;
+        _this._buttonOneCallback = null;
+        _this._buttonTwoCallback = null;
         return _this;
     }
     MessageDlgComponent.prototype.ngAfterContentChecked = function () {
@@ -68,21 +70,40 @@ var MessageDlgComponent = MessageDlgComponent_1 = (function (_super) {
                 this.buttonTwoLabel = _btnLbl;
             else
                 this.buttonTwoLabel = 'cancel';
+            var _cb = _opt[MessageDlgComponent_1.DLG_BUTTON_ONE_CALLBACK];
+            if (_cb && typeof (_cb) == 'function')
+                this._buttonOneCallback = _cb;
+            else
+                this._buttonOneCallback = null;
+            _cb = _opt[MessageDlgComponent_1.DLG_BUTTON_TWO_CALLBACK];
+            if (_cb && typeof (_cb) == 'function')
+                this._buttonTwoCallback = _cb;
+            else
+                this._buttonTwoCallback = null;
         } // end -- if (_opt is valid)
     };
     /* ------------------ */
     /*  implementations   */
     /* ------------------ */
     MessageDlgComponent.prototype.buttonOneClick = function (_e) {
-        this.buttonTwoClick(null);
+        if (this._buttonOneCallback) {
+            this._buttonOneCallback();
+        }
+        else
+            this.buttonTwoClick(null);
     };
     MessageDlgComponent.prototype.buttonTwoClick = function (_e) {
-        // cleanup to save memory
-        this.titleLabel = '';
-        this._message = '';
-        this._showWarning = false;
-        this._showButtonTwo = true;
-        MessageDlgComponent_1.hideDlg(this.getDlg(this._element, 'dlgMessage'), this._renderer);
+        if (this._buttonTwoCallback) {
+            this._buttonTwoCallback();
+        }
+        else {
+            // cleanup to save memory
+            this.titleLabel = '';
+            this._message = '';
+            this._showWarning = false;
+            this._showButtonTwo = true;
+            MessageDlgComponent_1.hideDlg(this.getDlg(this._element, 'dlgMessage'), this._renderer);
+        }
     };
     return MessageDlgComponent;
 }(generic_dlg_component_1.GenericDlgComponent));
@@ -94,6 +115,8 @@ MessageDlgComponent.DLG_TYPE = "DLG_TYPE";
 MessageDlgComponent.DLG_NEED_BUTTON_TWO = "DLG_NEED_BUTTON_TWO";
 MessageDlgComponent.DLG_BUTTON_ONE_LABEL = "DLG_BUTTON_ONE_LABEL";
 MessageDlgComponent.DLG_BUTTON_TWO_LABEL = "DLG_BUTTON_TWO_LABEL";
+MessageDlgComponent.DLG_BUTTON_ONE_CALLBACK = "DLG_BUTTON_ONE_CALLBACK";
+MessageDlgComponent.DLG_BUTTON_TWO_CALLBACK = "DLG_BUTTON_TWO_CALLBACK";
 // constants for DLG_TYPE
 MessageDlgComponent.DLG_TYPE_MESSAGE = "message";
 MessageDlgComponent.DLG_TYPE_HELP = "help";

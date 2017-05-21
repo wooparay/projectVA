@@ -25,7 +25,6 @@
     <h5><span class="dialog-testing-title">Tweek options</span></h5>
     <div class="md-form form-sm">
       <div class="container-fluid">
-
         <div class="row">
           <div class="col-sm-4 col-md-4" style="padding: 0px;">
             <span class="">main help message</span>
@@ -68,6 +67,14 @@
           <div class="col-sm-4 col-md-4" style="padding: 0px;"><span class="">button 2 label</span></div>
           <div class="col-sm-8 col-md-8" style="padding: 0px;">
             <input type="text" id="__0_btn2_lbl" [(ngModel)]="_frm['btn2_lbl']"  class="form-control dialog-testing-tweek-input">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 col-md-4" style="padding: 0px;"><span class="">add function callback to button 1</span></div>
+          <div class="col-sm-8 col-md-8" style="padding: 0px;">
+            <input type='radio' [(ngModel)]="_frm['btn1_cb']" name='__0_btn1_cb' value='yes'>&nbsp;yes&nbsp;
+            <input type='radio' [(ngModel)]="_frm['btn1_cb']" name='__0_btn1_cb' value='no'>&nbsp;no
+            <div style="margin-bottom: 15px;"></div>
           </div>
         </div>
 

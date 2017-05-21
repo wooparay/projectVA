@@ -25,6 +25,8 @@ export class MessageDlgComponent extends GenericDlgComponent {
   public static DLG_NEED_BUTTON_TWO:string = "DLG_NEED_BUTTON_TWO";
   public static DLG_BUTTON_ONE_LABEL:string="DLG_BUTTON_ONE_LABEL";
   public static DLG_BUTTON_TWO_LABEL:string="DLG_BUTTON_TWO_LABEL";
+  public static DLG_BUTTON_ONE_CALLBACK:string="DLG_BUTTON_ONE_CALLBACK";
+  public static DLG_BUTTON_TWO_CALLBACK:string="DLG_BUTTON_TWO_CALLBACK";
 
   // constants for DLG_TYPE
   public static DLG_TYPE_MESSAGE:string = "message";
@@ -37,6 +39,8 @@ export class MessageDlgComponent extends GenericDlgComponent {
   private _showWarning:boolean=false;
   private _showButtonTwo:boolean=true;
   private _isHelpDlg:boolean=false;
+  private _buttonOneCallback:any=null;
+  private _buttonTwoCallback:any=null;
 
   /**
    *  contructor
@@ -73,7 +77,11 @@ export class MessageDlgComponent extends GenericDlgComponent {
       _btnLbl=_opt[MessageDlgComponent.DLG_BUTTON_TWO_LABEL];
       if (_btnLbl) this.buttonTwoLabel=_btnLbl; else this.buttonTwoLabel='cancel';
 
+      let _cb:any = _opt[MessageDlgComponent.DLG_BUTTON_ONE_CALLBACK];
+      if (_cb && typeof(_cb)=='function') this._buttonOneCallback=_cb; else this._buttonOneCallback=null;
 
+      _cb = _opt[MessageDlgComponent.DLG_BUTTON_TWO_CALLBACK];
+      if (_cb && typeof(_cb)=='function') this._buttonTwoCallback=_cb; else this._buttonTwoCallback=null;
     } // end -- if (_opt is valid)
   }
 
@@ -81,16 +89,23 @@ export class MessageDlgComponent extends GenericDlgComponent {
   /*  implementations   */
   /* ------------------ */
   protected buttonOneClick(_e:Event):void {
-    this.buttonTwoClick(null);
+    if (this._buttonOneCallback) {
+      this._buttonOneCallback();
+
+    } else this.buttonTwoClick(null);
   }
   protected buttonTwoClick(_e:Event):void {
-    // cleanup to save memory
-    this.titleLabel='';
-    this._message='';
-    this._showWarning=false;
-    this._showButtonTwo=true;
+    if (this._buttonTwoCallback) {
+      this._buttonTwoCallback();
+    } else {
+      // cleanup to save memory
+      this.titleLabel='';
+      this._message='';
+      this._showWarning=false;
+      this._showButtonTwo=true;
 
-    MessageDlgComponent.hideDlg(this.getDlg(this._element, 'dlgMessage'), this._renderer);
+      MessageDlgComponent.hideDlg(this.getDlg(this._element, 'dlgMessage'), this._renderer);
+    }
   }
 
 

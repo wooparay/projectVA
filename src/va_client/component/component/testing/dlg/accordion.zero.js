@@ -22,7 +22,8 @@ var AccordionZeroComponent = (function () {
         this._frm = {
             'message': '', 'title': '',
             'warning': 'no', 'btn2': 'no',
-            'btn2_lbl': '', 'btn1_lbl': ''
+            'btn2_lbl': '', 'btn1_lbl': '',
+            'btn1_cb': 'no'
         };
     }
     AccordionZeroComponent.prototype.showDlg_0 = function (_e) {
@@ -34,6 +35,14 @@ var AccordionZeroComponent = (function () {
         _opt[message_dlg_component_1.MessageDlgComponent.DLG_NEED_BUTTON_TWO] = (this._frm['btn2'] == 'yes' ? true : false);
         _opt[message_dlg_component_1.MessageDlgComponent.DLG_BUTTON_ONE_LABEL] = this._frm['btn1_lbl'];
         _opt[message_dlg_component_1.MessageDlgComponent.DLG_BUTTON_TWO_LABEL] = this._frm['btn2_lbl'];
+        // test on adding function callback to button1?
+        if (this._frm['btn1_cb'] == 'yes') {
+            _opt[message_dlg_component_1.MessageDlgComponent.DLG_BUTTON_ONE_CALLBACK] = function () {
+                alert('testing on button one click');
+            };
+        }
+        else
+            _opt[message_dlg_component_1.MessageDlgComponent.DLG_BUTTON_ONE_CALLBACK] = null;
         this._coreModel.setDataByKey(message_dlg_component_1.MessageDlgComponent.CMODEL_KEY, _opt, true);
         message_dlg_component_1.MessageDlgComponent.showDlg(this._element.nativeElement.querySelector('#dlgMessage'), this._renderer);
     };
