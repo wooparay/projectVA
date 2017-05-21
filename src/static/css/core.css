@@ -7,6 +7,10 @@
   color: lightblue;
 }
 
+.margin-bottom-zero {
+  margin-bottom: 0;
+}
+
 .showing {
   display: block;
 }
@@ -178,7 +182,8 @@
 }
 .photo-picker-preview-container {
   padding-left: 2px; padding-right: 2px; padding-top: 2px; padding-bottom: 2px;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
+  overflow-y: auto;
 }
 .photo-picker-preview-container-inner {
   overflow-y: hidden;
@@ -224,5 +229,6 @@
 /*  message dlg   */
 /* */
 .message-dlg-container {
-
+  max-height: 300px;
+  overflow-y: auto;
 }
