@@ -9,10 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var coreModel_1 = require("./../../core/coreModel");
-var core_model_provider_1 = require("./../../core/core.model.provider");
-var message_dlg_component_1 = require("./../dialog/message.dlg.component");
-//import { AIOConfigService } from './../../core/aio.config';
+var coreModel_1 = require("./../../../core/coreModel");
+var core_model_provider_1 = require("./../../../core/core.model.provider");
+var message_dlg_component_1 = require("./../../dialog/message.dlg.component");
 var DialogTestingComponent = DialogTestingComponent_1 = (function () {
     function DialogTestingComponent(_element, _renderer, _coreModel) {
         this._element = _element;

@@ -1,15 +1,16 @@
 import { NgFor } from '@angular/common';
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 
-import { CoreModel } from './../../core/coreModel';
-import { CoreModelProvider } from './../../core/core.model.provider';
+import { CoreModel } from './../../../core/coreModel';
+import { CoreModelProvider } from './../../../core/core.model.provider';
 
-import { MessageDlgComponent } from './../dialog/message.dlg.component';
-import { FileUploadComponent } from './../dialog/file.upload.component';
-import { PhotoBigPreviewComponent } from './../photopicker/photo.big.preview.dialogue';
+import { MessageDlgComponent } from './../../dialog/message.dlg.component';
+import { FileUploadComponent } from './../../dialog/file.upload.component';
+import { PhotoBigPreviewComponent } from './../../photopicker/photo.big.preview.dialogue';
 
-import { ICoreModelLifeCycle } from './../../interface/i.core.model.lifecycle';
-//import { AIOConfigService } from './../../core/aio.config';
+import { ICoreModelLifeCycle } from './../../../interface/i.core.model.lifecycle';
+
+import { AccordionZeroComponent } from './accordion.zero';
 
 @Component({
   selector: 'dialog-testing',

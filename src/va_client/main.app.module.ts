@@ -1,3 +1,19 @@
+/**
+ * This file is part of projectVA.
+ *
+ * projectVA is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * projectVA is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ */
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule }   from '@angular/router';
@@ -21,7 +37,8 @@ import { MessageDlgComponent } from './component/component/dialog/message.dlg.co
 import { CoreModelProvider } from './component/core/core.model.provider';
 import { FileReaderServiceProvider, FileReaderService } from './component/core/file.reader';
 
-import { DialogTestingComponent } from './component/component/testing/dialog.testing.component';
+import { DialogTestingComponent } from './component/component/testing/dlg/dialog.testing.component';
+import { AccordionZeroComponent } from './component/component/testing/dlg/accordion.zero'
 
 @NgModule({
   imports:      [
@@ -56,7 +73,7 @@ import { DialogTestingComponent } from './component/component/testing/dialog.tes
     PlaygroundComponent, PlaygroundSideMenuComponent,
     PhotoPickerComponent, PhotoPickerPreviewWidget, PhotoPickerViewWidget,
     FileUploadComponent, PhotoBigPreviewComponent, MessageDlgComponent,
-    DialogTestingComponent
+    DialogTestingComponent, AccordionZeroComponent
   ],
   // [step] if you want to have REAL singleton, you need to create your own Provider...
   providers: [

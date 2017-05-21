@@ -1,0 +1,41 @@
+
+<!-- https://mdbootstrap.com/javascript/collapse/ accordion -->
+<div class="dialog-testing-container">
+  <h6><span class="dialog-testing-title">Dialog tester</span> : pick a dialog and tweek</h6>
+
+  <div class='dialog-testing-dlg-container'>
+    <div id='div_scroll_container' class="dialog-testing-dlg-scroll-container">
+      <!-- message.dlg.component -->
+      <!-- data-toggle="collapse" data-target="#divTweek_0" aria-expanded="false" aria-controls="divTweek_0" -->
+      <button class="btn btn-primary" id='btn_0' (click)='showTweekOption(0)'>
+        help dialog</button>
+      <!-- message.dlg.component -->
+      <!-- data-toggle="collapse" data-target="#divTweek_1" aria-expanded="false" aria-controls="divTweek_1" -->
+      <button class="btn btn-default" id='btn_1' (click)='showTweekOption(1)'>
+        message dialog</button>
+
+      <!-- add more buttons here -->
+    </div>
+  </div>
+
+  <!-- accordion panes -->
+  <!-- aria-expanded=true n class=collpase show -->
+  <accordion-zero [_parent]='this'></accordion-zero>
+  <div class="animated flipInX hiding" id="divTweek_1">
+    <div class="card card-block">
+      <h5><span class="dialog-testing-title">Specs</span></h5>
+      <ul class="dialog-testing-spec-list">
+        <li>actual component name: <span class='dialog-testing-spec-value'>MessageDlgComponent</span></li>
+        <li>class filename: <span class='dialog-testing-spec-value'>message.dlg.component.ts</span></li>
+        <li>dialog type: <span class='dialog-testing-spec-value'>message dialog</span></li>
+      </ul>
+      <button class="btn btn-primary" (click)='showDlg_1($event)' >show dialog</button>
+    </div>
+  </div>
+
+  <!-- dlg instances -->
+  <!--message-dlg [_parent]='this'></message-dlg-->
+
+
+
+</div>
