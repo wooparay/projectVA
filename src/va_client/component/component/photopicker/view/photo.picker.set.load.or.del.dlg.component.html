@@ -48,49 +48,35 @@
                   </div>
                 </dd>
                 <!-- 2nd column -->
-                <dd id='divSetPreview' [ngClass]='_divSetPreview' style="padding-left: 1px; padding-right:1px;">
+                <dd id='divSetPreview' [ngClass]='_divSetPreview'
+                  style="padding-left:1px; padding-right:1px;">
                   <div>
                     <span class="dialog-testing-spec-value">photo files available in set:</span>
                     <i class="fa fa-angle-double-right pull-right cursor-hand" style='padding-right: 2px;' aria-hidden="true" (click)='hidePreviewPane()' ></i>
                   </div>
                   <div class="photo-picker-set-selection-preview-pane-right">
                     <div style="width: calc(100%);">
-                      yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>
-                      yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>
-                      yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>
-                      yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>
-                      yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>
-                      yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>
-                      yo man<br/>he main<br/>she rayo man<br/>yo man<br/>he main<br/>she rayo man<br/>
+                      <img *ngFor='let _previewItem of _setPreviewPhotoList; let _previewI=index;'
+                       class="cursor-hand" (click)='updatePreviewPhotoData(_previewItem, _previewI)'
+                       src='{{_previewItem}}' style="max-width: 100px; max-height: 100px; padding: 2px;"
+                       />
                     </div>
                   </div>
-                  <div style="width: calc(100%); height: 130px; text-align: center;">
-                    <img style='max-width: 100%; max-height: 100%;'
-                      src='{{_setPreviewPhotoData}}'/>
+                  <div style="width: calc(100%); height: 160px; text-align: center; overflow: auto; border: 1px solid;">
+                    <!-- style='max-width: 100%; max-height: 100%;' -->
+                    <img id='imgPreviewData' src='{{_setPreviewPhotoData}}'
+                      [ngStyle]='_setPreviewPhotoDataStyle'
+                      [ngClass]='_setPreviewPhotoDataCss' />
                   </div>
-
+                  <div style="text-align: center;">
+                    <i class="fa fa-search-plus" aria-hidden="true" (click)='increasePreviewPhotoDimen()'></i>
+                    <i class="fa fa-search-minus" aria-hidden="true" (click)='decreasePreviewPhotoDimen()'></i>
+                    <i class="fa fa-refresh" aria-hidden="true" (click)='bestFitPreviewPhotoDimen()'></i>
+                  </div>
                 </dd>
               </dl>
             </div>
-
           </div>
-          <!--div class='photo-picker-set-selection-container'>
-            <div class="photo-picker-set-selection-inner-container">
-              <div class="photo-picker-set-selection-item-container"
-                *ngFor='let _item of _frm["selectedSet"]; let _i=index; trackBy: _item?.id' >
-                <div (click)='onSetItemClick($event, _item.id, _i)'
-                 [ngClass]='{ "photo-picker-set-selection-item-selected": _item.checked, "photo-picker-set-selection-item": !_item.checked }'
-                 >
-                  {{_item.id}}-{{_item.name}}--{{_item.checked}}
-                  <span class="pull-right" style="padding-right: 4px;"
-                   (click)='onPreviewSetClick($event, _item.id, _i)'
-                   >
-                    <i class="fa fa-desktop" aria-hidden="true"></i></span>
-                </div>
-              </div>
-            </div>
-          </div-->
-
         </div>
 <!-- footer -->
         <div class="modal-footer">

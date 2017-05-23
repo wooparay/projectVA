@@ -1,6 +1,6 @@
 import { Component, ElementRef, Renderer2, Input } from '@angular/core';
 
-import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgIf, NgFor, NgClass, NgStyle } from '@angular/common';
 
 import { CoreModel } from './../../core/coreModel';
 import { CoreModelProvider } from './../../core/core.model.provider';
@@ -18,6 +18,7 @@ import { GenericDlgComponent } from './../dialog/generic.dlg.component';
 export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent {
   public static CMODEL_KEY:string = "PhotoPickerSetLoadDlgComponent";
   public static DLG_TYPE:string = "DLG_TYPE";
+  public static IMG_DEFAULT:string='../../../static/img/photoPicker/emptyImage.gif';
 
 
   public static DLG_TYPE_LOAD:string = 'load';
@@ -38,9 +39,19 @@ export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent 
   private _divSetPreview:any = { 'hiding':true,
     'photo-picker-set-selection-item-list-pane-right': false
   };
+  private _setPreviewPhotoDataCss:any={
+    'photo-picker-set-selection-preview-img-default-dimension': true
+  };
+  private _setPreviewPhotoDataStyle:any={};
 
-  private _setPreviewPhotoData:string='../../../static/img/photoPicker/emptyImage.gif';
+  private static MAX_PREVIEW_PHOT_DIMEN:number=500; // max magnification is 5x
+  private static PREVIEW_PHOT_DIMEN_INTERVAL:number=50; // maginification step is 50
+  private _previewPhotoDimenPercentage:number=100;
 
+  // change this data value for the required preview
+  private _setPreviewPhotoData:string=PhotoPickerSetLoadOrDeleteDlgComponent.IMG_DEFAULT;
+  private _setPreviewPhotoList:any;
+  private _previousPreviewPhotoDimenPercentage:number=0;
 
   /**
    *  contructor
@@ -51,6 +62,7 @@ export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent 
     super();
 
     this._frm={ 'setChoices': [] };
+    this.buttonOneLabel='ok';
   }
   ngAfterContentChecked() {
     this._getAvailableSet();
@@ -67,7 +79,8 @@ export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent 
       this._frm['selectedSet']=[
         { 'id': '001', "name": "bikini set 01", "checked": false, "photo.list": ['http://modelisto.com/photo/tara-booher-model-123835.jpg', 'http://static.face.nextmedia.com/images/next-photos/face/235/640pixfolder/W1035_307__DSC6389.jpg'] },
         { 'id': '002', "name": "doom game 01", "checked": false, "photo.list": ['https://upload.wikimedia.org/wikipedia/en/5/57/Doom_cover_art.jpg'] },
-        { 'id': '003', "name": "quake game 99", "checked": false, "photo.list": ['http://3.bp.blogspot.com/-n7HdvzSs-Hg/U2YpvpQ_E9I/AAAAAAAAIcc/q1rfRlsbQJ0/s1600/4.jpg', 'http://2.bp.blogspot.com/-vBpZvMiQJnU/U2YpuFX-JzI/AAAAAAAAIcU/vFurHF7IB-s/s1600/2.jpg'] }
+        { 'id': '003', "name": "quake game 99", "checked": false, "photo.list": ['http://3.bp.blogspot.com/-n7HdvzSs-Hg/U2YpvpQ_E9I/AAAAAAAAIcc/q1rfRlsbQJ0/s1600/4.jpg', 'http://2.bp.blogspot.com/-vBpZvMiQJnU/U2YpuFX-JzI/AAAAAAAAIcU/vFurHF7IB-s/s1600/2.jpg'] },
+        { 'id': '999', "name": "everything babe", "checked": true, "photo.list": ['http://2.bp.blogspot.com/-vBpZvMiQJnU/U2YpuFX-JzI/AAAAAAAAIcU/vFurHF7IB-s/s1600/2.jpg', 'https://upload.wikimedia.org/wikipedia/en/5/57/Doom_cover_art.jpg', 'http://modelisto.com/photo/tara-booher-model-123835.jpg', 'http://static.face.nextmedia.com/images/next-photos/face/235/640pixfolder/W1035_307__DSC6389.jpg', 'http://3.bp.blogspot.com/-n7HdvzSs-Hg/U2YpvpQ_E9I/AAAAAAAAIcc/q1rfRlsbQJ0/s1600/4.jpg', 'https://vignette3.wikia.nocookie.net/villains/images/0/00/Aku_Human_Form.jpg/revision/latest?cb=20150307212243'] }
       ];
     }
     // set back the "checked" property when necessary
@@ -144,6 +157,10 @@ export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent 
       };
       this._isPreviewMode=true;
     }
+    // get back the data (photo list) according to the given _id
+    if (this._frm['selectedSet'].length > _index) {
+      this._setPreviewPhotoList=this._frm['selectedSet'][_index]['photo.list'];
+    }
   }
   private hidePreviewPane() {
     this._isPreviewMode=false;
@@ -156,6 +173,66 @@ export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent 
       'col-sm-6': false, 'col-md-6': false, 'hiding': true, 'showing': false,
       'photo-picker-set-selection-item-list-pane-right': false
     };
+  }
+
+  /* ------------------------ */
+  /*  preview photo related   */
+  /* ------------------------ */
+
+  private updatePreviewPhotoData(_dataUri:string, _index:number) {
+    this._setPreviewPhotoData=_dataUri;
+  }
+
+
+
+
+  private increasePreviewPhotoDimen() {
+    if (this._previewPhotoDimenPercentage < PhotoPickerSetLoadOrDeleteDlgComponent.MAX_PREVIEW_PHOT_DIMEN) {
+      this._previewPhotoDimenPercentage+=PhotoPickerSetLoadOrDeleteDlgComponent.PREVIEW_PHOT_DIMEN_INTERVAL;
+      // reset since already reached.. max
+      if (!this._canIncreasePreviewDataDimenPercentage()) {
+        this._previewPhotoDimenPercentage-=PhotoPickerSetLoadOrDeleteDlgComponent.PREVIEW_PHOT_DIMEN_INTERVAL;
+      }
+    }
+    this._setPreviewPhotoDataCss={
+      'photo-picker-set-selection-preview-img-default-dimension': false
+    };
+    this._setPreviewPhotoDataStyle={
+      'max-height': this._previewPhotoDimenPercentage+'%',
+      'max-width': this._previewPhotoDimenPercentage+'%'
+    };
+  }
+  private decreasePreviewPhotoDimen() {
+    if (this._previewPhotoDimenPercentage > 100) {
+      this._previewPhotoDimenPercentage-=PhotoPickerSetLoadOrDeleteDlgComponent.PREVIEW_PHOT_DIMEN_INTERVAL;
+      //console.log(this._element.nativeElement.querySelector('#imgPreviewData').width+', '+this._previewPhotoDimenPercentage);
+    }
+    this._setPreviewPhotoDataCss={
+      'photo-picker-set-selection-preview-img-default-dimension': false
+    };
+    this._setPreviewPhotoDataStyle={
+      'max-height': this._previewPhotoDimenPercentage+'%',
+      'max-width': this._previewPhotoDimenPercentage+'%'
+    };
+  }
+  private bestFitPreviewPhotoDimen() {
+    this._previewPhotoDimenPercentage=100;
+    this._setPreviewPhotoDataCss={
+      'photo-picker-set-selection-preview-img-default-dimension': true
+    };
+    this._setPreviewPhotoDataStyle={};
+  }
+  /*
+   *  check if max max-width has been accomplished
+   */
+  private _canIncreasePreviewDataDimenPercentage() {
+    let _w:number=this._element.nativeElement.querySelector('#imgPreviewData').width;
+    if (_w==this._previousPreviewPhotoDimenPercentage) {
+      return false;
+    } else {
+      this._previousPreviewPhotoDimenPercentage=_w;
+      return true;
+    }
   }
 
 

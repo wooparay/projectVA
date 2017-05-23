@@ -40,8 +40,16 @@ var PhotoPickerSetLoadOrDeleteDlgComponent = PhotoPickerSetLoadOrDeleteDlgCompon
         _this._divSetPreview = { 'hiding': true,
             'photo-picker-set-selection-item-list-pane-right': false
         };
-        _this._setPreviewPhotoData = '../../../static/img/photoPicker/emptyImage.gif';
+        _this._setPreviewPhotoDataCss = {
+            'photo-picker-set-selection-preview-img-default-dimension': true
+        };
+        _this._setPreviewPhotoDataStyle = {};
+        _this._previewPhotoDimenPercentage = 100;
+        // change this data value for the required preview
+        _this._setPreviewPhotoData = PhotoPickerSetLoadOrDeleteDlgComponent_1.IMG_DEFAULT;
+        _this._previousPreviewPhotoDimenPercentage = 0;
         _this._frm = { 'setChoices': [] };
+        _this.buttonOneLabel = 'ok';
         return _this;
     }
     PhotoPickerSetLoadOrDeleteDlgComponent.prototype.ngAfterContentChecked = function () {
@@ -58,7 +66,8 @@ var PhotoPickerSetLoadOrDeleteDlgComponent = PhotoPickerSetLoadOrDeleteDlgCompon
             this._frm['selectedSet'] = [
                 { 'id': '001', "name": "bikini set 01", "checked": false, "photo.list": ['http://modelisto.com/photo/tara-booher-model-123835.jpg', 'http://static.face.nextmedia.com/images/next-photos/face/235/640pixfolder/W1035_307__DSC6389.jpg'] },
                 { 'id': '002', "name": "doom game 01", "checked": false, "photo.list": ['https://upload.wikimedia.org/wikipedia/en/5/57/Doom_cover_art.jpg'] },
-                { 'id': '003', "name": "quake game 99", "checked": false, "photo.list": ['http://3.bp.blogspot.com/-n7HdvzSs-Hg/U2YpvpQ_E9I/AAAAAAAAIcc/q1rfRlsbQJ0/s1600/4.jpg', 'http://2.bp.blogspot.com/-vBpZvMiQJnU/U2YpuFX-JzI/AAAAAAAAIcU/vFurHF7IB-s/s1600/2.jpg'] }
+                { 'id': '003', "name": "quake game 99", "checked": false, "photo.list": ['http://3.bp.blogspot.com/-n7HdvzSs-Hg/U2YpvpQ_E9I/AAAAAAAAIcc/q1rfRlsbQJ0/s1600/4.jpg', 'http://2.bp.blogspot.com/-vBpZvMiQJnU/U2YpuFX-JzI/AAAAAAAAIcU/vFurHF7IB-s/s1600/2.jpg'] },
+                { 'id': '999', "name": "everything babe", "checked": true, "photo.list": ['http://2.bp.blogspot.com/-vBpZvMiQJnU/U2YpuFX-JzI/AAAAAAAAIcU/vFurHF7IB-s/s1600/2.jpg', 'https://upload.wikimedia.org/wikipedia/en/5/57/Doom_cover_art.jpg', 'http://modelisto.com/photo/tara-booher-model-123835.jpg', 'http://static.face.nextmedia.com/images/next-photos/face/235/640pixfolder/W1035_307__DSC6389.jpg', 'http://3.bp.blogspot.com/-n7HdvzSs-Hg/U2YpvpQ_E9I/AAAAAAAAIcc/q1rfRlsbQJ0/s1600/4.jpg', 'https://vignette3.wikia.nocookie.net/villains/images/0/00/Aku_Human_Form.jpg/revision/latest?cb=20150307212243'] }
             ];
         }
         // set back the "checked" property when necessary
@@ -130,6 +139,10 @@ var PhotoPickerSetLoadOrDeleteDlgComponent = PhotoPickerSetLoadOrDeleteDlgCompon
             };
             this._isPreviewMode = true;
         }
+        // get back the data (photo list) according to the given _id
+        if (this._frm['selectedSet'].length > _index) {
+            this._setPreviewPhotoList = this._frm['selectedSet'][_index]['photo.list'];
+        }
     };
     PhotoPickerSetLoadOrDeleteDlgComponent.prototype.hidePreviewPane = function () {
         this._isPreviewMode = false;
@@ -143,12 +156,69 @@ var PhotoPickerSetLoadOrDeleteDlgComponent = PhotoPickerSetLoadOrDeleteDlgCompon
             'photo-picker-set-selection-item-list-pane-right': false
         };
     };
+    /* ------------------------ */
+    /*  preview photo related   */
+    /* ------------------------ */
+    PhotoPickerSetLoadOrDeleteDlgComponent.prototype.updatePreviewPhotoData = function (_dataUri, _index) {
+        this._setPreviewPhotoData = _dataUri;
+    };
+    PhotoPickerSetLoadOrDeleteDlgComponent.prototype.increasePreviewPhotoDimen = function () {
+        if (this._previewPhotoDimenPercentage < PhotoPickerSetLoadOrDeleteDlgComponent_1.MAX_PREVIEW_PHOT_DIMEN) {
+            this._previewPhotoDimenPercentage += PhotoPickerSetLoadOrDeleteDlgComponent_1.PREVIEW_PHOT_DIMEN_INTERVAL;
+            // reset since already reached.. max
+            if (!this._canIncreasePreviewDataDimenPercentage()) {
+                this._previewPhotoDimenPercentage -= PhotoPickerSetLoadOrDeleteDlgComponent_1.PREVIEW_PHOT_DIMEN_INTERVAL;
+            }
+        }
+        this._setPreviewPhotoDataCss = {
+            'photo-picker-set-selection-preview-img-default-dimension': false
+        };
+        this._setPreviewPhotoDataStyle = {
+            'max-height': this._previewPhotoDimenPercentage + '%',
+            'max-width': this._previewPhotoDimenPercentage + '%'
+        };
+    };
+    PhotoPickerSetLoadOrDeleteDlgComponent.prototype.decreasePreviewPhotoDimen = function () {
+        if (this._previewPhotoDimenPercentage > 100) {
+            this._previewPhotoDimenPercentage -= PhotoPickerSetLoadOrDeleteDlgComponent_1.PREVIEW_PHOT_DIMEN_INTERVAL;
+        }
+        this._setPreviewPhotoDataCss = {
+            'photo-picker-set-selection-preview-img-default-dimension': false
+        };
+        this._setPreviewPhotoDataStyle = {
+            'max-height': this._previewPhotoDimenPercentage + '%',
+            'max-width': this._previewPhotoDimenPercentage + '%'
+        };
+    };
+    PhotoPickerSetLoadOrDeleteDlgComponent.prototype.bestFitPreviewPhotoDimen = function () {
+        this._previewPhotoDimenPercentage = 100;
+        this._setPreviewPhotoDataCss = {
+            'photo-picker-set-selection-preview-img-default-dimension': true
+        };
+        this._setPreviewPhotoDataStyle = {};
+    };
+    /*
+     *  check if max max-width has been accomplished
+     */
+    PhotoPickerSetLoadOrDeleteDlgComponent.prototype._canIncreasePreviewDataDimenPercentage = function () {
+        var _w = this._element.nativeElement.querySelector('#imgPreviewData').width;
+        if (_w == this._previousPreviewPhotoDimenPercentage) {
+            return false;
+        }
+        else {
+            this._previousPreviewPhotoDimenPercentage = _w;
+            return true;
+        }
+    };
     return PhotoPickerSetLoadOrDeleteDlgComponent;
 }(generic_dlg_component_1.GenericDlgComponent));
 PhotoPickerSetLoadOrDeleteDlgComponent.CMODEL_KEY = "PhotoPickerSetLoadDlgComponent";
 PhotoPickerSetLoadOrDeleteDlgComponent.DLG_TYPE = "DLG_TYPE";
+PhotoPickerSetLoadOrDeleteDlgComponent.IMG_DEFAULT = '../../../static/img/photoPicker/emptyImage.gif';
 PhotoPickerSetLoadOrDeleteDlgComponent.DLG_TYPE_LOAD = 'load';
 PhotoPickerSetLoadOrDeleteDlgComponent.DLG_TYPE_DELETE = 'delete';
+PhotoPickerSetLoadOrDeleteDlgComponent.MAX_PREVIEW_PHOT_DIMEN = 500; // max magnification is 5x
+PhotoPickerSetLoadOrDeleteDlgComponent.PREVIEW_PHOT_DIMEN_INTERVAL = 50; // maginification step is 50
 __decorate([
     core_1.Input(),
     __metadata("design:type", Object)
