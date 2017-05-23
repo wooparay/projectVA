@@ -33,6 +33,7 @@ import { PhotoPickerViewWidget } from './component/component/photopicker/photo.p
 import { FileUploadComponent } from './component/component/dialog/file.upload.component';
 import { PhotoBigPreviewComponent } from './component/component/photopicker/photo.big.preview.dialogue';
 import { MessageDlgComponent } from './component/component/dialog/message.dlg.component';
+import { PhotoPickerSetLoadOrDeleteDlgComponent } from './component/component/photopicker/photo.picker.set.load.or.del.dlg';
 
 import { CoreModelProvider } from './component/core/core.model.provider';
 import { FileReaderServiceProvider, FileReaderService } from './component/core/file.reader';
@@ -40,6 +41,7 @@ import { FileReaderServiceProvider, FileReaderService } from './component/core/f
 import { DialogTestingComponent } from './component/component/testing/dlg/dialog.testing.component';
 import { AccordionZeroComponent } from './component/component/testing/dlg/accordion.zero';
 import { AccordionOneComponent } from './component/component/testing/dlg/accordion.one';
+import { AccordionTwoComponent } from './component/component/testing/dlg/accordion.two';
 
 @NgModule({
   imports:      [
@@ -74,7 +76,8 @@ import { AccordionOneComponent } from './component/component/testing/dlg/accordi
     PlaygroundComponent, PlaygroundSideMenuComponent,
     PhotoPickerComponent, PhotoPickerPreviewWidget, PhotoPickerViewWidget,
     FileUploadComponent, PhotoBigPreviewComponent, MessageDlgComponent,
-    DialogTestingComponent, AccordionZeroComponent, AccordionOneComponent
+    PhotoPickerSetLoadOrDeleteDlgComponent,
+    DialogTestingComponent, AccordionZeroComponent, AccordionOneComponent, AccordionTwoComponent
   ],
   // [step] if you want to have REAL singleton, you need to create your own Provider...
   providers: [

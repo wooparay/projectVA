@@ -1,0 +1,75 @@
+
+<!-- add show to get it shown -->
+<div class="modal fade file-upload-background-overlay"
+  id='dlgPhotoPickerSetLoad' tabindex="-1"
+  role="dialog" aria-labelledby='dlgMessageLabel'
+  style="display: none;">
+  <form method="post" action="javascript:void(0);">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content animated flipInX" style="border-radius: 4px;">
+        <!-- title / header -->
+        <div class="modal-header">
+          <h5 class="modal-title w-100" id='dlgMessageLabel'>
+            <span *ngIf='_isLoadMode'>
+              <i class="fa fa-folder-open-o" aria-hidden="true"></i> set (load)
+            </span>
+            <span *ngIf='!_isLoadMode'>
+              <i class="fa fa-trash-o" aria-hidden="true"></i> set (delete)
+            </span>
+          </h5>
+          <button type="button" class="close pull-right"
+            data-dismiss='modal' aria-label='Close' (click)='buttonTwoClick($event)'>
+            <span aria-hidden='true'>x</span>
+          </button>
+        </div>
+<!-- content -->
+        <div class="modal-body">
+          <div class="mx-auto">
+            <div class='photo-picker-set-selection-container'>
+              <div class="photo-picker-set-selection-inner-container">
+                <div class="photo-picker-set-selection-item-container"
+                  *ngFor='let _item of _frm["selectedSet"]; let _i=index; trackBy: _item?.id' >
+                  <div *ngIf='_item.checked==true' class="photo-picker-set-selection-item-selected">
+                    {{_item.id}}-{{_item.name}}--{{_item.checked}}
+                    <span class="pull-right" style="padding-right: 4px;"><i class="fa fa-desktop" aria-hidden="true"></i></span>
+                  </div>
+                  <div *ngIf='_item.checked==false' class="photo-picker-set-selection-item">
+                    {{_item.id}}-{{_item.name}}--{{_item.checked}}
+                    <span class="pull-right" style="padding-right: 4px;"><i class="fa fa-desktop" aria-hidden="true"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--select id='selSet' name='selSet' multiple="true" size='4'
+            style='width: 200px;' class='form-control'
+            [(ngModel)]="_frm['selectedSet']"
+            >
+            <option value="0">option 0</option>
+            <option value="1">option 1</option>
+            <option value="2">option 2</option>
+            <option value="3">option 3</option>
+            <option value="10">option 10</option>
+            <option value="11">option 11</option>
+            <option value="12">option 12</option>
+            <option value="13">option 13</option>
+          </select-->
+
+        </div>
+<!-- footer -->
+        <div class="modal-footer">
+          <button class="btn btn-secondary waves-effect waves-light"
+            data-dismiss='modal' (click)='buttonOneClick($event)'>
+            {{buttonOneLabel}}
+          </button>
+          <button *ngIf='_showButtonTwo' class="btn btn-primary waves-effect waves-light"
+            (click)='buttonTwoClick($event)'>
+            {{buttonTwoLabel}}
+          </button>
+        </div>
+      </div>  <!-- content -->
+    </div>  <!-- dialog -->
+
+  </form>
+</div>

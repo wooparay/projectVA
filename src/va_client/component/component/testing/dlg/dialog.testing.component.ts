@@ -12,6 +12,7 @@ import { ICoreModelLifeCycle } from './../../../interface/i.core.model.lifecycle
 
 import { AccordionZeroComponent } from './accordion.zero';
 import { AccordionOneComponent } from './accordion.one';
+import { AccordionTwoComponent } from './accordion.two';
 
 @Component({
   selector: 'dialog-testing',

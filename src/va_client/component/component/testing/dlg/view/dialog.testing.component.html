@@ -9,11 +9,11 @@
       <!-- data-toggle="collapse" data-target="#divTweek_0" aria-expanded="false" aria-controls="divTweek_0" -->
       <button class="btn btn-primary" id='btn_0' (click)='showTweekOption(0)'>
         help dialog</button>
-      <!-- message.dlg.component -->
-      <!-- data-toggle="collapse" data-target="#divTweek_1" aria-expanded="false" aria-controls="divTweek_1" -->
       <button class="btn btn-default" id='btn_1' (click)='showTweekOption(1)'>
         message dialog</button>
 
+      <button class="btn btn-secondary" id='btn_2' (click)='showTweekOption(2)'>
+        photo picker (set) load dialog</button>
       <!-- add more buttons here -->
     </div>
   </div>
@@ -22,6 +22,7 @@
   <!-- aria-expanded=true n class=collpase show -->
   <accordion-zero [_parent]='this'></accordion-zero>
   <accordion-one [_parent]='this'></accordion-one>
+  <accordion-two [_parent]='this'></accordion-two>
 
   <!-- dlg instances -->
   <!--message-dlg [_parent]='this'></message-dlg-->
