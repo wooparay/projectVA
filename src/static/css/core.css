@@ -237,6 +237,20 @@
   padding-bottom: 8px;
   background-color: rgba(230, 230, 230, 0.5);
 }
+.photo-picker-set-selection-item-list-pane-left {
+  padding-right: 1px;
+}
+.photo-picker-set-selection-item-list-pane-right {
+  padding-left: 1px;
+}
+.photo-picker-set-selection-preview-pane-right {
+  height: 140px; width: calc(100%);
+  overflow: auto;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
 
 /* */
 /*  file-upload  */
