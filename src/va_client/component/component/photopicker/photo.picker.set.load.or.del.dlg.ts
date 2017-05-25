@@ -124,6 +124,9 @@ export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent 
   /*  event handlers    */
   /* ------------------ */
 
+  /*
+   *  toggle selection
+   */
   private onSetItemClick(_e:Event, _id:string, _index:number) {
     if (_index > -1 && this._frm['selectedSet'] &&
       _index < this._frm['selectedSet'].length) {
@@ -141,6 +144,10 @@ export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent 
       this._frm['selectedSet'][_index]['checked']=_checked;
     } // end -- if (_index is valid)
   }
+
+  /*
+   *  to show the set preview pane (list of images associated with the set)
+   */
   private onPreviewSetClick(_e:Event, _id:string, _index:number) {
     _e.preventDefault();
     _e.stopPropagation();
@@ -186,9 +193,9 @@ export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent 
     this._setPreviewPhotoData=_dataUri;
   }
 
-
-
-
+  /*
+   *  when you want to magnify the preview photo
+   */
   private increasePreviewPhotoDimen() {
     if (this._previewPhotoDimenPercentage < PhotoPickerSetLoadOrDeleteDlgComponent.MAX_PREVIEW_PHOT_DIMEN) {
       this._previewPhotoDimenPercentage+=PhotoPickerSetLoadOrDeleteDlgComponent.PREVIEW_PHOT_DIMEN_INTERVAL;
@@ -218,6 +225,9 @@ export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent 
       'max-width': this._previewPhotoDimenPercentage+'%'
     };
   }
+  /*
+   *  simply back to best-fit 100% max-width and max-height
+   */
   private bestFitPreviewPhotoDimen() {
     this._previewPhotoDimenPercentage=100;
     this._setPreviewPhotoDataCss={

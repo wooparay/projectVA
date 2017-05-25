@@ -106,6 +106,9 @@ var PhotoPickerSetLoadOrDeleteDlgComponent = PhotoPickerSetLoadOrDeleteDlgCompon
     /* ------------------ */
     /*  event handlers    */
     /* ------------------ */
+    /*
+     *  toggle selection
+     */
     PhotoPickerSetLoadOrDeleteDlgComponent.prototype.onSetItemClick = function (_e, _id, _index) {
         if (_index > -1 && this._frm['selectedSet'] &&
             _index < this._frm['selectedSet'].length) {
@@ -124,6 +127,9 @@ var PhotoPickerSetLoadOrDeleteDlgComponent = PhotoPickerSetLoadOrDeleteDlgCompon
             this._frm['selectedSet'][_index]['checked'] = _checked;
         } // end -- if (_index is valid)
     };
+    /*
+     *  to show the set preview pane (list of images associated with the set)
+     */
     PhotoPickerSetLoadOrDeleteDlgComponent.prototype.onPreviewSetClick = function (_e, _id, _index) {
         _e.preventDefault();
         _e.stopPropagation();
@@ -165,6 +171,9 @@ var PhotoPickerSetLoadOrDeleteDlgComponent = PhotoPickerSetLoadOrDeleteDlgCompon
     PhotoPickerSetLoadOrDeleteDlgComponent.prototype.updatePreviewPhotoData = function (_dataUri, _index) {
         this._setPreviewPhotoData = _dataUri;
     };
+    /*
+     *  when you want to magnify the preview photo
+     */
     PhotoPickerSetLoadOrDeleteDlgComponent.prototype.increasePreviewPhotoDimen = function () {
         if (this._previewPhotoDimenPercentage < PhotoPickerSetLoadOrDeleteDlgComponent_1.MAX_PREVIEW_PHOT_DIMEN) {
             this._previewPhotoDimenPercentage += PhotoPickerSetLoadOrDeleteDlgComponent_1.PREVIEW_PHOT_DIMEN_INTERVAL;
@@ -193,6 +202,9 @@ var PhotoPickerSetLoadOrDeleteDlgComponent = PhotoPickerSetLoadOrDeleteDlgCompon
             'max-width': this._previewPhotoDimenPercentage + '%'
         };
     };
+    /*
+     *  simply back to best-fit 100% max-width and max-height
+     */
     PhotoPickerSetLoadOrDeleteDlgComponent.prototype.bestFitPreviewPhotoDimen = function () {
         this._previewPhotoDimenPercentage = 100;
         this._setPreviewPhotoDataCss = {
