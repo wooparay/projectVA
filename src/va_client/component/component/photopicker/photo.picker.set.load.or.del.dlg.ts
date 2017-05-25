@@ -144,7 +144,7 @@ export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent 
   private onPreviewSetClick(_e:Event, _id:string, _index:number) {
     _e.preventDefault();
     _e.stopPropagation();
-    console.log('** preview button clicked > '+_index);
+    //console.log('** preview button clicked > '+_index);
 
     if (this._isPreviewMode==false) {
       this._divSetItemList={
@@ -160,6 +160,9 @@ export class PhotoPickerSetLoadOrDeleteDlgComponent extends GenericDlgComponent 
     // get back the data (photo list) according to the given _id
     if (this._frm['selectedSet'].length > _index) {
       this._setPreviewPhotoList=this._frm['selectedSet'][_index]['photo.list'];
+      // also reset the dataUri back to the original empty image + default css
+      this._setPreviewPhotoData=PhotoPickerSetLoadOrDeleteDlgComponent.IMG_DEFAULT;
+      this.bestFitPreviewPhotoDimen();
     }
   }
   private hidePreviewPane() {

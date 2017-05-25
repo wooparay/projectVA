@@ -127,7 +127,7 @@ var PhotoPickerSetLoadOrDeleteDlgComponent = PhotoPickerSetLoadOrDeleteDlgCompon
     PhotoPickerSetLoadOrDeleteDlgComponent.prototype.onPreviewSetClick = function (_e, _id, _index) {
         _e.preventDefault();
         _e.stopPropagation();
-        console.log('** preview button clicked > ' + _index);
+        //console.log('** preview button clicked > '+_index);
         if (this._isPreviewMode == false) {
             this._divSetItemList = {
                 'text-truncate': true, 'col-sm-6': true, 'col-md-6': true,
@@ -142,6 +142,9 @@ var PhotoPickerSetLoadOrDeleteDlgComponent = PhotoPickerSetLoadOrDeleteDlgCompon
         // get back the data (photo list) according to the given _id
         if (this._frm['selectedSet'].length > _index) {
             this._setPreviewPhotoList = this._frm['selectedSet'][_index]['photo.list'];
+            // also reset the dataUri back to the original empty image + default css
+            this._setPreviewPhotoData = PhotoPickerSetLoadOrDeleteDlgComponent_1.IMG_DEFAULT;
+            this.bestFitPreviewPhotoDimen();
         }
     };
     PhotoPickerSetLoadOrDeleteDlgComponent.prototype.hidePreviewPane = function () {
