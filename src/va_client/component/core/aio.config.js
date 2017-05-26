@@ -59,6 +59,14 @@ var AIOConfigService = (function () {
             }
         } // if the config is ready
     };
+    /**
+     *  return the "general" config (e.g. check if it is in production mode or not)
+     */
+    AIOConfigService.prototype.getGeneralConfig = function () {
+        if (this._configs && this._configs.hasOwnProperty('general')) {
+            return this._configs['general'];
+        }
+    };
     AIOConfigService.getInstance = function (_http) {
         if (AIOConfigService._instance == null) {
             AIOConfigService._instance = new AIOConfigService(_http);

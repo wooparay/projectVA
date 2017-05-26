@@ -73,10 +73,20 @@ export class AIOConfigService {
   }
 
   /**
+   *  return the "general" config (e.g. check if it is in production mode or not)
+   */
+  public getGeneralConfig() {
+    if (this._configs && this._configs.hasOwnProperty('general')) {
+      return this._configs['general'];
+    }
+  }
+
+
+  /**
    *  singleton related attributes and method
    */
   private static _instance:AIOConfigService=null;
-  
+
   public static getInstance(_http:Http):AIOConfigService {
     if (AIOConfigService._instance == null) {
       AIOConfigService._instance = new AIOConfigService(_http);

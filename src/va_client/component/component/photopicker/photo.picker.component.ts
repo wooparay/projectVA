@@ -49,7 +49,6 @@ export class PhotoPickerComponent implements ICoreModelLifeCycle {
     //console.log('*** to be destroyed => PhotoPickerComponent, remove the key on CoreModel');
   }
 
-
   /**
    *  method to return the Configuration related to
    *  "photo.picker.component"
