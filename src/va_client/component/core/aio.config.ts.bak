@@ -6,7 +6,7 @@ import { Http, Response } from '@angular/http';
 /**
  *  AIO = All-In-One config reader
  */
-//@Injectable()
+@Injectable()
 export class AIOConfigService {
   private _configs:any = null;
 
@@ -72,23 +72,6 @@ export class AIOConfigService {
     } // if the config is ready
   }
 
-  /**
-   *  singleton related attributes and method
-   */
-  private static _instance:AIOConfigService=null;
-  
-  public static getInstance(_http:Http):AIOConfigService {
-    if (AIOConfigService._instance == null) {
-      AIOConfigService._instance = new AIOConfigService(_http);
-    }
-    return AIOConfigService._instance;
-  }
-
 }
 
 // ** need to find a way to use singleton plus dependencies (deps: [http] didnot work)
-export let AIOConfigServiceProvider = {
-  provide: AIOConfigService,
-  useFactory: AIOConfigService.getInstance,
-  deps: [ Http ]
-};

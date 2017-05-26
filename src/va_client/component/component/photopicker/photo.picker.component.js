@@ -14,7 +14,7 @@ var core_model_provider_1 = require("./../../core/core.model.provider");
 var message_dlg_component_1 = require("./../dialog/message.dlg.component");
 var file_upload_component_1 = require("./../dialog/file.upload.component");
 var photo_big_preview_dialogue_1 = require("./photo.big.preview.dialogue");
-//import { AIOConfigService, AIOConfigServiceProvider } from './../core/aio.config';
+//import { AIOConfigService } from './../../core/aio.config';
 var aio_config_1 = require("./../../core/aio.config");
 var PhotoPickerComponent = (function () {
     function PhotoPickerComponent(_coreModel, _aioConfig, _renderer, _element) {
@@ -27,6 +27,8 @@ var PhotoPickerComponent = (function () {
         this._photoDataList = [];
         // the Configuration data related to photo.picker.component (e.g. backend endpoints)
         this._configs = null;
+        // force to get the configs once created
+        this._getConfigs();
     }
     PhotoPickerComponent.prototype.ngOnDestroy = function () {
         this._photoDataList = [];
@@ -128,7 +130,8 @@ PhotoPickerComponent = __decorate([
          *    injecting CoreModel not CoreModelProvider
          * **
          */
-        providers: [core_model_provider_1.CoreModelProvider, aio_config_1.AIOConfigService]
+        // providers: [ CoreModelProvider, AIOConfigService ]
+        providers: [core_model_provider_1.CoreModelProvider, aio_config_1.AIOConfigServiceProvider]
     }),
     __metadata("design:paramtypes", [coreModel_1.CoreModel,
         aio_config_1.AIOConfigService,
