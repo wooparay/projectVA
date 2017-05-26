@@ -6,7 +6,8 @@
     "app": {
       "version": "1.0.0",
       "title": "ProjectVA - making html based VIDEO and MTV at your fingertips"
-    }
+    },
+    "production.mode": false
   },
   "modules": [
     {

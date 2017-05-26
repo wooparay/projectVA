@@ -1,4 +1,3 @@
-
 /**
  *  interface: related to PhotoPicker Set operations like save set, load set,
  *  delete set etc
@@ -14,6 +13,23 @@ export interface IPhotoPickerSetService {
     _request:PhotoPickerSetServiceRequest,
     _additionalParams:any):any;
 
+}
+
+/**
+ *  since the injection factory requires a "class" instead of an "interface",
+ *  so in this implmentation, we add all methods to the abstract class instead
+ *  of the interface (usually you declare interface instead... )
+ */
+export abstract class AbstractPhotoPickerSetService implements IPhotoPickerSetService {
+  /**
+   *  method to clean up the data set inside
+   *    the CoreModel (sort of cleaning up); this method
+   *    could be handy when you need to free up memory with
+   *    non-used data
+   */
+  abstract getAvailablePhotoSets(
+    _request:PhotoPickerSetServiceRequest,
+    _additionalParams:any):any;
 }
 
 /**

@@ -7,10 +7,13 @@ import { PhotoPickerSetLoadOrDeleteDlgComponent } from './../../photopicker/phot
 import { CoreModel } from './../../../core/coreModel';
 import { CoreModelProvider } from './../../../core/core.model.provider';
 
+import { PhotoPickerSetServiceProvider } from './../../../core/photo.picker.set.service.factory';
+import { AbstractPhotoPickerSetService } from './../../photopicker/i.photo.picker.set.service';
+
 @Component({
   selector: 'accordion-two',
   templateUrl: './view/accordion.two.component.html',
-  providers: [ CoreModelProvider ]
+  providers: [ CoreModelProvider, PhotoPickerSetServiceProvider ]
 })
 export class AccordionTwoComponent {
 
@@ -20,12 +23,16 @@ export class AccordionTwoComponent {
 
   constructor(private _element:ElementRef,
     private _renderer:Renderer2,
-    private _coreModel:CoreModel) {
+    private _coreModel:CoreModel,
+    private _photoPickerSetService:AbstractPhotoPickerSetService) {
 
     this._frm={
       'message': '', 'title': '',
       'warning': 'no', 'btn1_lbl': ''
     };
+console.log('** accordion two');
+console.log(this._photoPickerSetService);
+console.log(this._photoPickerSetService.getAvailablePhotoSets(null, null));
   }
 
   private showDlg(_e:Event) {

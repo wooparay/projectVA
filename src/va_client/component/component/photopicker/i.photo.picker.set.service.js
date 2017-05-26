@@ -1,5 +1,16 @@
 "use strict";
 /**
+ *  since the injection factory requires a "class" instead of an "interface",
+ *  so in this implmentation, we add all methods to the abstract class instead
+ *  of the interface (usually you declare interface instead... )
+ */
+var AbstractPhotoPickerSetService = (function () {
+    function AbstractPhotoPickerSetService() {
+    }
+    return AbstractPhotoPickerSetService;
+}());
+exports.AbstractPhotoPickerSetService = AbstractPhotoPickerSetService;
+/**
  *  treate it as Request or Param object for the service
  */
 var PhotoPickerSetServiceRequest = (function () {

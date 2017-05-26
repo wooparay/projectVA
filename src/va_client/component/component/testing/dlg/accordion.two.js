@@ -14,16 +14,22 @@ var message_dlg_component_1 = require("./../../dialog/message.dlg.component");
 var photo_picker_set_load_or_del_dlg_1 = require("./../../photopicker/photo.picker.set.load.or.del.dlg");
 var coreModel_1 = require("./../../../core/coreModel");
 var core_model_provider_1 = require("./../../../core/core.model.provider");
+var photo_picker_set_service_factory_1 = require("./../../../core/photo.picker.set.service.factory");
+var i_photo_picker_set_service_1 = require("./../../photopicker/i.photo.picker.set.service");
 var AccordionTwoComponent = (function () {
-    function AccordionTwoComponent(_element, _renderer, _coreModel) {
+    function AccordionTwoComponent(_element, _renderer, _coreModel, _photoPickerSetService) {
         this._element = _element;
         this._renderer = _renderer;
         this._coreModel = _coreModel;
+        this._photoPickerSetService = _photoPickerSetService;
         this._frm = {};
         this._frm = {
             'message': '', 'title': '',
             'warning': 'no', 'btn1_lbl': ''
         };
+        console.log('** accordion two');
+        console.log(this._photoPickerSetService);
+        console.log(this._photoPickerSetService.getAvailablePhotoSets(null, null));
     }
     AccordionTwoComponent.prototype.showDlg = function (_e) {
         var _opt = {};
@@ -47,11 +53,12 @@ AccordionTwoComponent = __decorate([
     core_1.Component({
         selector: 'accordion-two',
         templateUrl: './view/accordion.two.component.html',
-        providers: [core_model_provider_1.CoreModelProvider]
+        providers: [core_model_provider_1.CoreModelProvider, photo_picker_set_service_factory_1.PhotoPickerSetServiceProvider]
     }),
     __metadata("design:paramtypes", [core_1.ElementRef,
         core_1.Renderer2,
-        coreModel_1.CoreModel])
+        coreModel_1.CoreModel,
+        i_photo_picker_set_service_1.AbstractPhotoPickerSetService])
 ], AccordionTwoComponent);
 exports.AccordionTwoComponent = AccordionTwoComponent;
 //# sourceMappingURL=accordion.two.js.map
